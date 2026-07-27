@@ -1,25 +1,45 @@
 import { Link } from "@tanstack/react-router";
 import { Search, ShoppingBag, User } from "lucide-react";
 
-export function SiteHeader() {
+type NavHandler = (to: string) => (e: React.MouseEvent) => void;
+
+export function SiteHeader({ onNavigate }: { onNavigate?: NavHandler }) {
+  const linkProps = (to: string) =>
+    onNavigate
+      ? { href: to, onClick: onNavigate(to) }
+      : null;
+
   return (
-    <header className="flex items-center justify-between">
+    <header className="relative z-20 flex items-center justify-between">
       <Link to="/" className="text-2xl md:text-3xl font-bold tracking-tight text-black">
         SANCIN AUDIO
       </Link>
       <nav className="hidden md:flex items-center gap-1 rounded-full bg-black px-2 py-2 text-sm text-white">
-        <Link
-          to="/free-identity-analysis"
-          className="rounded-full px-5 py-2 hover:bg-white/10 transition"
-        >
-          FREE Identity Analysis
-        </Link>
-        <Link to="/about-us" className="rounded-full px-5 py-2 hover:bg-white/10 transition">
-          about us
-        </Link>
-        <Link to="/contact" className="rounded-full px-5 py-2 hover:bg-white/10 transition">
-          contact
-        </Link>
+        {onNavigate ? (
+          <>
+            <a {...linkProps("/free-identity-analysis")!} className="rounded-full px-5 py-2 hover:bg-white/10 transition">
+              FREE Identity Analysis
+            </a>
+            <a {...linkProps("/about-us")!} className="rounded-full px-5 py-2 hover:bg-white/10 transition">
+              about us
+            </a>
+            <a {...linkProps("/contact")!} className="rounded-full px-5 py-2 hover:bg-white/10 transition">
+              contact
+            </a>
+          </>
+        ) : (
+          <>
+            <Link to="/free-identity-analysis" className="rounded-full px-5 py-2 hover:bg-white/10 transition">
+              FREE Identity Analysis
+            </Link>
+            <Link to="/about-us" className="rounded-full px-5 py-2 hover:bg-white/10 transition">
+              about us
+            </Link>
+            <Link to="/contact" className="rounded-full px-5 py-2 hover:bg-white/10 transition">
+              contact
+            </Link>
+          </>
+        )}
       </nav>
       <div className="flex items-center gap-4 text-black">
         <button aria-label="Search" className="hover:opacity-60 transition">
