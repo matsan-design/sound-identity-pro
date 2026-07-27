@@ -1,5 +1,5 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Instagram, Linkedin, Facebook } from "lucide-react";
 import heroImage from "@/assets/headphones-hero.png";
 import thumbImage from "@/assets/headphones-thumb.jpg";
@@ -29,6 +29,13 @@ export const Route = createFileRoute("/")({
 function Index() {
   const router = useRouter();
   const [leaving, setLeaving] = useState(false);
+  const [entering, setEntering] = useState(true);
+
+  // Play enter animation on mount
+  useEffect(() => {
+    const t = window.setTimeout(() => setEntering(false), 20);
+    return () => window.clearTimeout(t);
+  }, []);
 
   const navigateWithAnimation = useCallback(
     (to: string) => (e: React.MouseEvent) => {
@@ -43,34 +50,40 @@ function Index() {
     [leaving, router],
   );
 
+  // hidden state = either leaving OR still in initial entering phase
+  const hidden = leaving || entering;
+
   return (
     <div className="min-h-screen bg-[#e9e9e9] p-4 md:p-8">
       <div className="mx-auto max-w-[1400px] rounded-3xl bg-white px-6 py-8 md:px-14 md:py-10 shadow-sm">
-        <SiteHeader onNavigate={navigateWithAnimation} />
+        {/* Header: scale-in on enter, unaffected on leave */}
+        <div
+          className={`transition-all duration-500 ease-out ${
+            entering ? "opacity-0 scale-95" : "opacity-100 scale-100"
+          }`}
+        >
+          <SiteHeader onNavigate={navigateWithAnimation} />
+        </div>
 
         {/* Hero */}
         <section className="relative mt-10 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div className="relative z-10">
-            <h1
-              className={`text-5xl md:text-7xl font-bold uppercase leading-[1.02] tracking-tight text-black transition-all duration-500 ${
-                leaving ? "opacity-0 -translate-y-2" : "opacity-100"
-              }`}
-            >
+          <div
+            className={`relative z-10 transition-all ease-[cubic-bezier(0.65,0,0.35,1)] duration-700 ${
+              hidden
+                ? `opacity-0 blur-md ${leaving ? "-translate-x-[60%]" : "translate-x-0"}`
+                : "opacity-100 blur-0 translate-x-0"
+            }`}
+          >
+            <h1 className="text-5xl md:text-7xl font-bold uppercase leading-[1.02] tracking-tight text-black">
               Expand your brand through sound
             </h1>
-            <p
-              className={`mt-8 max-w-md text-base md:text-lg text-neutral-500 leading-relaxed transition-all duration-500 delay-75 ${
-                leaving ? "opacity-0" : "opacity-100"
-              }`}
-            >
+            <p className="mt-8 max-w-md text-base md:text-lg text-neutral-500 leading-relaxed">
               A brand's sonic identity communicates and enhances its essence.
             </p>
 
             {/* decorative squiggle */}
             <svg
-              className={`mt-6 h-16 w-52 text-black/70 transition-opacity duration-500 ${
-                leaving ? "opacity-0" : "opacity-100"
-              }`}
+              className="mt-6 h-16 w-52 text-black/70"
               viewBox="0 0 240 80"
               fill="none"
               stroke="currentColor"
@@ -100,16 +113,18 @@ function Index() {
             </a>
           </div>
 
-          {/* Headphones image — pointer-events-none so header nav stays clickable */}
-          <div className="pointer-events-none relative md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-[62%] z-0">
+          {/* Headphones image — moved slightly down so it doesn't overlap nav */}
+          <div className="pointer-events-none relative md:absolute md:right-0 md:top-[58%] md:-translate-y-1/2 md:w-[62%] z-0">
             <img
               src={heroImage}
               alt="Premium over-ear headphones"
               width={1400}
               height={1400}
               className={`w-full h-auto object-contain drop-shadow-2xl transition-all ease-[cubic-bezier(0.65,0,0.35,1)] duration-700 ${
-                leaving
-                  ? "-translate-x-[120%] opacity-0 blur-md scale-90 rotate-[-6deg]"
+                hidden
+                  ? `opacity-0 blur-md scale-90 ${
+                      leaving ? "translate-x-[120%] rotate-[6deg]" : "translate-x-[40%] rotate-[6deg]"
+                    }`
                   : "translate-x-0 opacity-100 blur-0 scale-100 rotate-0"
               }`}
             />
@@ -118,8 +133,10 @@ function Index() {
 
         {/* Bottom thumb + social */}
         <div
-          className={`relative mt-8 md:mt-24 flex items-end justify-between transition-opacity duration-500 ${
-            leaving ? "opacity-0" : "opacity-100"
+          className={`relative mt-8 md:mt-24 flex items-end justify-between transition-all duration-700 ease-[cubic-bezier(0.65,0,0.35,1)] ${
+            hidden
+              ? `opacity-0 blur-md ${leaving ? "-translate-x-[40%]" : "translate-x-0"}`
+              : "opacity-100 blur-0 translate-x-0"
           }`}
         >
           <div className="rounded-2xl bg-[#f2f2f2] p-4 w-48 md:w-64">
