@@ -1,18 +1,19 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Search, ShoppingBag, User, Instagram, Linkedin, Facebook } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Instagram, Linkedin, Facebook } from "lucide-react";
 import heroImage from "@/assets/headphones-hero.png";
 import thumbImage from "@/assets/headphones-thumb.jpg";
+import { SiteHeader } from "@/components/site-header";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sancin Audio — Expand your brand potential through sound" },
+      { title: "Sancin Audio — Expand your brand through sound" },
       {
         name: "description",
         content:
           "A brand's sonic identity communicates and enhances its essence. Free brand sound analysis by Sancin Audio.",
       },
-      { property: "og:title", content: "Sancin Audio — Expand your brand potential through sound" },
+      { property: "og:title", content: "Sancin Audio — Expand your brand through sound" },
       {
         property: "og:description",
         content: "A brand's sonic identity communicates and enhances its essence.",
@@ -28,40 +29,13 @@ function Index() {
   return (
     <div className="min-h-screen bg-[#e9e9e9] p-4 md:p-8">
       <div className="mx-auto max-w-[1400px] rounded-3xl bg-white px-6 py-8 md:px-14 md:py-10 shadow-sm">
-        {/* Nav */}
-        <header className="flex items-center justify-between">
-          <a href="/" className="text-2xl md:text-3xl font-bold tracking-tight text-black">
-            SANCIN AUDIO
-          </a>
-          <nav className="hidden md:flex items-center gap-1 rounded-full bg-black px-2 py-2 text-sm text-white">
-            <a href="#analysis" className="rounded-full px-5 py-2 hover:bg-white/10 transition">
-              Free identity analysis
-            </a>
-            <a href="#about" className="rounded-full px-5 py-2 hover:bg-white/10 transition">
-              About us
-            </a>
-            <a href="#contact" className="rounded-full px-5 py-2 hover:bg-white/10 transition">
-              Contact
-            </a>
-          </nav>
-          <div className="flex items-center gap-4 text-black">
-            <button aria-label="Search" className="hover:opacity-60 transition">
-              <Search className="h-5 w-5" strokeWidth={1.5} />
-            </button>
-            <button aria-label="Cart" className="hover:opacity-60 transition">
-              <ShoppingBag className="h-5 w-5" strokeWidth={1.5} />
-            </button>
-            <button aria-label="Account" className="hover:opacity-60 transition">
-              <User className="h-5 w-5" strokeWidth={1.5} />
-            </button>
-          </div>
-        </header>
+        <SiteHeader />
 
         {/* Hero */}
         <section className="relative mt-10 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="relative z-10">
             <h1 className="text-5xl md:text-7xl font-bold uppercase leading-[1.02] tracking-tight text-black">
-              Expand your brand potential through sound
+              Expand your brand through sound
             </h1>
             <p className="mt-8 max-w-md text-base md:text-lg text-neutral-500 leading-relaxed">
               A brand's sonic identity communicates and enhances its essence.
@@ -90,12 +64,12 @@ function Index() {
               <path d="M45 40 C 90 10, 140 70, 220 30" />
             </svg>
 
-            <a
-              href="#analysis"
+            <Link
+              to="/free-identity-analysis"
               className="mt-4 inline-flex items-center justify-center rounded-full bg-black px-8 py-4 text-sm font-medium text-white hover:bg-neutral-800 transition"
             >
-              Free analysis of your brand
-            </a>
+              FREE analysis of your Brand
+            </Link>
           </div>
 
           {/* Headphones image */}
@@ -164,3 +138,4 @@ function XIcon({ className, strokeWidth }: { className?: string; strokeWidth?: n
     </svg>
   );
 }
+
