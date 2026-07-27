@@ -1,5 +1,5 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Instagram, Linkedin, Facebook } from "lucide-react";
 import heroImage from "@/assets/headphones-hero.png";
 import thumbImage from "@/assets/headphones-thumb.jpg";
