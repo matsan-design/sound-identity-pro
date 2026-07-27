@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { useState, useCallback } from "react";
 import { Instagram, Linkedin, Facebook } from "lucide-react";
 import heroImage from "@/assets/headphones-hero.png";
 import thumbImage from "@/assets/headphones-thumb.jpg";
@@ -26,24 +27,50 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const router = useRouter();
+  const [leaving, setLeaving] = useState(false);
+
+  const navigateWithAnimation = useCallback(
+    (to: string) => (e: React.MouseEvent) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      if (leaving) return;
+      setLeaving(true);
+      window.setTimeout(() => {
+        router.navigate({ to });
+      }, 650);
+    },
+    [leaving, router],
+  );
+
   return (
     <div className="min-h-screen bg-[#e9e9e9] p-4 md:p-8">
       <div className="mx-auto max-w-[1400px] rounded-3xl bg-white px-6 py-8 md:px-14 md:py-10 shadow-sm">
-        <SiteHeader />
+        <SiteHeader onNavigate={navigateWithAnimation} />
 
         {/* Hero */}
         <section className="relative mt-10 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="relative z-10">
-            <h1 className="text-5xl md:text-7xl font-bold uppercase leading-[1.02] tracking-tight text-black">
+            <h1
+              className={`text-5xl md:text-7xl font-bold uppercase leading-[1.02] tracking-tight text-black transition-all duration-500 ${
+                leaving ? "opacity-0 -translate-y-2" : "opacity-100"
+              }`}
+            >
               Expand your brand through sound
             </h1>
-            <p className="mt-8 max-w-md text-base md:text-lg text-neutral-500 leading-relaxed">
+            <p
+              className={`mt-8 max-w-md text-base md:text-lg text-neutral-500 leading-relaxed transition-all duration-500 delay-75 ${
+                leaving ? "opacity-0" : "opacity-100"
+              }`}
+            >
               A brand's sonic identity communicates and enhances its essence.
             </p>
 
             {/* decorative squiggle */}
             <svg
-              className="mt-6 h-16 w-52 text-black/70"
+              className={`mt-6 h-16 w-52 text-black/70 transition-opacity duration-500 ${
+                leaving ? "opacity-0" : "opacity-100"
+              }`}
               viewBox="0 0 240 80"
               fill="none"
               stroke="currentColor"
@@ -64,28 +91,37 @@ function Index() {
               <path d="M45 40 C 90 10, 140 70, 220 30" />
             </svg>
 
-            <Link
-              to="/free-identity-analysis"
+            <a
+              href="/free-identity-analysis"
+              onClick={navigateWithAnimation("/free-identity-analysis")}
               className="mt-4 inline-flex items-center justify-center rounded-full bg-black px-8 py-4 text-sm font-medium text-white hover:bg-neutral-800 transition"
             >
               FREE analysis of your Brand
-            </Link>
+            </a>
           </div>
 
-          {/* Headphones image */}
-          <div className="relative md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-[62%]">
+          {/* Headphones image — pointer-events-none so header nav stays clickable */}
+          <div className="pointer-events-none relative md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-[62%] z-0">
             <img
               src={heroImage}
               alt="Premium over-ear headphones"
               width={1400}
               height={1400}
-              className="w-full h-auto object-contain drop-shadow-2xl"
+              className={`w-full h-auto object-contain drop-shadow-2xl transition-all ease-[cubic-bezier(0.65,0,0.35,1)] duration-700 ${
+                leaving
+                  ? "-translate-x-[120%] opacity-0 blur-md scale-90 rotate-[-6deg]"
+                  : "translate-x-0 opacity-100 blur-0 scale-100 rotate-0"
+              }`}
             />
           </div>
         </section>
 
         {/* Bottom thumb + social */}
-        <div className="relative mt-8 md:mt-24 flex items-end justify-between">
+        <div
+          className={`relative mt-8 md:mt-24 flex items-end justify-between transition-opacity duration-500 ${
+            leaving ? "opacity-0" : "opacity-100"
+          }`}
+        >
           <div className="rounded-2xl bg-[#f2f2f2] p-4 w-48 md:w-64">
             <img
               src={thumbImage}
@@ -138,4 +174,3 @@ function XIcon({ className, strokeWidth }: { className?: string; strokeWidth?: n
     </svg>
   );
 }
-
