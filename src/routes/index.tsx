@@ -1,9 +1,9 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useState, useCallback, useEffect } from "react";
-import { Instagram, Linkedin, Facebook } from "lucide-react";
 import heroImage from "@/assets/headphones-hero.png";
-import thumbImage from "@/assets/headphones-thumb.jpg";
 import { SiteHeader } from "@/components/site-header";
+import { ContactForm } from "@/components/contact-form";
+import { RevealOnScroll } from "@/components/reveal-on-scroll";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -31,7 +31,6 @@ function Index() {
   const [leaving, setLeaving] = useState(false);
   const [entering, setEntering] = useState(true);
 
-  // Play enter animation on mount
   useEffect(() => {
     const t = window.setTimeout(() => setEntering(false), 20);
     return () => window.clearTimeout(t);
@@ -50,13 +49,11 @@ function Index() {
     [leaving, router],
   );
 
-  // hidden state = either leaving OR still in initial entering phase
   const hidden = leaving || entering;
 
   return (
     <div className="min-h-screen bg-[#e9e9e9] p-4 md:p-8">
       <div className="mx-auto max-w-[1400px] rounded-3xl bg-white px-6 py-8 md:px-14 md:py-10 shadow-sm">
-        {/* Header: scale-in on enter, unaffected on leave */}
         <div
           className={`transition-all duration-500 ease-out ${
             entering ? "opacity-0 scale-95" : "opacity-100 scale-100"
@@ -81,7 +78,6 @@ function Index() {
               A brand's sonic identity communicates and enhances its essence.
             </p>
 
-            {/* decorative squiggle */}
             <svg
               className="mt-6 h-16 w-52 text-black/70"
               viewBox="0 0 240 80"
@@ -113,81 +109,41 @@ function Index() {
             </a>
           </div>
 
-          {/* Headphones image — moved slightly down so it doesn't overlap nav */}
+          {/* Headphones — subtle floating animation */}
           <div className="pointer-events-none relative md:absolute md:right-0 md:top-[58%] md:-translate-y-1/2 md:w-[62%] z-0">
-            <img
-              src={heroImage}
-              alt="Premium over-ear headphones"
-              width={1400}
-              height={1400}
-              className={`w-full h-auto object-contain drop-shadow-2xl transition-all ease-[cubic-bezier(0.65,0,0.35,1)] duration-700 ${
+            <div
+              className={`transition-all ease-[cubic-bezier(0.65,0,0.35,1)] duration-700 ${
                 hidden
                   ? `opacity-0 blur-md scale-90 ${
                       leaving ? "translate-x-[120%] rotate-[6deg]" : "translate-x-[40%] rotate-[6deg]"
                     }`
                   : "translate-x-0 opacity-100 blur-0 scale-100 rotate-0"
               }`}
-            />
+            >
+              <img
+                src={heroImage}
+                alt="Premium over-ear headphones"
+                width={1400}
+                height={1400}
+                className={`w-full h-auto object-contain drop-shadow-2xl ${!hidden ? "animate-float-y" : ""}`}
+              />
+            </div>
           </div>
         </section>
 
-        {/* Bottom thumb + social */}
-        <div
-          className={`relative mt-8 md:mt-24 flex items-end justify-between transition-all duration-700 ease-[cubic-bezier(0.65,0,0.35,1)] ${
-            hidden
-              ? `opacity-0 blur-md ${leaving ? "-translate-x-[40%]" : "translate-x-0"}`
-              : "opacity-100 blur-0 translate-x-0"
-          }`}
-        >
-          <div className="rounded-2xl bg-[#f2f2f2] p-4 w-48 md:w-64">
-            <img
-              src={thumbImage}
-              alt="Black headphones"
-              width={800}
-              height={800}
-              loading="lazy"
-              className="w-full h-auto rounded-lg object-cover"
-            />
-            <div className="mt-3 flex justify-center">
-              <div className="h-2 w-14 rounded-full bg-neutral-300" />
-            </div>
+        {/* Scroll-triggered contact form */}
+        <RevealOnScroll className="mt-32 md:mt-48">
+          <div className="max-w-3xl">
+            <h2 className="text-4xl md:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-black">
+              Let's talk
+            </h2>
+            <p className="mt-6 max-w-xl text-base md:text-lg text-neutral-500 leading-relaxed">
+              Tell us about your brand and we'll be in touch soon.
+            </p>
+            <ContactForm />
           </div>
-
-          <div className="flex flex-col gap-3">
-            {[
-              { Icon: Instagram, label: "Instagram" },
-              { Icon: XIcon, label: "X" },
-              { Icon: Linkedin, label: "LinkedIn" },
-              { Icon: Facebook, label: "Facebook" },
-            ].map(({ Icon, label }) => (
-              <a
-                key={label}
-                href="#"
-                aria-label={label}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f2f2f2] text-black hover:bg-neutral-200 transition"
-              >
-                <Icon className="h-4 w-4" strokeWidth={1.5} />
-              </a>
-            ))}
-          </div>
-        </div>
+        </RevealOnScroll>
       </div>
     </div>
-  );
-}
-
-function XIcon({ className, strokeWidth }: { className?: string; strokeWidth?: number }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={strokeWidth ?? 1.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M4 4l16 16M20 4L4 20" />
-    </svg>
   );
 }
