@@ -14,27 +14,33 @@ export function SiteHeader({ onNavigate }: { onNavigate?: NavHandler }) {
         <img
           src={logo}
           alt="Sancin Audio"
-          className="h-8 md:h-10 w-auto object-contain select-none"
+          className="h-[2.6rem] md:h-[3.25rem] w-auto object-contain select-none"
           draggable={false}
         />
       </Link>
       <nav className="hidden md:flex items-center gap-1 rounded-full bg-black px-2 py-2 text-sm text-white">
         {onNavigate ? (
           <>
+            <a {...linkProps("/free-identity-analysis")!} className="rounded-full px-5 py-2 hover:bg-white/10 transition">
+              FREE brand analysis
+            </a>
             <a {...linkProps("/about-us")!} className="rounded-full px-5 py-2 hover:bg-white/10 transition">
-              About Us
+              About
             </a>
             <a {...linkProps("/contact")!} className="rounded-full px-5 py-2 hover:bg-white/10 transition">
-              Contact
+              Contacts
             </a>
           </>
         ) : (
           <>
+            <Link to="/free-identity-analysis" className="rounded-full px-5 py-2 hover:bg-white/10 transition">
+              FREE brand analysis
+            </Link>
             <Link to="/about-us" className="rounded-full px-5 py-2 hover:bg-white/10 transition">
-              About Us
+              About
             </Link>
             <Link to="/contact" className="rounded-full px-5 py-2 hover:bg-white/10 transition">
-              Contact
+              Contacts
             </Link>
           </>
         )}
