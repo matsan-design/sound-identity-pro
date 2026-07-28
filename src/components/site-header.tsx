@@ -14,7 +14,7 @@ export function SiteHeader({ onNavigate }: { onNavigate?: NavHandler }) {
         <img
           src={logo}
           alt="Sancin Audio"
-          className="h-8 md:h-10 w-auto object-contain select-none"
+          className="h-[2.6rem] md:h-[3.25rem] w-auto object-contain select-none"
           draggable={false}
         />
       </Link>
