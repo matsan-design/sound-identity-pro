@@ -75,7 +75,7 @@ function Index() {
               Expand your brand through sound
             </h1>
             <p className="mt-8 max-w-md text-base md:text-lg text-neutral-500 leading-relaxed">
-              A brand's sonic identity communicates and enhances its essence.
+              We craft immersive audio identities that make brands instantly recognizable and create lasting emotional connections with audiences.
             </p>
 
             <svg
