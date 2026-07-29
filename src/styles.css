@@ -167,3 +167,30 @@
 .animate-drift-x { animation: drift-x 9s ease-in-out infinite }
 .animate-page-morph { animation: page-morph-in 0.7s cubic-bezier(0.65,0,0.35,1) both }
 .animate-section-morph { animation: section-morph-in 0.9s cubic-bezier(0.65,0,0.35,1) both }
+
+@keyframes cta-shake {
+  0%, 92%, 100% { transform: translateX(0) }
+  93% { transform: translateX(4px) }
+  94% { transform: translateX(-4px) }
+  95% { transform: translateX(4px) }
+  96% { transform: translateX(-4px) }
+  97% { transform: translateX(0) }
+}
+.animate-cta-shake { animation: cta-shake 7s ease-in-out infinite }
+
+/* Tilted premium SEND button (inspired by editorial motion reference) */
+.tilt-btn {
+  position: relative;
+  display: inline-block;
+  transform: rotate(-4deg);
+  transition: transform 0.35s cubic-bezier(0.65,0,0.35,1);
+}
+.tilt-btn:hover { transform: rotate(-4deg) translateY(-2px) scale(1.03) }
+.tilt-btn::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: -6px;
+  height: 2px; background: currentColor;
+  transform-origin: right; transform: scaleX(1);
+  transition: transform 0.5s cubic-bezier(0.65,0,0.35,1);
+}
+.tilt-btn:hover::after { transform-origin: left; transform: scaleX(1) }

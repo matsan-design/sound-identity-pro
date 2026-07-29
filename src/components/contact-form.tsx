@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useLang } from "@/lib/i18n";
 
 export function ContactForm() {
+  const { t } = useLang();
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -29,59 +31,57 @@ export function ContactForm() {
 
   if (state === "sent") {
     return (
-      <div className="mt-8 rounded-2xl bg-[#f2f2f2] p-8 md:p-12 text-center">
+      <div className="mt-8 rounded-2xl border border-black/10 p-8 md:p-12 text-center">
         <h3 className="text-2xl md:text-3xl font-bold uppercase tracking-tight text-black">
-          Thank you for reaching out.
+          {t("formThanks")}
         </h3>
-        <p className="mt-4 text-neutral-600">
-          We'll get back to you as soon as possible — expect to hear from us shortly.
-        </p>
+        <p className="mt-4 text-neutral-600">{t("formThanksSub")}</p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={onSubmit} className="mt-8 grid grid-cols-1 gap-4 max-w-2xl">
+    <form onSubmit={onSubmit} className="mt-8 grid grid-cols-1 gap-5 max-w-2xl">
       <label className="block">
-        <span className="text-sm font-medium text-black">Brand name or Personal name</span>
+        <span className="text-sm font-medium text-black">{t("formName")}</span>
         <input
           required
           maxLength={200}
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
-          className="mt-2 w-full rounded-xl border border-neutral-200 bg-[#f2f2f2] px-4 py-3 text-black outline-none focus:border-black transition"
+          className="mt-2 w-full rounded-none border-0 border-b border-black/30 bg-transparent px-0 py-3 text-black outline-none focus:border-black transition"
         />
       </label>
       <label className="block">
-        <span className="text-sm font-medium text-black">Your email</span>
+        <span className="text-sm font-medium text-black">{t("formEmail")}</span>
         <input
           required
           type="email"
           maxLength={320}
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
-          className="mt-2 w-full rounded-xl border border-neutral-200 bg-[#f2f2f2] px-4 py-3 text-black outline-none focus:border-black transition"
+          className="mt-2 w-full rounded-none border-0 border-b border-black/30 bg-transparent px-0 py-3 text-black outline-none focus:border-black transition"
         />
       </label>
       <label className="block">
-        <span className="text-sm font-medium text-black">Message</span>
+        <span className="text-sm font-medium text-black">{t("formMessage")}</span>
         <textarea
           required
           rows={5}
           maxLength={5000}
           value={form.message}
           onChange={(e) => setForm({ ...form, message: e.target.value })}
-          className="mt-2 w-full rounded-xl border border-neutral-200 bg-[#f2f2f2] px-4 py-3 text-black outline-none focus:border-black transition resize-none"
+          className="mt-2 w-full rounded-none border-0 border-b border-black/30 bg-transparent px-0 py-3 text-black outline-none focus:border-black transition resize-none"
         />
       </label>
       {error && <p className="text-sm text-red-600">{error}</p>}
-      <div>
+      <div className="pt-6">
         <button
           type="submit"
           disabled={state === "sending"}
-          className="inline-flex items-center justify-center rounded-full bg-black px-8 py-4 text-sm font-medium text-white hover:bg-neutral-800 transition disabled:opacity-60"
+          className="tilt-btn text-3xl md:text-5xl font-black italic uppercase tracking-tight text-black disabled:opacity-60"
         >
-          {state === "sending" ? "Sending..." : "SEND"}
+          {state === "sending" ? t("formSending") : t("formSend")}
         </button>
       </div>
     </form>
