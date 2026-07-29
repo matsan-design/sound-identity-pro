@@ -4,6 +4,7 @@ import heroImage from "@/assets/headphones-hero.png";
 import { SiteHeader } from "@/components/site-header";
 import { ContactForm } from "@/components/contact-form";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
+import { useLang } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,6 +28,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const { t } = useLang();
   const router = useRouter();
   const [leaving, setLeaving] = useState(false);
   const [entering, setEntering] = useState(true);
@@ -72,10 +74,10 @@ function Index() {
             }`}
           >
             <h1 className="text-5xl md:text-7xl font-bold uppercase leading-[1.02] tracking-tight text-black">
-              Expand your brand through sound
+              {t("heroTitle")}
             </h1>
             <p className="mt-8 max-w-md text-base md:text-lg text-neutral-500 leading-relaxed">
-              We craft immersive audio identities that make brands instantly recognizable and create lasting emotional connections with audiences.
+              {t("heroSubtitle")}
             </p>
 
             <svg
@@ -103,9 +105,9 @@ function Index() {
             <a
               href="/free-identity-analysis"
               onClick={navigateWithAnimation("/free-identity-analysis")}
-              className="mt-4 inline-flex items-center justify-center rounded-full bg-black px-8 py-4 text-sm font-medium text-white hover:bg-neutral-800 transition"
+              className="mt-4 inline-flex items-center justify-center rounded-full bg-black px-8 py-4 text-sm font-medium text-white hover:bg-neutral-800 transition animate-cta-shake"
             >
-              FREE analysis of your Brand
+              {t("ctaFreeAnalysis")}
             </a>
           </div>
 
@@ -135,10 +137,10 @@ function Index() {
         <RevealOnScroll className="mt-32 md:mt-48">
           <div className="max-w-3xl">
             <h2 className="text-4xl md:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-black">
-              Let's talk
+              {t("letsTalk")}
             </h2>
             <p className="mt-6 max-w-xl text-base md:text-lg text-neutral-500 leading-relaxed">
-              Tell us about your brand and we'll be in touch soon.
+              {t("letsTalkSub")}
             </p>
             <ContactForm />
           </div>
