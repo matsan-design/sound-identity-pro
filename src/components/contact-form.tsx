@@ -75,14 +75,14 @@ export function ContactForm() {
         />
       </label>
       {error && <p className="text-sm text-red-600">{error}</p>}
-      <div className="pt-6">
-        <button
-          type="submit"
-          disabled={state === "sending"}
-          className="tilt-btn text-3xl md:text-5xl font-black italic uppercase tracking-tight text-black disabled:opacity-60"
-        >
-          {state === "sending" ? t("formSending") : t("formSend")}
-        </button>
+      <div className="pt-10">
+        <div className="glass-send-stage">
+          <button type="submit" disabled={state === "sending"} className="glass-send">
+            <span className="glass-send-label text-base md:text-lg">
+              {state === "sending" ? t("formSending") : "SEND"}
+            </span>
+          </button>
+        </div>
       </div>
     </form>
   );

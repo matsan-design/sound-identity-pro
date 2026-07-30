@@ -194,3 +194,133 @@
   transition: transform 0.5s cubic-bezier(0.65,0,0.35,1);
 }
 .tilt-btn:hover::after { transform-origin: left; transform: scaleX(1) }
+
+/* ── Glass pill SEND button (VisionOS-style, perspective tilted) ───────── */
+.glass-send-stage {
+  perspective: 900px;
+  perspective-origin: 50% 40%;
+  display: inline-block;
+  padding: 1.75rem 2rem 2.25rem;
+  margin: -1.75rem -2rem -2.25rem;
+}
+
+.glass-send {
+  --lift: 0px;
+  --press: 0px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 15rem;
+  padding: 1.15rem 3rem;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transform:
+    rotateX(46deg) rotateZ(-27deg)
+    translate3d(0, var(--press), var(--lift));
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.55s ease;
+  background:
+    linear-gradient(150deg,
+      color-mix(in oklab, var(--background) 78%, transparent) 0%,
+      color-mix(in oklab, var(--background) 42%, transparent) 45%,
+      color-mix(in oklab, var(--foreground) 8%, transparent) 100%);
+  backdrop-filter: blur(18px) saturate(180%);
+  box-shadow:
+    0 1px 0 0 color-mix(in oklab, var(--background) 90%, transparent) inset,
+    0 -1px 1px 0 color-mix(in oklab, var(--foreground) 14%, transparent) inset,
+    0 2px 3px -1px color-mix(in oklab, var(--foreground) 22%, transparent),
+    0 18px 30px -12px color-mix(in oklab, var(--foreground) 32%, transparent),
+    0 40px 60px -30px color-mix(in oklab, var(--foreground) 28%, transparent);
+}
+
+/* outer rim: refracted glass edge */
+.glass-send::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(140deg,
+    color-mix(in oklab, var(--background) 95%, transparent),
+    color-mix(in oklab, var(--foreground) 18%, transparent) 40%,
+    color-mix(in oklab, var(--background) 85%, transparent) 70%,
+    color-mix(in oklab, var(--foreground) 12%, transparent));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* specular highlight sweeping across the surface */
+.glass-send::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background:
+    radial-gradient(120% 80% at 22% 0%,
+      color-mix(in oklab, var(--background) 92%, transparent) 0%,
+      transparent 58%),
+    linear-gradient(110deg,
+      transparent 30%,
+      color-mix(in oklab, var(--background) 70%, transparent) 47%,
+      transparent 62%);
+  background-size: 100% 100%, 260% 100%;
+  background-position: 0 0, 130% 0;
+  opacity: 0.9;
+  transition: background-position 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.glass-send-label {
+  position: relative;
+  z-index: 1;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-style: normal;
+  text-decoration: none;
+  color: var(--foreground);
+  transform: translateZ(6px);
+}
+
+.glass-send:hover {
+  --lift: 26px;
+  background:
+    linear-gradient(150deg,
+      color-mix(in oklab, var(--background) 88%, transparent) 0%,
+      color-mix(in oklab, var(--background) 55%, transparent) 45%,
+      color-mix(in oklab, var(--foreground) 6%, transparent) 100%);
+  box-shadow:
+    0 1px 0 0 color-mix(in oklab, var(--background) 96%, transparent) inset,
+    0 -1px 2px 0 color-mix(in oklab, var(--foreground) 12%, transparent) inset,
+    0 4px 6px -2px color-mix(in oklab, var(--foreground) 20%, transparent),
+    0 34px 46px -18px color-mix(in oklab, var(--foreground) 34%, transparent),
+    0 70px 90px -46px color-mix(in oklab, var(--foreground) 30%, transparent);
+}
+.glass-send:hover::after { background-position: 0 0, -130% 0 }
+
+.glass-send:active {
+  --lift: 2px;
+  --press: 3px;
+  transition-duration: 0.14s;
+  box-shadow:
+    0 1px 0 0 color-mix(in oklab, var(--background) 80%, transparent) inset,
+    0 -1px 1px 0 color-mix(in oklab, var(--foreground) 18%, transparent) inset,
+    0 1px 2px -1px color-mix(in oklab, var(--foreground) 24%, transparent),
+    0 10px 18px -10px color-mix(in oklab, var(--foreground) 30%, transparent);
+}
+
+.glass-send:disabled { cursor: default; opacity: 0.65 }
+.glass-send:disabled:hover { --lift: 0px }
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-send, .glass-send::after { transition-duration: 0.01ms }
+}
+
