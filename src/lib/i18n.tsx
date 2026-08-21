@@ -10,7 +10,7 @@ export const T: Dict = {
     it: "Analisi gratuita del brand",
   },
   navAbout: { en: "About", it: "Chi siamo" },
-  navContact: { en: "Contacts", it: "Contatti" },
+  navContact: { en: "Contact", it: "Contatti" },
 
   heroTitle: {
     en: "Expand your brand through sound",
