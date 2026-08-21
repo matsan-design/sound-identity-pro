@@ -1,19 +1,63 @@
 import { Link } from "@tanstack/react-router";
+import { useRef } from "react";
 import logo from "@/assets/sancin-logo.png";
 import { LangToggle, useLang } from "@/lib/i18n";
 
 type NavHandler = (to: string) => (e: React.MouseEvent) => void;
 
+/** Tracks the cursor for the glass illumination and spins the pill on click. */
+function useGlassInteractions() {
+  const timers = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
+
+  const onMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const el = e.currentTarget;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    el.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
+
+  const onMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
+    const el = e.currentTarget;
+    el.style.setProperty("--mx", "50%");
+    el.style.setProperty("--my", "50%");
+  };
+
+  const spin = (e: React.MouseEvent<HTMLElement>) => {
+    const el = e.currentTarget;
+    const key = el.getAttribute("data-nav-key") ?? "x";
+    el.classList.remove("glass-nav-spinning");
+    // force reflow so the animation can restart
+    void el.offsetWidth;
+    el.classList.add("glass-nav-spinning");
+    clearTimeout(timers.current[key]);
+    timers.current[key] = setTimeout(
+      () => el.classList.remove("glass-nav-spinning"),
+      800,
+    );
+  };
+
+  return { onMouseMove, onMouseLeave, spin };
+}
+
 export function SiteHeader({ onNavigate }: { onNavigate?: NavHandler }) {
   const { t } = useLang();
-  const linkProps = (to: string) =>
-    onNavigate ? { href: to, onClick: onNavigate(to) } : null;
+  const glass = useGlassInteractions();
 
   const items = [
     { to: "/free-identity-analysis", label: t("navFree") },
     { to: "/about-us", label: t("navAbout") },
     { to: "/contact", label: t("navContact") },
   ];
+
+  const interactions = (to: string, extra?: (e: React.MouseEvent) => void) => ({
+    "data-nav-key": to,
+    onMouseMove: glass.onMouseMove,
+    onMouseLeave: glass.onMouseLeave,
+    onClick: (e: React.MouseEvent) => {
+      glass.spin(e as React.MouseEvent<HTMLElement>);
+      extra?.(e);
+    },
+  });
 
   return (
     <>
@@ -26,23 +70,25 @@ export function SiteHeader({ onNavigate }: { onNavigate?: NavHandler }) {
             draggable={false}
           />
         </Link>
-        <nav className="hidden md:flex items-center gap-1 rounded-full bg-black px-2 py-2 text-sm text-white">
+        <nav className="hidden md:flex items-center gap-2 rounded-full bg-black px-2 py-2 text-sm text-white">
           {items.map((it) =>
             onNavigate ? (
               <a
                 key={it.to}
-                {...linkProps(it.to)!}
-                className="rounded-full px-5 py-2 hover:bg-white/10 transition"
+                href={it.to}
+                className="glass-nav px-5 py-2"
+                {...interactions(it.to, onNavigate(it.to))}
               >
-                {it.label}
+                <span>{it.label}</span>
               </a>
             ) : (
               <Link
                 key={it.to}
                 to={it.to}
-                className="rounded-full px-5 py-2 hover:bg-white/10 transition"
+                className="glass-nav px-5 py-2"
+                {...interactions(it.to)}
               >
-                {it.label}
+                <span>{it.label}</span>
               </Link>
             ),
           )}
@@ -61,18 +107,20 @@ export function SiteHeader({ onNavigate }: { onNavigate?: NavHandler }) {
           onNavigate ? (
             <a
               key={it.to}
-              {...linkProps(it.to)!}
-              className="rounded-full bg-black/90 px-4 py-2 text-[11px] font-medium tracking-wide text-white shadow-sm backdrop-blur"
+              href={it.to}
+              className="glass-nav bg-black/70 px-4 py-2 text-[11px] font-medium tracking-wide"
+              {...interactions(it.to, onNavigate(it.to))}
             >
-              {it.label}
+              <span>{it.label}</span>
             </a>
           ) : (
             <Link
               key={it.to}
               to={it.to}
-              className="rounded-full bg-black/90 px-4 py-2 text-[11px] font-medium tracking-wide text-white shadow-sm backdrop-blur"
+              className="glass-nav bg-black/70 px-4 py-2 text-[11px] font-medium tracking-wide"
+              {...interactions(it.to)}
             >
-              {it.label}
+              <span>{it.label}</span>
             </Link>
           ),
         )}
