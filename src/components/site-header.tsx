@@ -70,7 +70,7 @@ export function SiteHeader({ onNavigate }: { onNavigate?: NavHandler }) {
             draggable={false}
           />
         </Link>
-        <nav className="hidden md:flex items-center gap-2 rounded-full bg-black px-2 py-2 text-sm text-white">
+        <nav className="hidden md:flex items-center gap-2 px-2 py-2 text-sm">
           {items.map((it) =>
             onNavigate ? (
               <a
