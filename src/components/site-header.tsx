@@ -70,7 +70,7 @@ export function SiteHeader({ onNavigate }: { onNavigate?: NavHandler }) {
             draggable={false}
           />
         </Link>
-        <nav className="hidden md:flex items-center gap-2 rounded-full bg-black px-2 py-2 text-sm text-white">
+        <nav className="hidden md:flex items-center gap-2 px-2 py-2 text-sm">
           {items.map((it) =>
             onNavigate ? (
               <a
@@ -108,7 +108,7 @@ export function SiteHeader({ onNavigate }: { onNavigate?: NavHandler }) {
             <a
               key={it.to}
               href={it.to}
-              className="glass-nav bg-black/70 px-4 py-2 text-[11px] font-medium tracking-wide"
+              className="glass-nav px-4 py-2 text-[11px] font-medium tracking-wide"
               {...interactions(it.to, onNavigate(it.to))}
             >
               <span>{it.label}</span>
@@ -117,7 +117,7 @@ export function SiteHeader({ onNavigate }: { onNavigate?: NavHandler }) {
             <Link
               key={it.to}
               to={it.to}
-              className="glass-nav bg-black/70 px-4 py-2 text-[11px] font-medium tracking-wide"
+              className="glass-nav px-4 py-2 text-[11px] font-medium tracking-wide"
               {...interactions(it.to)}
             >
               <span>{it.label}</span>
