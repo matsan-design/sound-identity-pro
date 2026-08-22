@@ -1,6 +1,7 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import heroImage from "@/assets/headphones-hero.png";
+import rattleAsset from "@/assets/Rattle.wav.asset.json";
 import { SiteHeader } from "@/components/site-header";
 import { ContactForm } from "@/components/contact-form";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
@@ -32,6 +33,50 @@ function Index() {
   const router = useRouter();
   const [leaving, setLeaving] = useState(false);
   const [entering, setEntering] = useState(true);
+  const ctaRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    const audio = new Audio(rattleAsset.url);
+    audio.preload = "auto";
+
+    // Unlock autoplay on first user interaction (required by mobile browsers).
+    const unlock = () => {
+      audio.play().catch(() => {});
+      document.removeEventListener("pointerdown", unlock);
+      document.removeEventListener("keydown", unlock);
+    };
+    document.addEventListener("pointerdown", unlock);
+    document.addEventListener("keydown", unlock);
+
+    let shakeTimer: ReturnType<typeof setTimeout> | null = null;
+
+    const playRattle = () => {
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+    };
+
+    const scheduleShake = () => {
+      if (shakeTimer) clearTimeout(shakeTimer);
+      // The shake animation runs every 7s and the movement starts at 92%.
+      shakeTimer = setTimeout(() => playRattle(), 6440);
+    };
+
+    const el = ctaRef.current;
+    if (el) {
+      el.addEventListener("animationstart", scheduleShake);
+      el.addEventListener("animationiteration", scheduleShake);
+    }
+
+    return () => {
+      if (shakeTimer) clearTimeout(shakeTimer);
+      if (el) {
+        el.removeEventListener("animationstart", scheduleShake);
+        el.removeEventListener("animationiteration", scheduleShake);
+      }
+      document.removeEventListener("pointerdown", unlock);
+      document.removeEventListener("keydown", unlock);
+    };
+  }, []);
 
   useEffect(() => {
     const t = window.setTimeout(() => setEntering(false), 20);
@@ -103,6 +148,7 @@ function Index() {
             </svg>
 
             <a
+              ref={ctaRef}
               href="/free-identity-analysis"
               onClick={navigateWithAnimation("/free-identity-analysis")}
               className="mt-4 inline-flex items-center justify-center rounded-full bg-black px-8 py-4 text-sm font-medium text-white hover:bg-neutral-800 transition animate-cta-shake"
