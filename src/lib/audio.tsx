@@ -121,8 +121,8 @@ export function AudioGate({ children }: { children: ReactNode }) {
             closing ? "opacity-0 scale-105 blur-md" : "opacity-100 scale-100 blur-0"
           }`}
         >
-          <p className="text-center text-lg md:text-2xl font-medium tracking-tight text-black">
-            Activate ON for better experience
+          <p className="text-center max-w-md text-base md:text-lg text-neutral-500 leading-relaxed">
+            Activate audio for a better experience
           </p>
           <button
             type="button"
