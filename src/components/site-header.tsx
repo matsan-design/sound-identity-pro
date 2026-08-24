@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useRef } from "react";
 import logo from "@/assets/sancin-logo.png";
 import { LangToggle, useLang } from "@/lib/i18n";
+import { AudioToggle } from "@/lib/audio";
 
 type NavHandler = (to: string) => (e: React.MouseEvent) => void;
 
@@ -93,8 +94,9 @@ export function SiteHeader({ onNavigate }: { onNavigate?: NavHandler }) {
             ),
           )}
         </nav>
-        <div className="flex items-center gap-3 text-black">
+        <div className="flex flex-col items-end gap-2 text-black">
           <LangToggle />
+          <AudioToggle />
         </div>
       </header>
 
