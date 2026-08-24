@@ -30,35 +30,21 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const { t } = useLang();
+  const { play } = useAudio();
   const router = useRouter();
   const [leaving, setLeaving] = useState(false);
   const [entering, setEntering] = useState(true);
   const ctaRef = useRef<HTMLAnchorElement>(null);
+  const playRef = useRef(play);
+  playRef.current = play;
 
   useEffect(() => {
-    const audio = new Audio(rattleAsset.url);
-    audio.preload = "auto";
-
-    // Unlock autoplay on first user interaction (required by mobile browsers).
-    const unlock = () => {
-      audio.play().catch(() => {});
-      document.removeEventListener("pointerdown", unlock);
-      document.removeEventListener("keydown", unlock);
-    };
-    document.addEventListener("pointerdown", unlock);
-    document.addEventListener("keydown", unlock);
-
     let shakeTimer: ReturnType<typeof setTimeout> | null = null;
-
-    const playRattle = () => {
-      audio.currentTime = 0;
-      audio.play().catch(() => {});
-    };
 
     const scheduleShake = () => {
       if (shakeTimer) clearTimeout(shakeTimer);
       // The shake animation runs every 7s and the movement starts at 92%.
-      shakeTimer = setTimeout(() => playRattle(), 6440);
+      shakeTimer = setTimeout(() => playRef.current(rattleAsset.url), 6440);
     };
 
     const el = ctaRef.current;
@@ -73,8 +59,6 @@ function Index() {
         el.removeEventListener("animationstart", scheduleShake);
         el.removeEventListener("animationiteration", scheduleShake);
       }
-      document.removeEventListener("pointerdown", unlock);
-      document.removeEventListener("keydown", unlock);
     };
   }, []);
 
