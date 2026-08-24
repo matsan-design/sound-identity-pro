@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { ContactForm } from "@/components/contact-form";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
 import { useLang } from "@/lib/i18n";
+import { useAudio } from "@/lib/audio";
 
 export const Route = createFileRoute("/")({
   head: () => ({
