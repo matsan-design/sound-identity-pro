@@ -1,7 +1,7 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useState, useCallback, useEffect, useRef } from "react";
 import heroImage from "@/assets/headphones-hero.png";
-import rattleAsset from "@/assets/Rattle.wav.asset.json";
+import shakeSfx from "@/assets/sfx-shake.wav.asset.json";
 import { SiteHeader } from "@/components/site-header";
 import { ContactForm } from "@/components/contact-form";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const { t } = useLang();
-  const { play } = useAudio();
+  const { play, activated } = useAudio();
   const router = useRouter();
   const [leaving, setLeaving] = useState(false);
   const [entering, setEntering] = useState(true);
@@ -44,8 +44,8 @@ function Index() {
 
     const scheduleShake = () => {
       if (shakeTimer) clearTimeout(shakeTimer);
-      // The shake animation runs every 7s and the movement starts at 92%.
-      shakeTimer = setTimeout(() => playRef.current(rattleAsset.url), 6440);
+      // The shake animation runs every 20s and the movement starts at 98.25%.
+      shakeTimer = setTimeout(() => playRef.current(shakeSfx.url), 19650);
     };
 
     const el = ctaRef.current;
@@ -91,7 +91,7 @@ function Index() {
             entering ? "opacity-0 scale-95" : "opacity-100 scale-100"
           }`}
         >
-          <SiteHeader onNavigate={navigateWithAnimation} />
+          <SiteHeader onNavigate={navigateWithAnimation} logoIntro={activated} />
         </div>
 
         {/* Hero */}

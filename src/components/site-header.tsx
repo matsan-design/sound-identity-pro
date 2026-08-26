@@ -1,10 +1,15 @@
 import { Link } from "@tanstack/react-router";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import logo from "@/assets/sancin-logo.png";
+import swooshSfx from "@/assets/sfx-swoosh.wav.asset.json";
 import { LangToggle, useLang } from "@/lib/i18n";
-import { AudioToggle } from "@/lib/audio";
+import { AudioToggle, useAudio } from "@/lib/audio";
 
 type NavHandler = (to: string) => (e: React.MouseEvent) => void;
+
+/** Session-scoped guard: the logo reveal only plays on the first landing-page entry. */
+let logoIntroPlayed = false;
+
 
 /** Tracks the cursor for the glass illumination and spins the pill on click. */
 function useGlassInteractions() {
@@ -40,9 +45,27 @@ function useGlassInteractions() {
   return { onMouseMove, onMouseLeave, spin };
 }
 
-export function SiteHeader({ onNavigate }: { onNavigate?: NavHandler }) {
+export function SiteHeader({
+  onNavigate,
+  logoIntro = false,
+}: {
+  onNavigate?: NavHandler;
+  logoIntro?: boolean;
+}) {
   const { t } = useLang();
   const glass = useGlassInteractions();
+  const { play } = useAudio();
+  const [intro, setIntro] = useState(false);
+  const playRef = useRef(play);
+  playRef.current = play;
+
+  useEffect(() => {
+    if (!logoIntro || logoIntroPlayed) return;
+    logoIntroPlayed = true;
+    setIntro(true);
+    playRef.current(swooshSfx.url);
+  }, [logoIntro]);
+
 
   const items = [
     { to: "/free-identity-analysis", label: t("navFree") },
@@ -67,7 +90,9 @@ export function SiteHeader({ onNavigate }: { onNavigate?: NavHandler }) {
           <img
             src={logo}
             alt="Sancin Audio"
-            className="h-[2.6rem] md:h-[3.25rem] w-auto object-contain select-none"
+            className={`h-[2.6rem] md:h-[3.25rem] w-auto object-contain select-none ${
+              intro ? "animate-logo-morph" : ""
+            }`}
             draggable={false}
           />
         </Link>
