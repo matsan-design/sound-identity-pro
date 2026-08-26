@@ -1,10 +1,15 @@
 import { Link } from "@tanstack/react-router";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import logo from "@/assets/sancin-logo.png";
+import swooshSfx from "@/assets/sfx-swoosh.wav.asset.json";
 import { LangToggle, useLang } from "@/lib/i18n";
-import { AudioToggle } from "@/lib/audio";
+import { AudioToggle, useAudio } from "@/lib/audio";
 
 type NavHandler = (to: string) => (e: React.MouseEvent) => void;
+
+/** Session-scoped guard: the logo reveal only plays on the first landing-page entry. */
+let logoIntroPlayed = false;
+
 
 /** Tracks the cursor for the glass illumination and spins the pill on click. */
 function useGlassInteractions() {
