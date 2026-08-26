@@ -45,9 +45,27 @@ function useGlassInteractions() {
   return { onMouseMove, onMouseLeave, spin };
 }
 
-export function SiteHeader({ onNavigate }: { onNavigate?: NavHandler }) {
+export function SiteHeader({
+  onNavigate,
+  logoIntro = false,
+}: {
+  onNavigate?: NavHandler;
+  logoIntro?: boolean;
+}) {
   const { t } = useLang();
   const glass = useGlassInteractions();
+  const { play } = useAudio();
+  const [intro, setIntro] = useState(false);
+  const playRef = useRef(play);
+  playRef.current = play;
+
+  useEffect(() => {
+    if (!logoIntro || logoIntroPlayed) return;
+    logoIntroPlayed = true;
+    setIntro(true);
+    playRef.current(swooshSfx.url);
+  }, [logoIntro]);
+
 
   const items = [
     { to: "/free-identity-analysis", label: t("navFree") },
