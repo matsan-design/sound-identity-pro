@@ -167,7 +167,7 @@ export function AudioGate({ children }: { children: ReactNode }) {
           </p>
           <button
             type="button"
-            onClick={() => !pressed && setPressed(true)}
+            onClick={onActivateClick}
             aria-label="Activate audio"
             className="rounded-full p-4 transition-colors duration-500"
           >
