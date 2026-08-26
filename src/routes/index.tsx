@@ -91,7 +91,7 @@ function Index() {
             entering ? "opacity-0 scale-95" : "opacity-100 scale-100"
           }`}
         >
-          <SiteHeader onNavigate={navigateWithAnimation} />
+          <SiteHeader onNavigate={navigateWithAnimation} logoIntro={activated} />
         </div>
 
         {/* Hero */}
