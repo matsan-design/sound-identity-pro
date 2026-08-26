@@ -14,6 +14,9 @@ type AudioCtx = {
   /** global sound on/off state */
   enabled: boolean;
   toggle: () => void;
+  /** enable + unlock the audio pipeline (called inside the user gesture) */
+  unlock: () => void;
+  /** dismiss the activation screen */
   activate: () => void;
   /** play a one-shot sound effect, respecting the global state */
   play: (url: string) => void;
@@ -23,9 +26,11 @@ const Ctx = createContext<AudioCtx>({
   activated: false,
   enabled: false,
   toggle: () => {},
+  unlock: () => {},
   activate: () => {},
   play: () => {},
 });
+
 
 export function SpeakerIcon({ className = "" }: { className?: string }) {
   return (
