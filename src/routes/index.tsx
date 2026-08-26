@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const { t } = useLang();
-  const { play } = useAudio();
+  const { play, activated } = useAudio();
   const router = useRouter();
   const [leaving, setLeaving] = useState(false);
   const [entering, setEntering] = useState(true);
@@ -44,8 +44,8 @@ function Index() {
 
     const scheduleShake = () => {
       if (shakeTimer) clearTimeout(shakeTimer);
-      // The shake animation runs every 7s and the movement starts at 92%.
-      shakeTimer = setTimeout(() => playRef.current(rattleAsset.url), 6440);
+      // The shake animation runs every 20s and the movement starts at 98.25%.
+      shakeTimer = setTimeout(() => playRef.current(shakeSfx.url), 19650);
     };
 
     const el = ctaRef.current;
