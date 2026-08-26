@@ -58,10 +58,25 @@ export function SpeakerIcon({ className = "" }: { className?: string }) {
 export function AudioProvider({ children }: { children: ReactNode }) {
   const [activated, setActivated] = useState(false);
   const [enabled, setEnabled] = useState(false);
+  const enabledRef = useRef(false);
+  enabledRef.current = enabled;
   const cache = useRef<Record<string, HTMLAudioElement>>({});
 
-  const activate = useCallback(() => {
-    setActivated(true);
+  const playNow = useCallback((url: string) => {
+    let el = cache.current[url];
+    if (!el) {
+      el = new Audio(url);
+      el.preload = "auto";
+      cache.current[url] = el;
+    }
+    try {
+      el.currentTime = 0;
+      void el.play().catch(() => {});
+    } catch {}
+  }, []);
+
+  const unlock = useCallback(() => {
+    enabledRef.current = true;
     setEnabled(true);
     // Unlock the audio pipeline inside the user gesture without audible output.
     try {
@@ -71,27 +86,39 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     } catch {}
   }, []);
 
+  const activate = useCallback(() => setActivated(true), []);
+
   const toggle = useCallback(() => setEnabled((v) => !v), []);
 
   const play = useCallback(
     (url: string) => {
-      if (!enabled) return;
-      let el = cache.current[url];
-      if (!el) {
-        el = new Audio(url);
-        el.preload = "auto";
-        cache.current[url] = el;
-      }
-      try {
-        el.currentTime = 0;
-        void el.play().catch(() => {});
-      } catch {}
+      if (!enabledRef.current) return;
+      playNow(url);
     },
-    [enabled],
+    [playNow],
   );
 
+  // Global click sound for every interactive element, respecting the audio state.
+  useEffect(() => {
+    const onPointerUp = (e: Event) => {
+      if (!enabledRef.current) return;
+      const target = e.target as HTMLElement | null;
+      if (!target || typeof target.closest !== "function") return;
+      const hit = target.closest(
+        'button, a, [role="button"], input[type="submit"], input[type="button"], summary',
+      );
+      if (!hit) return;
+      if (hit.hasAttribute("data-no-click-sound")) return;
+      playNow(clickSfx.url);
+    };
+    document.addEventListener("click", onPointerUp, true);
+    return () => document.removeEventListener("click", onPointerUp, true);
+  }, [playNow]);
+
   return (
-    <Ctx.Provider value={{ activated, enabled, toggle, activate, play }}>{children}</Ctx.Provider>
+    <Ctx.Provider value={{ activated, enabled, toggle, unlock, activate, play }}>
+      {children}
+    </Ctx.Provider>
   );
 }
 
@@ -101,9 +128,17 @@ export function useAudio() {
 
 /** Full-screen white activation screen shown before the site on every load. */
 export function AudioGate({ children }: { children: ReactNode }) {
-  const { activated, activate } = useAudio();
+  const { activated, activate, unlock, play } = useAudio();
   const [pressed, setPressed] = useState(false);
   const [closing, setClosing] = useState(false);
+
+  const onActivateClick = () => {
+    if (pressed) return;
+    // 1. unlock audio inside the gesture, 2. play the click sound, 3. turn the icon black
+    unlock();
+    play(clickSfx.url);
+    setPressed(true);
+  };
 
   useEffect(() => {
     if (!pressed) return;
@@ -116,6 +151,7 @@ export function AudioGate({ children }: { children: ReactNode }) {
     const t2 = window.setTimeout(() => activate(), 620);
     return () => window.clearTimeout(t2);
   }, [closing, activate]);
+
 
   return (
     <>
