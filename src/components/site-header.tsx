@@ -90,7 +90,9 @@ export function SiteHeader({
           <img
             src={logo}
             alt="Sancin Audio"
-            className="h-[2.6rem] md:h-[3.25rem] w-auto object-contain select-none"
+            className={`h-[2.6rem] md:h-[3.25rem] w-auto object-contain select-none ${
+              intro ? "animate-logo-morph" : ""
+            }`}
             draggable={false}
           />
         </Link>
