@@ -1,7 +1,7 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useState, useCallback, useEffect, useRef } from "react";
 import heroImage from "@/assets/headphones-hero.png";
-import rattleAsset from "@/assets/Rattle.wav.asset.json";
+import shakeSfx from "@/assets/sfx-shake.wav.asset.json";
 import { SiteHeader } from "@/components/site-header";
 import { ContactForm } from "@/components/contact-form";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
