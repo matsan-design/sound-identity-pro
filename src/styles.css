@@ -169,14 +169,22 @@
 .animate-section-morph { animation: section-morph-in 0.9s cubic-bezier(0.65,0,0.35,1) both }
 
 @keyframes cta-shake {
-  0%, 92%, 100% { transform: translateX(0) }
-  93% { transform: translateX(4px) }
-  94% { transform: translateX(-4px) }
-  95% { transform: translateX(4px) }
-  96% { transform: translateX(-4px) }
-  97% { transform: translateX(0) }
+  0%, 98.25%, 100% { transform: translateX(0) }
+  98.6% { transform: translateX(4px) }
+  98.95% { transform: translateX(-4px) }
+  99.3% { transform: translateX(4px) }
+  99.65% { transform: translateX(-4px) }
+  99.9% { transform: translateX(0) }
 }
-.animate-cta-shake { animation: cta-shake 7s ease-in-out infinite }
+.animate-cta-shake { animation: cta-shake 20s ease-in-out infinite }
+
+@keyframes logo-morph-in {
+  0% { opacity: 0; transform: scale(0.86) translateY(10px); filter: blur(14px) }
+  55% { opacity: 1; filter: blur(3px) }
+  100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0) }
+}
+.animate-logo-morph { animation: logo-morph-in 1.5s cubic-bezier(0.65,0,0.35,1) both }
+
 
 /* Tilted premium SEND button (inspired by editorial motion reference) */
 .tilt-btn {
