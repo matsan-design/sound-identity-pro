@@ -7,6 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import clickSfx from "@/assets/sfx-click.wav.asset.json";
 
 type AudioCtx = {
   /** true once the user has passed the activation screen */
