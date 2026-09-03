@@ -5,6 +5,7 @@ import shakeSfx from "@/assets/sfx-shake.wav.asset.json";
 import { SiteHeader } from "@/components/site-header";
 import { ContactForm } from "@/components/contact-form";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
+import { LogoMarqueeSection } from "@/components/logo-marquee-section";
 import { useLang } from "@/lib/i18n";
 import { useAudio } from "@/lib/audio";
 
@@ -163,6 +164,8 @@ function Index() {
             </div>
           </div>
         </section>
+
+        <LogoMarqueeSection />
 
         {/* Scroll-triggered contact form */}
         <RevealOnScroll className="mt-32 md:mt-48">
