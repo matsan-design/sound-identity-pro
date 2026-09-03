@@ -127,7 +127,7 @@ export function LogoMarqueeSection() {
             const local = Math.min(1, Math.max(0, revealed - i));
             return (
               <span
-                key={word}
+                key={`${i}-${word}`}
                 className="transition-colors duration-300"
                 style={{ color: `rgba(0,0,0,${0.14 + local * 0.86})` }}
               >
