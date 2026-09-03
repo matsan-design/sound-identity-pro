@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
+import { useLang } from "@/lib/i18n";
+
 import logo1 from "@/assets/logo-1.jpg.asset.json";
 import logo2 from "@/assets/logo-2.jpg.asset.json";
 import logo3 from "@/assets/logo-3.jpg.asset.json";
@@ -19,8 +21,6 @@ const LOGOS = [
   { url: logo7.url, alt: "Mastercard" },
   { url: logo8.url, alt: "Nintendo" },
 ];
-
-const TITLE_WORDS = ["SOUND", "THAT", "MAKES", "BRANDS", "UNFORGETTABLE"];
 
 // Vertical offsets recreate the gentle wave the reference row has.
 const WAVE = [-18, 6, -30, 10, -8, 22, -24, 4];
@@ -61,7 +61,7 @@ function Row({ reverse }: { reverse: boolean }) {
   const items = [...LOGOS, ...LOGOS, ...LOGOS, ...LOGOS];
 
   return (
-    <div className="relative overflow-hidden py-6">
+    <div className="relative overflow-x-clip py-14 -my-8">
       <div
         className={`flex w-max items-center gap-6 md:gap-10 ${
           reverse ? "animate-logo-track-reverse" : "animate-logo-track"
@@ -81,6 +81,8 @@ function Row({ reverse }: { reverse: boolean }) {
 }
 
 export function LogoMarqueeSection() {
+  const { t } = useLang();
+  const TITLE_WORDS = t("marqueeTitle").split(" ");
   const sectionRef = useRef<HTMLElement>(null);
   const [progress, setProgress] = useState(0);
 
@@ -116,7 +118,7 @@ export function LogoMarqueeSection() {
   const revealed = progress * (TITLE_WORDS.length + 1);
 
   return (
-    <section ref={sectionRef} className="mt-32 md:mt-48 -mx-6 md:-mx-14 overflow-hidden">
+    <section ref={sectionRef} className="mt-32 md:mt-48 -mx-6 md:-mx-14 overflow-x-clip">
       <Row reverse={false} />
 
       <div className="px-6 md:px-14 py-6 md:py-10 text-center">
