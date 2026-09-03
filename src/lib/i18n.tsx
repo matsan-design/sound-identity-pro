@@ -109,6 +109,11 @@ export const T: Dict = {
   },
 
   contactTitle: { en: "Contact", it: "Contatti" },
+
+  marqueeTitle: {
+    en: "EVERY POWERFUL BRAND HAS ITS OWN SOUND. YOUR BRAND HAS A SOUND. WE HELP YOU FIND IT.",
+    it: "OGNI BRAND POTENTE HA IL SUO SUONO. IL TUO BRAND HA UN SUONO. TI AIUTIAMO A TROVARLO.",
+  },
 };
 
 type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (k: keyof typeof T) => string };
