@@ -164,6 +164,8 @@ function Index() {
           </div>
         </section>
 
+        <LogoMarqueeSection />
+
         {/* Scroll-triggered contact form */}
         <RevealOnScroll className="mt-32 md:mt-48">
           <div className="max-w-3xl">
