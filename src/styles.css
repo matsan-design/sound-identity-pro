@@ -504,3 +504,20 @@
   .glass-nav, .glass-nav::after { transition-duration: 0.01ms }
   .glass-nav-spinning { animation: none }
 }
+
+/* ── Client logo marquee section (scroll-driven) ────────────────────────── */
+@keyframes logo-track {
+  0% { transform: translate3d(0, 0, 0) }
+  100% { transform: translate3d(-50%, 0, 0) }
+}
+@keyframes logo-track-reverse {
+  0% { transform: translate3d(-50%, 0, 0) }
+  100% { transform: translate3d(0, 0, 0) }
+}
+@keyframes logo-bob {
+  0%, 100% { transform: translateY(0) scale(1) }
+  50% { transform: translateY(-10px) scale(1.03) }
+}
+.animate-logo-track { animation: logo-track 42s linear infinite }
+.animate-logo-track-reverse { animation: logo-track-reverse 42s linear infinite }
+.animate-logo-bob { animation: logo-bob 5.5s ease-in-out infinite }
