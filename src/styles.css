@@ -362,7 +362,7 @@
 }
 
 
-/* ── Glass nav pills (VisionOS-style, no tilt) ─────────────────────────── */
+/* ── Glass nav pills: thin translucent acrylic, no tilt or extrusion ───── */
 .glass-nav {
   --mx: 50%;
   --my: 50%;
@@ -371,123 +371,93 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: none;
+  border: 1px solid color-mix(in oklab, var(--background) 68%, transparent);
   border-radius: 999px;
   cursor: pointer;
   isolation: isolate;
   overflow: hidden;
-  transform-style: preserve-3d;
-  color: #000;
+  color: var(--foreground);
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
     "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
   letter-spacing: 0.01em;
   background:
-    /* top specular highlight — glass catching light from above */
-    radial-gradient(130% 120% at 22% -10%,
-      rgba(255,255,255,0.98) 0%,
-      rgba(255,255,255,0.62) 38%,
-      rgba(255,255,255,0.30) 72%),
-    /* bottom reflected area — subtle darker reflection */
-    radial-gradient(120% 80% at 50% 120%,
-      rgba(120,135,160,0.14) 0%,
-      transparent 60%),
-    /* frosted glass body */
-    linear-gradient(152deg,
-      rgba(255,255,255,0.80) 0%,
-      rgba(240,242,246,0.48) 46%,
-      rgba(210,214,222,0.36) 100%);
-  backdrop-filter: blur(18px) saturate(150%) brightness(1.03);
-  -webkit-backdrop-filter: blur(18px) saturate(150%) brightness(1.03);
+    radial-gradient(120% 95% at 22% -18%,
+      color-mix(in oklab, var(--background) 72%, transparent) 0%,
+      transparent 62%),
+    linear-gradient(145deg,
+      color-mix(in oklab, var(--background) 42%, transparent) 0%,
+      color-mix(in oklab, var(--background) 18%, transparent) 55%,
+      color-mix(in oklab, var(--muted) 16%, transparent) 100%);
+  backdrop-filter: blur(16px) saturate(135%) brightness(1.04);
   box-shadow:
-    /* physical top edge highlight */
-    0 1px 0 0 rgba(255,255,255,0.98) inset,
-    /* physical bottom edge / thickness */
-    0 -1.5px 2px -1px rgba(120,135,160,0.18) inset,
-    /* internal side light */
-    6px 8px 16px -12px rgba(255,255,255,0.9) inset,
-    /* soft contact shadow directly beneath */
-    0 2px 3px -2px rgba(100,115,140,0.08),
-    /* soft diffused ambient elevation shadow */
-    0 14px 30px -20px rgba(100,115,140,0.18),
-    /* subtle lower edge shadow */
-    0 1px 1px rgba(100,115,140,0.04);
+    0 1px 0 color-mix(in oklab, var(--background) 72%, transparent) inset,
+    0 -1px 0 color-mix(in oklab, var(--muted-foreground) 8%, transparent) inset,
+    0 7px 18px -12px color-mix(in oklab, var(--foreground) 22%, transparent);
   transition:
-    box-shadow 0.5s cubic-bezier(0.22,1,0.36,1),
-    background 0.5s ease,
-    transform 0.45s cubic-bezier(0.22,1,0.36,1);
+    border-color 320ms cubic-bezier(0.22,1,0.36,1),
+    box-shadow 320ms cubic-bezier(0.22,1,0.36,1),
+    background 320ms cubic-bezier(0.22,1,0.36,1),
+    transform 450ms cubic-bezier(0.22,1,0.36,1);
 }
 
-/* refracted rim — rounded physical glass edge */
+/* Hairline rim and quiet edge refraction. */
 .glass-nav::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(180deg,
-    rgba(255,255,255,0.99) 0%,
-    rgba(255,255,255,0.55) 22%,
-    rgba(255,255,255,0.30) 50%,
-    rgba(180,192,210,0.40) 82%,
-    rgba(255,255,255,0.92) 100%);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  background:
+    linear-gradient(180deg,
+      color-mix(in oklab, var(--background) 76%, transparent) 0%,
+      transparent 38%,
+      transparent 72%,
+      color-mix(in oklab, var(--muted-foreground) 7%, transparent) 100%),
+    linear-gradient(100deg,
+      transparent 10%,
+      color-mix(in oklab, var(--background) 42%, transparent) 28%,
+      transparent 48%);
   pointer-events: none;
-  z-index: 2;
+  z-index: 1;
 }
 
-/* cursor-tracked illumination + realistic surface reflections */
+/* Pale blue light follows the pointer inside the hovered pill only. */
 .glass-nav::after {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -1px;
   border-radius: inherit;
   background:
-    /* blue glow that follows the cursor */
-    radial-gradient(8rem 5rem at var(--mx) var(--my),
-      rgba(120,170,255,calc(0.34 * var(--glow))) 0%,
-      rgba(150,190,255,calc(0.16 * var(--glow))) 40%,
-      transparent 72%),
-    /* white gloss that follows the cursor */
-    radial-gradient(9rem 6rem at var(--mx) var(--my),
-      rgba(255,255,255,0.62) 0%,
-      rgba(255,255,255,0.24) 38%,
-      transparent 70%),
-    /* top soft studio highlight */
-    linear-gradient(180deg,
-      rgba(255,255,255,0.70) 0%,
-      rgba(255,255,255,0.18) 40%,
-      transparent 60%),
-    /* bottom subtle reflected area */
-    linear-gradient(0deg,
-      rgba(120,135,160,0.10) 0%,
-      transparent 30%);
-  opacity: calc(0.55 + 0.45 * var(--glow));
-  transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), background 0.55s ease;
+    radial-gradient(5.75rem 3.5rem at var(--mx) var(--my),
+      color-mix(in oklab, oklch(0.81 0.10 249) calc(30% * var(--glow)), transparent) 0%,
+      color-mix(in oklab, oklch(0.88 0.07 245) calc(16% * var(--glow)), transparent) 46%,
+      transparent 78%),
+    radial-gradient(4.5rem 2.4rem at var(--mx) var(--my),
+      color-mix(in oklab, var(--background) calc(42% * var(--glow)), transparent) 0%,
+      transparent 72%);
+  opacity: var(--glow);
+  transition: opacity 260ms cubic-bezier(0.22,1,0.36,1);
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 
 .glass-nav > * { position: relative; z-index: 3 }
 
 .glass-nav:hover {
   --glow: 1;
+  border-color: color-mix(in oklab, oklch(0.83 0.07 247) 26%, var(--background));
+  background:
+    radial-gradient(120% 95% at 22% -18%,
+      color-mix(in oklab, var(--background) 82%, transparent) 0%,
+      transparent 62%),
+    linear-gradient(145deg,
+      color-mix(in oklab, var(--background) 48%, transparent) 0%,
+      color-mix(in oklab, oklch(0.91 0.045 247) 22%, transparent) 58%,
+      color-mix(in oklab, var(--background) 20%, transparent) 100%);
   box-shadow:
-    /* stronger top edge highlight */
-    0 1px 0 0 rgba(255,255,255,1) inset,
-    /* blue-tinted bottom edge */
-    0 -1.5px 3px -1px rgba(120,150,200,0.22) inset,
-    /* subtle outer ring */
-    0 0 0 1px rgba(255,255,255,0.55),
-    /* soft contact shadow */
-    0 2px 6px -3px rgba(100,120,160,0.12),
-    /* blue glow ambient shadow */
-    0 14px 30px -18px rgba(90,140,230,0.28),
-    /* diffused lower ambient shadow */
-    0 18px 40px -22px rgba(80,100,140,0.16);
+    0 1px 0 color-mix(in oklab, var(--background) 88%, transparent) inset,
+    0 -1px 0 color-mix(in oklab, oklch(0.75 0.08 247) 12%, transparent) inset,
+    0 8px 22px -14px color-mix(in oklab, oklch(0.67 0.11 250) 20%, transparent);
 }
 
 
