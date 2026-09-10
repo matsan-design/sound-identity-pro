@@ -128,7 +128,7 @@ export function SiteHeader({
       {/* Mobile vertical nav — visible only on smartphone */}
       <nav
         aria-label="Mobile navigation"
-        className="md:hidden fixed right-3 top-1/2 -translate-y-1/2 z-30 flex flex-col items-end gap-3"
+        className="md:hidden fixed left-3 top-1/2 -translate-y-1/2 z-30 flex flex-col items-start gap-3"
       >
         {items.map((it) =>
           onNavigate ? (
