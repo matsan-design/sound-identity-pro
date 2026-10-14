@@ -1,7 +1,6 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useState, useCallback, useEffect, useRef } from "react";
 import heroImage from "@/assets/headphones-hero.png";
-import shakeSfx from "@/assets/sfx-shake.wav.asset.json";
 import { SiteHeader } from "@/components/site-header";
 import { ContactForm } from "@/components/contact-form";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
@@ -41,30 +40,6 @@ function Index() {
   playRef.current = play;
 
   useEffect(() => {
-    let shakeTimer: ReturnType<typeof setTimeout> | null = null;
-
-    const scheduleShake = () => {
-      if (shakeTimer) clearTimeout(shakeTimer);
-      // The shake animation runs every 20s and the movement starts at 98.25%.
-      shakeTimer = setTimeout(() => playRef.current(shakeSfx.url), 19650);
-    };
-
-    const el = ctaRef.current;
-    if (el) {
-      el.addEventListener("animationstart", scheduleShake);
-      el.addEventListener("animationiteration", scheduleShake);
-    }
-
-    return () => {
-      if (shakeTimer) clearTimeout(shakeTimer);
-      if (el) {
-        el.removeEventListener("animationstart", scheduleShake);
-        el.removeEventListener("animationiteration", scheduleShake);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
     const t = window.setTimeout(() => setEntering(false), 20);
     return () => window.clearTimeout(t);
   }, []);
@@ -86,7 +61,7 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-[#e9e9e9] p-4 md:p-8">
-      <div className="mx-auto max-w-[1400px] rounded-3xl bg-white px-6 py-8 md:px-14 md:py-10 shadow-sm">
+      <div className="mx-auto max-w-none rounded-3xl bg-white px-6 py-8 md:px-14 md:py-10 shadow-sm">
         <div
           className={`transition-all duration-500 ease-out ${
             entering ? "opacity-0 scale-95" : "opacity-100 scale-100"
