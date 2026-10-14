@@ -8,6 +8,10 @@ import {
   type ReactNode,
 } from "react";
 import clickSfx from "@/assets/sfx-click-v2.wav.asset.json";
+import swooshSfx from "@/assets/sfx-swoosh.wav.asset.json";
+
+/** Shared once-per-session flag for the logo intro swoosh. */
+export const introSwoosh = { played: false };
 
 type AudioCtx = {
   /** true once the user has passed the activation screen */
@@ -150,9 +154,19 @@ export function AudioGate({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!closing) return;
+    // Swoosh starts slightly before the logo is revealed for tighter sync.
+    const t0 = window.setTimeout(() => {
+      if (window.location.pathname === "/" && !introSwoosh.played) {
+        introSwoosh.played = true;
+        play(swooshSfx.url, Math.pow(10, -5 / 20));
+      }
+    }, 420);
     const t2 = window.setTimeout(() => activate(), 620);
-    return () => window.clearTimeout(t2);
-  }, [closing, activate]);
+    return () => {
+      window.clearTimeout(t0);
+      window.clearTimeout(t2);
+    };
+  }, [closing, activate, play]);
 
 
   return (
