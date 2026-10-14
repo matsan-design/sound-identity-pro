@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import clickSfx from "@/assets/sfx-click.wav.asset.json";
+import clickSfx from "@/assets/sfx-click-v2.wav.asset.json";
 
 type AudioCtx = {
   /** true once the user has passed the activation screen */
@@ -20,7 +20,7 @@ type AudioCtx = {
   /** dismiss the activation screen */
   activate: () => void;
   /** play a one-shot sound effect, respecting the global state */
-  play: (url: string) => void;
+  play: (url: string, volume?: number) => void;
 };
 
 const Ctx = createContext<AudioCtx>({
@@ -63,7 +63,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   enabledRef.current = enabled;
   const cache = useRef<Record<string, HTMLAudioElement>>({});
 
-  const playNow = useCallback((url: string) => {
+  const playNow = useCallback((url: string, volume = 1) => {
     let el = cache.current[url];
     if (!el) {
       el = new Audio(url);
@@ -71,6 +71,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       cache.current[url] = el;
     }
     try {
+      el.volume = volume;
       el.currentTime = 0;
       void el.play().catch(() => {});
     } catch {}
@@ -92,9 +93,9 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const toggle = useCallback(() => setEnabled((v) => !v), []);
 
   const play = useCallback(
-    (url: string) => {
+    (url: string, volume?: number) => {
       if (!enabledRef.current) return;
-      playNow(url);
+      playNow(url, volume);
     },
     [playNow],
   );

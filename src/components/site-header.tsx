@@ -63,7 +63,7 @@ export function SiteHeader({
     if (!logoIntro || logoIntroPlayed) return;
     logoIntroPlayed = true;
     setIntro(true);
-    playRef.current(swooshSfx.url);
+    playRef.current(swooshSfx.url, Math.pow(10, -5 / 20));
   }, [logoIntro]);
 
 
@@ -91,7 +91,7 @@ export function SiteHeader({
             src={logo}
             alt="Sancin Audio"
             className={`h-[2.6rem] md:h-[3.25rem] w-auto object-contain select-none ${
-              intro ? "animate-logo-morph" : ""
+              ""
             }`}
             draggable={false}
           />
@@ -119,39 +119,42 @@ export function SiteHeader({
             ),
           )}
         </nav>
-        <div className="flex flex-col items-end gap-2 text-black">
+        <div className="hidden md:flex flex-col items-end gap-2 text-black">
           <LangToggle />
           <AudioToggle />
         </div>
       </header>
 
-      {/* Mobile vertical nav — visible only on smartphone */}
-      <nav
-        aria-label="Mobile navigation"
-        className="md:hidden fixed left-3 top-1/2 -translate-y-1/2 z-30 flex flex-col items-start gap-3"
-      >
-        {items.map((it) =>
-          onNavigate ? (
-            <a
-              key={it.to}
-              href={it.to}
-              className="glass-nav px-4 py-2 text-[11px] font-medium tracking-wide"
-              {...interactions(it.to, onNavigate(it.to))}
-            >
-              <span>{it.label}</span>
-            </a>
-          ) : (
-            <Link
-              key={it.to}
-              to={it.to}
-              className="glass-nav px-4 py-2 text-[11px] font-medium tracking-wide"
-              {...interactions(it.to)}
-            >
-              <span>{it.label}</span>
-            </Link>
-          ),
-        )}
-      </nav>
+      {/* Mobile nav — two rows, controls enlarged 30% */}
+      <div className="md:hidden relative z-20 mt-6 flex flex-col gap-4">
+        <nav aria-label="Mobile navigation" className="grid grid-cols-3 gap-2">
+          {items.map((it) =>
+            onNavigate ? (
+              <a
+                key={it.to}
+                href={it.to}
+                className="glass-nav justify-center text-center px-2 py-[0.65rem] text-[14px] font-medium tracking-wide whitespace-nowrap"
+                {...interactions(it.to, onNavigate(it.to))}
+              >
+                <span>{it.label}</span>
+              </a>
+            ) : (
+              <Link
+                key={it.to}
+                to={it.to}
+                className="glass-nav justify-center text-center px-2 py-[0.65rem] text-[14px] font-medium tracking-wide whitespace-nowrap"
+                {...interactions(it.to)}
+              >
+                <span>{it.label}</span>
+              </Link>
+            ),
+          )}
+        </nav>
+        <div className="flex items-center gap-6 text-black">
+          <div className="origin-left scale-[1.3]"><LangToggle /></div>
+          <div className="origin-left scale-[1.3] ml-2"><AudioToggle /></div>
+        </div>
+      </div>
     </>
   );
 }
@@ -159,7 +162,7 @@ export function SiteHeader({
 export function PageShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-[#e9e9e9] p-4 md:p-8">
-      <div className="mx-auto max-w-[1400px] rounded-3xl bg-white px-6 py-8 md:px-14 md:py-10 shadow-sm animate-page-morph">
+      <div className="mx-auto max-w-none rounded-3xl bg-white px-6 py-8 md:px-14 md:py-10 shadow-sm animate-page-morph">
         <SiteHeader />
         {children}
       </div>
