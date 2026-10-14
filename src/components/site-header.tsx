@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import logo from "@/assets/sancin-logo.png";
 import swooshSfx from "@/assets/sfx-swoosh.wav.asset.json";
 import { LangToggle, useLang } from "@/lib/i18n";
-import { AudioToggle, useAudio } from "@/lib/audio";
+import { AudioToggle, useAudio, introSwoosh } from "@/lib/audio";
 
 type NavHandler = (to: string) => (e: React.MouseEvent) => void;
 
@@ -63,7 +63,10 @@ export function SiteHeader({
     if (!logoIntro || logoIntroPlayed) return;
     logoIntroPlayed = true;
     setIntro(true);
-    playRef.current(swooshSfx.url, Math.pow(10, -5 / 20));
+    if (!introSwoosh.played) {
+      introSwoosh.played = true;
+      playRef.current(swooshSfx.url, Math.pow(10, -5 / 20));
+    }
   }, [logoIntro]);
 
 
@@ -102,7 +105,7 @@ export function SiteHeader({
               <a
                 key={it.to}
                 href={it.to}
-                className="glass-nav px-5 py-2"
+                className="glass-nav px-7 py-[0.7rem]"
                 {...interactions(it.to, onNavigate(it.to))}
               >
                 <span>{it.label}</span>
@@ -111,7 +114,7 @@ export function SiteHeader({
               <Link
                 key={it.to}
                 to={it.to}
-                className="glass-nav px-5 py-2"
+                className="glass-nav px-7 py-[0.7rem]"
                 {...interactions(it.to)}
               >
                 <span>{it.label}</span>
@@ -136,7 +139,7 @@ export function SiteHeader({
                 className="glass-nav justify-center text-center px-2 py-[0.65rem] text-[14px] font-medium tracking-wide whitespace-nowrap"
                 {...interactions(it.to, onNavigate(it.to))}
               >
-                <span>{it.label}</span>
+                <MobileLabel to={it.to} label={it.label} />
               </a>
             ) : (
               <Link
@@ -145,7 +148,7 @@ export function SiteHeader({
                 className="glass-nav justify-center text-center px-2 py-[0.65rem] text-[14px] font-medium tracking-wide whitespace-nowrap"
                 {...interactions(it.to)}
               >
-                <span>{it.label}</span>
+                <MobileLabel to={it.to} label={it.label} />
               </Link>
             ),
           )}

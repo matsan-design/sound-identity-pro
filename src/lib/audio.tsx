@@ -8,6 +8,10 @@ import {
   type ReactNode,
 } from "react";
 import clickSfx from "@/assets/sfx-click-v2.wav.asset.json";
+import swooshSfx from "@/assets/sfx-swoosh.wav.asset.json";
+
+/** Shared once-per-session flag for the logo intro swoosh. */
+export const introSwoosh = { played: false };
 
 type AudioCtx = {
   /** true once the user has passed the activation screen */
