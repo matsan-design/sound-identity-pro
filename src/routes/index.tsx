@@ -112,14 +112,14 @@ function Index() {
               ref={ctaRef}
               href="/free-identity-analysis"
               onClick={navigateWithAnimation("/free-identity-analysis")}
-              className="mt-4 inline-flex items-center justify-center rounded-full bg-black px-8 py-4 text-sm font-medium text-white hover:bg-neutral-800 transition animate-cta-shake"
+              className="mt-4 inline-flex items-center justify-center rounded-full bg-black px-8 py-4 md:px-[2.8rem] md:py-[1.4rem] text-sm font-medium text-white hover:bg-neutral-800 transition animate-cta-shake"
             >
               {t("ctaFreeAnalysis")}
             </a>
           </div>
 
           {/* Headphones — subtle floating animation */}
-          <div className="pointer-events-none relative md:absolute md:right-0 md:top-[58%] md:-translate-y-1/2 md:w-[62%] z-0">
+          <div className="pointer-events-none relative md:absolute md:right-0 md:top-[70%] md:-translate-y-1/2 md:w-[62%] z-0">
             <div
               className={`transition-all ease-[cubic-bezier(0.65,0,0.35,1)] duration-700 ${
                 hidden

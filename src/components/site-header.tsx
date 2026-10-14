@@ -7,6 +7,19 @@ import { AudioToggle, useAudio, introSwoosh } from "@/lib/audio";
 
 type NavHandler = (to: string) => (e: React.MouseEvent) => void;
 
+/** Mobile label: only the FREE analysis item scrolls slowly right-to-left. */
+function MobileLabel({ to, label }: { to: string; label: string }) {
+  if (to !== "/free-identity-analysis") return <span>{label}</span>;
+  return (
+    <span className="marquee-label">
+      <span className="marquee-label-track">
+        <span>{label}</span>
+        <span aria-hidden="true">{label}</span>
+      </span>
+    </span>
+  );
+}
+
 /** Session-scoped guard: the logo reveal only plays on the first landing-page entry. */
 let logoIntroPlayed = false;
 
