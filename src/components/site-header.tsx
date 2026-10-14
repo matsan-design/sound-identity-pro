@@ -38,7 +38,7 @@ function useGlassInteractions() {
     clearTimeout(timers.current[key]);
     timers.current[key] = setTimeout(
       () => el.classList.remove("glass-nav-spinning"),
-      800,
+      500,
     );
   };
 
