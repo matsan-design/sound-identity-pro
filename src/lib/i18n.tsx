@@ -110,6 +110,10 @@ export const T: Dict = {
 
   contactTitle: { en: "Contact", it: "Contatti" },
 
+  marqueeHeard: {
+    en: "The world's most recognizable brands are heard before they are seen.",
+    it: "I brand più riconoscibili al mondo si sentono prima ancora di vedersi.",
+  },
   marqueeTitle: {
     en: "EVERY POWERFUL BRAND HAS ITS OWN SOUND. YOUR BRAND HAS A SOUND. WE HELP YOU FIND IT.",
     it: "OGNI BRAND POTENTE HA IL SUO SUONO. IL TUO BRAND HA UN SUONO. TI AIUTIAMO A TROVARLO.",

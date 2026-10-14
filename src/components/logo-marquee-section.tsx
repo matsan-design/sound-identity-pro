@@ -144,7 +144,7 @@ export function LogoMarqueeSection() {
             transform: progress > 0.82 ? "translateY(0)" : "translateY(10px)",
           }}
         >
-          The world's most recognizable brands are heard before they are seen.
+          {t("marqueeHeard")}
         </p>
       </div>
 
