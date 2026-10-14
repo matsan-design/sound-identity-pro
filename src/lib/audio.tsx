@@ -150,9 +150,19 @@ export function AudioGate({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!closing) return;
+    // Swoosh starts slightly before the logo is revealed for tighter sync.
+    const t0 = window.setTimeout(() => {
+      if (window.location.pathname === "/" && !introSwoosh.played) {
+        introSwoosh.played = true;
+        play(swooshSfx.url, Math.pow(10, -5 / 20));
+      }
+    }, 420);
     const t2 = window.setTimeout(() => activate(), 620);
-    return () => window.clearTimeout(t2);
-  }, [closing, activate]);
+    return () => {
+      window.clearTimeout(t0);
+      window.clearTimeout(t2);
+    };
+  }, [closing, activate, play]);
 
 
   return (
