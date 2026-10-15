@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LanguageProvider } from "@/lib/i18n";
 import { AudioProvider, AudioGate } from "@/lib/audio";
+import { ContactPopupProvider } from "@/components/contact-popup";
 
 function NotFoundComponent() {
   return (
@@ -126,7 +127,9 @@ function RootComponent() {
         <AudioProvider>
           <AudioGate>
             {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-            <Outlet />
+            <ContactPopupProvider>
+              <Outlet />
+            </ContactPopupProvider>
           </AudioGate>
         </AudioProvider>
       </LanguageProvider>

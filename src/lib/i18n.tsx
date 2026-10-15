@@ -108,11 +108,18 @@ export const T: Dict = {
     it: "Ti risponderemo il prima possibile — a presto.",
   },
 
+  popTitle: { en: "Let’s expand your sound experience!", it: "Espandiamo la tua esperienza sonora!" },
+  popName: { en: "Full name or company name", it: "Nome completo o nome azienda" },
+  popEmail: { en: "Email", it: "Email" },
+  popPhone: { en: "Phone number (optional)", it: "Numero di telefono (facoltativo)" },
+  popMessage: { en: "Your message", it: "Il tuo messaggio" },
+  popSend: { en: "Send Message", it: "Invia messaggio" },
+  popClose: { en: "Close", it: "Chiudi" },
   contactTitle: { en: "Contact", it: "Contatti" },
 
   marqueeHeard: {
     en: "The world's most recognizable brands are heard before they are seen.",
-    it: "I brand più riconoscibili al mondo si sentono prima ancora di vedersi.",
+    it: "I brand più iconici si fanno sentire prima ancora di mostrarsi.",
   },
   marqueeTitle: {
     en: "EVERY POWERFUL BRAND HAS ITS OWN SOUND. YOUR BRAND HAS A SOUND. WE HELP YOU FIND IT.",

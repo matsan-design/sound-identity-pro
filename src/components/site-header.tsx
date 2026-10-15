@@ -4,6 +4,7 @@ import logo from "@/assets/sancin-logo.png";
 import swooshSfx from "@/assets/sfx-swoosh.wav.asset.json";
 import { LangToggle, useLang } from "@/lib/i18n";
 import { AudioToggle, useAudio, introSwoosh } from "@/lib/audio";
+import { useContactPopup } from "@/components/contact-popup";
 
 type NavHandler = (to: string) => (e: React.MouseEvent) => void;
 
@@ -89,12 +90,18 @@ export function SiteHeader({
     { to: "/contact", label: t("navContact") },
   ];
 
+  const popup = useContactPopup();
   const interactions = (to: string, extra?: (e: React.MouseEvent) => void) => ({
     "data-nav-key": to,
     onMouseMove: glass.onMouseMove,
     onMouseLeave: glass.onMouseLeave,
     onClick: (e: React.MouseEvent) => {
       glass.spin(e as React.MouseEvent<HTMLElement>);
+      if (to === "/contact") {
+        e.preventDefault();
+        popup.open();
+        return;
+      }
       extra?.(e);
     },
   });
