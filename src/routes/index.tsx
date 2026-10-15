@@ -2,8 +2,6 @@ import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useState, useCallback, useEffect, useRef } from "react";
 import heroImage from "@/assets/headphones-hero.png";
 import { SiteHeader } from "@/components/site-header";
-import { ContactForm } from "@/components/contact-form";
-import { RevealOnScroll } from "@/components/reveal-on-scroll";
 import { LogoMarqueeSection } from "@/components/logo-marquee-section";
 import { useLang } from "@/lib/i18n";
 import { useAudio } from "@/lib/audio";
@@ -71,7 +69,7 @@ function Index() {
         </div>
 
         {/* Hero */}
-        <section className="relative mt-10 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <section className="relative mt-10 md:mt-16 md:mb-56 lg:mb-72 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div
             className={`relative z-10 transition-all ease-[cubic-bezier(0.65,0,0.35,1)] duration-700 ${
               hidden
@@ -119,7 +117,7 @@ function Index() {
           </div>
 
           {/* Headphones — subtle floating animation */}
-          <div className="pointer-events-none relative md:absolute md:right-0 md:top-[70%] md:-translate-y-1/2 md:w-[62%] z-0">
+          <div className="pointer-events-none relative md:absolute md:right-0 md:left-[46%] md:top-[70%] md:-translate-y-1/2 z-0">
             <div
               className={`transition-all ease-[cubic-bezier(0.65,0,0.35,1)] duration-700 ${
                 hidden
@@ -142,18 +140,6 @@ function Index() {
 
         <LogoMarqueeSection />
 
-        {/* Scroll-triggered contact form */}
-        <RevealOnScroll className="mt-32 md:mt-48">
-          <div className="max-w-3xl">
-            <h2 className="text-4xl md:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-black">
-              {t("letsTalk")}
-            </h2>
-            <p className="mt-6 max-w-xl text-base md:text-lg text-neutral-500 leading-relaxed">
-              {t("letsTalkSub")}
-            </p>
-            <ContactForm />
-          </div>
-        </RevealOnScroll>
       </div>
     </div>
   );

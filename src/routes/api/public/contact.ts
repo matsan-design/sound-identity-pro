@@ -4,6 +4,7 @@ import { z } from "zod";
 const schema = z.object({
   name: z.string().trim().min(1).max(200),
   email: z.string().trim().email().max(320),
+  phone: z.string().trim().max(50).optional(),
   message: z.string().trim().min(1).max(5000),
 });
 
@@ -21,7 +22,8 @@ export const Route = createFileRoute("/api/public/contact")({
         if (!parsed.success) {
           return Response.json({ error: "Invalid input" }, { status: 400 });
         }
-        const { name, email, message } = parsed.data;
+        const { name, email, phone } = parsed.data;
+        const message = phone ? `Phone: ${phone}\n\n${parsed.data.message}` : parsed.data.message;
 
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         const { error } = await supabaseAdmin
