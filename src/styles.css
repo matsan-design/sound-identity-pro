@@ -541,7 +541,7 @@
   transform-origin: 50% 100%;
 }
 @media (min-width: 768px) { .cp-window { width: min(86vw, 900px); padding: 28px 36px 34px; } }
-@media (min-width: 1024px) { .cp-window { width: 50vw; min-width: 820px; max-width: 1100px; padding: 32px 48px 40px; } }
+@media (min-width: 1024px) { .cp-window { width: 50vw; min-width: min(760px, 92vw); max-width: 1100px; padding: 32px 48px 40px; } }
 .cp-dot { display: inline-block; width: 36px; height: 36px; border-radius: 9999px; cursor: default; }
 button.cp-dot { cursor: pointer; }
 .cp-label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #111; }
