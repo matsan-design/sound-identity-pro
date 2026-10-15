@@ -40,7 +40,13 @@ export function ContactPopupProvider({ children }: { children: ReactNode }) {
 
   return (
     <PopupContext.Provider value={{ open, close }}>
-      {children}
+      <div
+        className="cp-page"
+        style={phase === "open" || phase === "opening" ? { filter: "blur(14px)", pointerEvents: "none" } : undefined}
+        aria-hidden={phase !== "closed" ? true : undefined}
+      >
+        {children}
+      </div>
       {phase !== "closed" && typeof document !== "undefined" &&
         createPortal(<ContactPopup closing={phase === "closing"} onClose={close} />, document.body)}
     </PopupContext.Provider>
