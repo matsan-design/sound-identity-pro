@@ -1,10 +1,11 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useState, useCallback, useEffect, useRef } from "react";
 import heroImage from "@/assets/headphones-hero.png";
-import { SiteHeader } from "@/components/site-header";
+import { SiteHeader, SiteFooter } from "@/components/site-header";
 import { LogoMarqueeSection } from "@/components/logo-marquee-section";
 import { useLang } from "@/lib/i18n";
 import { useAudio } from "@/lib/audio";
+import { useContactPopup } from "@/components/contact-popup";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -31,6 +32,7 @@ function Index() {
   const { t } = useLang();
   const { play, activated } = useAudio();
   const router = useRouter();
+  const popup = useContactPopup();
   const [leaving, setLeaving] = useState(false);
   const [entering, setEntering] = useState(true);
   const ctaRef = useRef<HTMLAnchorElement>(null);
@@ -106,14 +108,14 @@ function Index() {
               <path d="M45 40 C 90 10, 140 70, 220 30" />
             </svg>
 
-            <a
+            <button
               ref={ctaRef}
-              href="/free-identity-analysis"
-              onClick={navigateWithAnimation("/free-identity-analysis")}
+              type="button"
+              onClick={() => popup.open()}
               className="mt-4 inline-flex items-center justify-center rounded-full bg-black px-8 py-4 md:px-[2.8rem] md:py-[1.4rem] text-sm font-medium text-white hover:bg-neutral-800 transition animate-cta-shake"
             >
               {t("ctaFreeAnalysis")}
-            </a>
+            </button>
           </div>
 
           {/* Headphones — subtle floating animation */}
@@ -140,6 +142,7 @@ function Index() {
 
         <LogoMarqueeSection />
 
+        <SiteFooter />
       </div>
     </div>
   );
