@@ -65,32 +65,89 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const [enabled, setEnabled] = useState(false);
   const enabledRef = useRef(false);
   enabledRef.current = enabled;
-  const cache = useRef<Record<string, HTMLAudioElement>>({});
+  const ctxRef = useRef<AudioContext | null>(null);
+  const buffers = useRef<Record<string, AudioBuffer | Promise<AudioBuffer | null>>>({});
 
-  const playNow = useCallback((url: string, volume = 1) => {
-    let el = cache.current[url];
-    if (!el) {
-      el = new Audio(url);
-      el.preload = "auto";
-      cache.current[url] = el;
+  const getCtx = () => {
+    if (typeof window === "undefined") return null;
+    if (!ctxRef.current) {
+      const AC =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      if (!AC) return null;
+      ctxRef.current = new AC();
     }
-    try {
-      el.volume = volume;
-      el.currentTime = 0;
-      void el.play().catch(() => {});
-    } catch {}
+    return ctxRef.current;
+  };
+
+  const load = useCallback((url: string) => {
+    const ctx = getCtx();
+    if (!ctx) return Promise.resolve(null);
+    const existing = buffers.current[url];
+    if (existing) return Promise.resolve(existing);
+    const p = fetch(url)
+      .then((r) => r.arrayBuffer())
+      .then(
+        (data) =>
+          new Promise<AudioBuffer>((res, rej) => ctx.decodeAudioData(data, res, rej)),
+      )
+      .then((buf) => {
+        buffers.current[url] = buf;
+        return buf;
+      })
+      .catch(() => {
+        delete buffers.current[url];
+        return null;
+      });
+    buffers.current[url] = p;
+    return p;
   }, []);
+
+  const playNow = useCallback(
+    (url: string, volume = 1) => {
+      const ctx = getCtx();
+      if (!ctx) {
+        try {
+          const a = new Audio(url);
+          a.volume = volume;
+          void a.play().catch(() => {});
+        } catch {}
+        return;
+      }
+      if (ctx.state === "suspended") void ctx.resume().catch(() => {});
+      const start = (buf: AudioBuffer | null) => {
+        if (!buf) return;
+        const src = ctx.createBufferSource();
+        src.buffer = buf;
+        const gain = ctx.createGain();
+        gain.gain.value = volume;
+        src.connect(gain).connect(ctx.destination);
+        src.start(0);
+      };
+      const b = buffers.current[url];
+      if (b instanceof AudioBuffer) start(b);
+      else void load(url).then(start);
+    },
+    [load],
+  );
 
   const unlock = useCallback(() => {
     enabledRef.current = true;
     setEnabled(true);
-    // Unlock the audio pipeline inside the user gesture without audible output.
-    try {
-      const a = new Audio();
-      a.muted = true;
-      void a.play().catch(() => {});
-    } catch {}
-  }, []);
+    // Create/resume the AudioContext inside the user gesture and preload sounds.
+    const ctx = getCtx();
+    if (ctx) {
+      void ctx.resume().catch(() => {});
+      try {
+        const s = ctx.createBufferSource();
+        s.buffer = ctx.createBuffer(1, 1, 22050);
+        s.connect(ctx.destination);
+        s.start(0);
+      } catch {}
+      void load(clickSfx.url);
+      void load(swooshSfx.url);
+    }
+  }, [load]);
 
   const activate = useCallback(() => setActivated(true), []);
 
