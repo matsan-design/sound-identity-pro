@@ -64,6 +64,41 @@ export const T: Dict = {
     it: "Perché nel mondo di oggi, i brand più forti non si vedono soltanto. Si ricordano per come suonano.",
   },
 
+  aboutIntroA: {
+    en: "In today's world, the strongest brands are not only seen.",
+    it: "Nel mondo di oggi, i brand più forti non si vedono soltanto.",
+  },
+  aboutIntroB: {
+    en: "They are remembered by",
+    it: "Si ricordano",
+  },
+  aboutIntroBold: {
+    en: "the way they sound.",
+    it: "per come suonano.",
+  },
+  svcLabel: { en: "Our Services", it: "I nostri servizi" },
+  svc1Title: { en: "Your External Audio Department", it: "Il tuo reparto audio esterno" },
+  svc1Desc: {
+    en: "We manage your entire audio department, from strategy to delivery. One dedicated audio partner, one seamless workflow, every project covered.",
+    it: "Gestiamo l'intero reparto audio, dalla strategia alla consegna. Un unico partner audio dedicato, un flusso di lavoro senza interruzioni, ogni progetto coperto.",
+  },
+  svc2Title: { en: "Sound Branding", it: "Sound Branding" },
+  svc2Desc: {
+    en: "We create distinctive sonic logos and signature corporate themes that make brands instantly recognizable across campaigns, content, and experiences.",
+    it: "Creiamo loghi sonori distintivi e temi corporate che rendono i brand immediatamente riconoscibili in campagne, contenuti ed esperienze.",
+  },
+  svc3Title: { en: "Music Experience", it: "Music Experience" },
+  svc3Desc: {
+    en: "Original music and bespoke sound design for films, branded content, events, retail spaces, podcasts, and every environment where sound shapes the experience.",
+    it: "Musica originale e sound design su misura per film, contenuti brandizzati, eventi, spazi retail, podcast e ogni ambiente in cui il suono plasma l'esperienza.",
+  },
+  teamLabel: { en: "OUR TEAM IS MADE OF INDUSTRY EXPERTS", it: "IL NOSTRO TEAM È COMPOSTO DA ESPERTI DEL SETTORE" },
+  teamLine: {
+    en: "We've worked with global icons like Giorgio Armani, and leading brands worldwide.",
+    it: "Abbiamo lavorato con icone globali come Giorgio Armani e con brand leader in tutto il mondo.",
+  },
+  svcClose: { en: "Close", it: "Chiudi" },
+
   fiaTitle: {
     en: "WHAT DEFINES YOUR IDENTITY?",
     it: "COSA DEFINISCE LA TUA IDENTITÀ?",
