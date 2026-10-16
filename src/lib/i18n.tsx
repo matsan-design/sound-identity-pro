@@ -6,23 +6,23 @@ type Dict = Record<string, { en: string; it: string }>;
 
 export const T: Dict = {
   navFree: {
-    en: "FREE brand analysis",
-    it: "Analisi gratuita del brand",
+    en: "Our service",
+    it: "Il nostro servizio",
   },
   navAbout: { en: "About", it: "Chi siamo" },
   navContact: { en: "Contact", it: "Contatti" },
 
   heroTitle: {
-    en: "Expand your brand through sound",
-    it: "Espandi il tuo brand attraverso il suono",
+    en: "The world's most recognizable brands are heard before they are seen.",
+    it: "I brand più iconici si fanno sentire prima ancora di mostrarsi.",
   },
   heroSubtitle: {
     en: "We craft immersive audio identities that make brands instantly recognizable and create lasting emotional connections with audiences.",
     it: "Creiamo identità sonore immersive che rendono i brand immediatamente riconoscibili e generano connessioni emotive durature con il pubblico.",
   },
   ctaFreeAnalysis: {
-    en: "FREE analysis of your Brand",
-    it: "Analisi gratuita del tuo Brand",
+    en: "Book a FREE videocall!",
+    it: "Prenota una videochiamata GRATUITA!",
   },
 
   letsTalk: { en: "Let's talk", it: "Parliamone" },
@@ -118,8 +118,8 @@ export const T: Dict = {
   contactTitle: { en: "Contact", it: "Contatti" },
 
   marqueeHeard: {
-    en: "The world's most recognizable brands are heard before they are seen.",
-    it: "I brand più iconici si fanno sentire prima ancora di mostrarsi.",
+    en: "EXPAND YOUR BRAND THROUGH SOUND",
+    it: "ESPANDI IL TUO BRAND ATTRAVERSO IL SUONO",
   },
   marqueeTitle: {
     en: "EVERY POWERFUL BRAND HAS ITS OWN SOUND. YOUR BRAND HAS A SOUND. WE HELP YOU FIND IT.",
