@@ -35,7 +35,7 @@ function Index() {
   const popup = useContactPopup();
   const [leaving, setLeaving] = useState(false);
   const [entering, setEntering] = useState(true);
-  const ctaRef = useRef<HTMLAnchorElement>(null);
+  const ctaRef = useRef<HTMLButtonElement>(null);
   const playRef = useRef(play);
   playRef.current = play;
 
