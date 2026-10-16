@@ -542,7 +542,7 @@
 }
 @media (min-width: 768px) { .cp-window { width: min(86vw, 900px); padding: 28px 36px 34px; } }
 @media (min-width: 1024px) { .cp-window { width: 50vw; min-width: min(760px, 92vw); max-width: 1100px; padding: 32px 48px 40px; } }
-.cp-dot { display: inline-block; width: 36px; height: 36px; border-radius: 9999px; cursor: default; }
+.cp-dot { display: inline-block; width: 18px; height: 18px; border-radius: 9999px; cursor: default; }
 button.cp-dot { cursor: pointer; }
 .cp-label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #111; }
 .cp-input {
@@ -555,8 +555,8 @@ button.cp-dot { cursor: pointer; }
 }
 .cp-input::placeholder { color: #8a8a8a; }
 .cp-input:focus { border-color: rgba(0,0,0,0.45); background: rgba(255,255,255,0.8); }
-.cp-genie-in { animation: cp-genie-in 0.52s cubic-bezier(0.22,1,0.36,1) both; }
-.cp-genie-out { animation: cp-genie-out 0.45s cubic-bezier(0.64,0,0.78,0) both; }
+.cp-genie-in { animation: cp-genie-in 0.52s cubic-bezier(0.22,1,0.36,1) both; will-change: transform, opacity, clip-path; backface-visibility: hidden; }
+.cp-genie-out { animation: cp-genie-out 0.45s cubic-bezier(0.64,0,0.78,0) both; will-change: transform, opacity, clip-path; backface-visibility: hidden; }
 @keyframes cp-genie-in {
   0% { opacity: 0; transform: translateY(40vh) scale(0.08, 0.02) skewX(0deg); clip-path: polygon(40% 0, 60% 0, 52% 100%, 48% 100%); }
   45% { opacity: 1; transform: translateY(12vh) scale(0.55, 0.6); clip-path: polygon(10% 0, 90% 0, 62% 100%, 38% 100%); }
@@ -574,4 +574,4 @@ button.cp-dot { cursor: pointer; }
   .cp-genie-out { animation: cp-fade-out 0.25s ease-in both; }
 }
 
-.cp-page { transition: filter 0.45s ease; }
+.cp-page { transition: filter 0.45s ease; will-change: filter; transform: translateZ(0); }

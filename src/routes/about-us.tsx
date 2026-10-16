@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/site-header";
-import sonicWave from "@/assets/sonic-wave.png";
 import { useLang } from "@/lib/i18n";
 
 export const Route = createFileRoute("/about-us")({
@@ -41,19 +40,6 @@ function AboutUs() {
           <p>{t("aboutP5")}</p>
           <p>{t("aboutP6")}</p>
           <p className="font-medium text-black">{t("aboutP7")}</p>
-        </div>
-      </section>
-
-      <section className="mt-16 md:mt-24 relative overflow-hidden">
-        <div className="pointer-events-none select-none">
-          <img
-            src={sonicWave}
-            alt="Sonic wave — Sancin Audio"
-            width={1600}
-            height={900}
-            loading="lazy"
-            className="w-full h-auto object-contain drop-shadow-2xl animate-drift-x"
-          />
         </div>
       </section>
     </PageShell>

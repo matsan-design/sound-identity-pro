@@ -113,7 +113,7 @@ export function SiteHeader({
           <img
             src={logo}
             alt="Sancin Audio"
-            className={`h-[2.6rem] md:h-[3.25rem] w-auto object-contain select-none ${
+            className={`h-[3.5rem] md:h-[4.4rem] w-auto object-contain select-none ${
               ""
             }`}
             draggable={false}
@@ -182,12 +182,21 @@ export function SiteHeader({
   );
 }
 
+export function SiteFooter() {
+  return (
+    <footer className="mt-16 md:mt-24 pt-6 border-t border-black/10 text-center">
+      <p className="text-xs tracking-wide text-neutral-400">© Sancin Audio 2026</p>
+    </footer>
+  );
+}
+
 export function PageShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-[#e9e9e9] p-4 md:p-8">
       <div className="mx-auto max-w-none rounded-3xl bg-white px-6 py-8 md:px-14 md:py-10 shadow-sm animate-page-morph">
         <SiteHeader />
         {children}
+        <SiteFooter />
       </div>
     </div>
   );
