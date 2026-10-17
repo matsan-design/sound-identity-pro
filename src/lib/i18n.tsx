@@ -6,8 +6,8 @@ type Dict = Record<string, { en: string; it: string }>;
 
 export const T: Dict = {
   navFree: {
-    en: "Our service",
-    it: "Il nostro servizio",
+    en: "Our Expertise",
+    it: "Le nostre competenze",
   },
   navAbout: { en: "About", it: "Chi siamo" },
   navContact: { en: "Contact", it: "Contatti" },
@@ -31,6 +31,10 @@ export const T: Dict = {
     it: "Raccontaci del tuo brand e ti ricontatteremo a breve.",
   },
 
+  expertiseTitle: {
+    en: "THE POWER OF SOUND BRANDING",
+    it: "IL POTERE DEL SOUND BRANDING",
+  },
   aboutTitle: {
     en: "The power of Sonic Branding",
     it: "Il potere del Sonic Branding",

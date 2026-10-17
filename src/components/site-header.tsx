@@ -10,7 +10,7 @@ type NavHandler = (to: string) => (e: React.MouseEvent) => void;
 
 /** Mobile label: only the FREE analysis item scrolls slowly right-to-left. */
 function MobileLabel({ to, label }: { to: string; label: string }) {
-  if (to !== "/free-identity-analysis") return <span>{label}</span>;
+  if (to !== "/our-expertise") return <span>{label}</span>;
   return (
     <span className="marquee-label">
       <span className="marquee-label-track">
@@ -85,7 +85,7 @@ export function SiteHeader({
 
 
   const items = [
-    { to: "/free-identity-analysis", label: t("navFree") },
+    { to: "/our-expertise", label: t("navFree") },
     { to: "/about-us", label: t("navAbout") },
     { to: "/contact", label: t("navContact") },
   ];
@@ -190,10 +190,10 @@ export function SiteFooter() {
   );
 }
 
-export function PageShell({ children }: { children: React.ReactNode }) {
+export function PageShell({ children, expertise = false }: { children: React.ReactNode; expertise?: boolean }) {
   return (
-    <div className="min-h-screen bg-[#e9e9e9] p-4 md:p-8">
-      <div className="mx-auto max-w-none rounded-3xl bg-white px-6 py-8 md:px-14 md:py-10 shadow-sm animate-page-morph">
+    <div className={expertise ? "expertise-page min-h-screen p-4 md:p-8" : "min-h-screen bg-[#e9e9e9] p-4 md:p-8"}>
+      <div className={expertise ? "mx-auto max-w-none px-6 py-8 md:px-14 md:py-10 animate-page-morph" : "mx-auto max-w-none rounded-3xl bg-white px-6 py-8 md:px-14 md:py-10 shadow-sm animate-page-morph"}>
         <SiteHeader />
         {children}
         <SiteFooter />
