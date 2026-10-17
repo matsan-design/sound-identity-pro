@@ -652,7 +652,7 @@ button.cp-dot { cursor: pointer; }
 
 /* desktop expansion: selected grows, siblings recede; float paused */
 @media (min-width: 768px) {
-  .svc-row[data-selected] .svc-card { animation-play-state: paused; }
+  .svc-row[data-selected] .svc-card { animation: none; }
   .svc-row[data-selected] .svc-card[aria-pressed="true"] {
     transform: scale(1.14) translateY(-6px); z-index: 5;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.95), 0 44px 80px -34px rgba(40,40,70,0.45);
@@ -672,3 +672,10 @@ button.cp-dot { cursor: pointer; }
 @media (min-width: 768px) { .svc-dots { display: none; } }
 .svc-dot { width: 7px; height: 7px; border-radius: 9999px; background: rgba(0,0,0,0.2); transition: background 0.3s, transform 0.3s; }
 .svc-dot[data-active="true"] { background: rgba(0,0,0,0.75); transform: scale(1.25); }
+
+@media (max-width: 767px) {
+  .svc-stage { margin-inline: -1.5rem; padding-inline: 0; }
+  .svc-card { flex-basis: min(78%, 300px); min-height: 470px; }
+  .svc-row { padding-inline: max(11%, calc((100% - 300px) / 2)); scroll-padding-inline: 11%; }
+  .svc-card[aria-pressed="true"] { animation: none; transform: scale(1.025); }
+}
