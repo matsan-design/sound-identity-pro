@@ -9,4 +9,6 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- About service cards reuse the shared Button and prepared service styles, with local selection and native scroll-snap pagination; this keeps interactions accessible without adding dependencies.
+- Expertise service cards live in one shared ServiceCards component using Button, prepared styles, local selection and native scroll-snap pagination; this preserves existing interactions without duplication or dependencies.
+- Keep /free-identity-analysis as a redirect to /our-expertise; this preserves the previously published service URL.
+- PageShell accepts an expertise appearance while leaving other pages unchanged; this extends the existing service background across only the expertise page.

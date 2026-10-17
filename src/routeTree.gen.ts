@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutUsRouteImport } from './routes/about-us'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FreeIdentityAnalysisRouteImport } from './routes/free-identity-analysis'
+import { Route as OurExpertiseRouteImport } from './routes/our-expertise'
 import { Route as ApiPublicContactRouteImport } from './routes/api/public/contact'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +36,11 @@ const FreeIdentityAnalysisRoute = FreeIdentityAnalysisRouteImport.update({
   path: '/free-identity-analysis',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OurExpertiseRoute = OurExpertiseRouteImport.update({
+  id: '/our-expertise',
+  path: '/our-expertise',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicContactRoute = ApiPublicContactRouteImport.update({
   id: '/api/public/contact',
   path: '/api/public/contact',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/about-us': typeof AboutUsRoute
   '/contact': typeof ContactRoute
   '/free-identity-analysis': typeof FreeIdentityAnalysisRoute
+  '/our-expertise': typeof OurExpertiseRoute
   '/api/public/contact': typeof ApiPublicContactRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/about-us': typeof AboutUsRoute
   '/contact': typeof ContactRoute
   '/free-identity-analysis': typeof FreeIdentityAnalysisRoute
+  '/our-expertise': typeof OurExpertiseRoute
   '/api/public/contact': typeof ApiPublicContactRoute
 }
 export interface FileRoutesById {
@@ -61,6 +69,7 @@ export interface FileRoutesById {
   '/about-us': typeof AboutUsRoute
   '/contact': typeof ContactRoute
   '/free-identity-analysis': typeof FreeIdentityAnalysisRoute
+  '/our-expertise': typeof OurExpertiseRoute
   '/api/public/contact': typeof ApiPublicContactRoute
 }
 export interface FileRouteTypes {
@@ -70,6 +79,7 @@ export interface FileRouteTypes {
     | '/about-us'
     | '/contact'
     | '/free-identity-analysis'
+    | '/our-expertise'
     | '/api/public/contact'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -77,6 +87,7 @@ export interface FileRouteTypes {
     | '/about-us'
     | '/contact'
     | '/free-identity-analysis'
+    | '/our-expertise'
     | '/api/public/contact'
   id:
     | '__root__'
@@ -84,6 +95,7 @@ export interface FileRouteTypes {
     | '/about-us'
     | '/contact'
     | '/free-identity-analysis'
+    | '/our-expertise'
     | '/api/public/contact'
   fileRoutesById: FileRoutesById
 }
@@ -92,6 +104,7 @@ export interface RootRouteChildren {
   AboutUsRoute: typeof AboutUsRoute
   ContactRoute: typeof ContactRoute
   FreeIdentityAnalysisRoute: typeof FreeIdentityAnalysisRoute
+  OurExpertiseRoute: typeof OurExpertiseRoute
   ApiPublicContactRoute: typeof ApiPublicContactRoute
 }
 
@@ -125,6 +138,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FreeIdentityAnalysisRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/our-expertise': {
+      id: '/our-expertise'
+      path: '/our-expertise'
+      fullPath: '/our-expertise'
+      preLoaderRoute: typeof OurExpertiseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/contact': {
       id: '/api/public/contact'
       path: '/api/public/contact'
@@ -140,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutUsRoute: AboutUsRoute,
   ContactRoute: ContactRoute,
   FreeIdentityAnalysisRoute: FreeIdentityAnalysisRoute,
+  OurExpertiseRoute: OurExpertiseRoute,
   ApiPublicContactRoute: ApiPublicContactRoute,
 }
 export const routeTree = rootRouteImport

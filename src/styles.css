@@ -45,6 +45,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --background-expertise: linear-gradient(160deg, oklch(0.93 0.015 285), oklch(0.9 0.02 300));
   --color-ring-offset-background: var(--background);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -576,11 +577,15 @@ button.cp-dot { cursor: pointer; }
 
 .cp-page { transition: filter 0.45s ease; will-change: filter; transform: translateZ(0); }
 
-/* ---------- About page: service cards ---------- */
+/* ---------- Expertise page: existing service cards ---------- */
+.expertise-page {
+  background: var(--background-expertise);
+}
+.expertise-heading { font-size: 2.1rem; }
+@media (min-width: 768px) { .expertise-heading { font-size: 3.15rem; } }
+
 .svc-stage {
   position: relative;
-  border-radius: 2rem;
-  background: linear-gradient(160deg, oklch(0.93 0.015 285), oklch(0.9 0.02 300));
   padding: 2.5rem 1.25rem 3rem;
   overflow: hidden;
 }
