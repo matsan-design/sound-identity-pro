@@ -1,4 +1,5 @@
 # Expertise page refinements
+- [ ] Make About founder label static and match the compact desktop reference; verify mobile and popup preservation.
 - [x] Complete About founder layout with supplied portrait and bilingual copy.
 - [x] Add biography popup, existing contact popup trigger, and LinkedIn link.
 - [x] Verify About interactions and layout on desktop and mobile.
