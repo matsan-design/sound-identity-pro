@@ -1,20 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/site-header";
 import { useLang } from "@/lib/i18n";
+import { Linkedin } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useContactPopup } from "@/components/contact-popup";
+import founderAsset from "@/assets/matej-sancin-founder.png.asset.json";
 
 export const Route = createFileRoute("/about-us")({
   head: () => ({
     meta: [
-      { title: "About Us — The Power of Sonic Branding | Sancin Audio" },
+      { title: "About — Matej Sancin & Our Vision | Sancin Audio" },
       {
         name: "description",
         content:
-          "Sancin Audio designs bespoke sonic identities that make brands unforgettable — where sound becomes the most powerful part of your brand.",
+          "Meet Matej Sancin, founder of Sancin Audio, and the experienced creative team shaping how brands sound, communicate and connect.",
       },
-      { property: "og:title", content: "About Us — The Power of Sonic Branding | Sancin Audio" },
+      { property: "og:title", content: "About — Matej Sancin & Our Vision | Sancin Audio" },
       {
         property: "og:description",
-        content: "Sancin Audio designs bespoke sonic identities that make brands unforgettable.",
+        content: "Discover the founder and creative vision behind Sancin Audio, your trusted partner for exceptional sound.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -25,21 +29,43 @@ export const Route = createFileRoute("/about-us")({
 
 function AboutUs() {
   const { t } = useLang();
+  const popup = useContactPopup();
   return (
     <PageShell>
-      <section className="mt-10 md:mt-16 max-w-4xl">
-        <h1 className="text-5xl md:text-7xl font-bold uppercase leading-[1.02] text-foreground break-words">
-          {t("aboutTitle")}
-        </h1>
-        <p className="mt-10 text-xl md:text-2xl text-muted-foreground leading-relaxed">
-          {t("aboutIntroA")}<br />
-          {t("aboutIntroB")} {" "}<strong className="font-semibold text-foreground">{t("aboutIntroBold")}</strong>
-        </p>
+      <section className="about-founder" aria-labelledby="founder-title">
+        <div className="about-founder-copy">
+          <h1 id="founder-title" className="about-founder-title text-foreground">{t("founderTitle")}</h1>
+          <p className="about-founder-intro">{t("founderIntro")}</p>
+          <div className="about-founder-actions">
+            <Button onClick={popup.openBiography}>{t("founderMore")}</Button>
+            <Button variant="outline" onClick={popup.open}>{t("founderContact")}</Button>
+            <Button asChild variant="outline" size="icon" className="about-linkedin">
+              <a href="https://www.linkedin.com/in/matej-sancin-6a59b8233/" target="_blank" rel="noopener noreferrer" aria-label="Matej Sancin — LinkedIn" title="LinkedIn">
+                <Linkedin aria-hidden="true" />
+              </a>
+            </Button>
+          </div>
+          <dl className="about-stats">
+            <div><dt>200+</dt><dd>{t("founderProjects")}</dd></div>
+            <div><dt>15+</dt><dd>{t("founderYears")}</dd></div>
+            <div><dt>150+</dt><dd>{t("founderClients")}</dd></div>
+          </dl>
+        </div>
+        <div className="about-founder-portrait">
+          <img src={founderAsset.url} alt="Matej Sancin, founder of Sancin Audio" width={768} height={1152} fetchPriority="high" />
+          <div className="about-founder-label text-foreground">
+            <strong>Matej Sancin</strong>
+            <span>{t("founderRole")}</span>
+          </div>
+        </div>
       </section>
 
-      <section className="mt-14 md:mt-20 text-center mx-auto max-w-3xl">
-        <h2 className="text-sm font-semibold text-muted-foreground">{t("teamLabel")}</h2>
-        <p className="mt-5 text-xl md:text-2xl leading-relaxed text-foreground">{t("teamLine")}</p>
+      <section className="about-story">
+        <h2 className="text-foreground">
+          {t("aboutIntroA")}<br />
+          {t("aboutIntroB")} {" "}<strong className="font-semibold">{t("aboutIntroBold")}</strong>
+        </h2>
+        <p>{t("aboutTeamNarrative")}</p>
       </section>
     </PageShell>
   );
