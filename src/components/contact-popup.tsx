@@ -2,17 +2,20 @@ import { createContext, useCallback, useContext, useEffect, useState, type React
 import { createPortal } from "react-dom";
 import heroImage from "@/assets/headphones-hero.png";
 import { useLang } from "@/lib/i18n";
+import { Button } from "@/components/ui/button";
 
-type Ctx = { open: () => void; close: () => void };
-const PopupContext = createContext<Ctx>({ open: () => {}, close: () => {} });
+type Ctx = { open: () => void; openBiography: () => void; close: () => void };
+const PopupContext = createContext<Ctx>({ open: () => {}, openBiography: () => {}, close: () => {} });
 export const useContactPopup = () => useContext(PopupContext);
 
 type Phase = "closed" | "opening" | "open" | "closing";
 
 export function ContactPopupProvider({ children }: { children: ReactNode }) {
   const [phase, setPhase] = useState<Phase>("closed");
+  const [biography, setBiography] = useState(false);
 
-  const open = useCallback(() => setPhase("opening"), []);
+  const open = useCallback(() => { setBiography(false); setPhase("opening"); }, []);
+  const openBiography = useCallback(() => { setBiography(true); setPhase("opening"); }, []);
   const close = useCallback(() => setPhase((p) => (p === "closed" ? p : "closing")), []);
 
   useEffect(() => {
@@ -39,7 +42,7 @@ export function ContactPopupProvider({ children }: { children: ReactNode }) {
   }, [phase, close]);
 
   return (
-    <PopupContext.Provider value={{ open, close }}>
+    <PopupContext.Provider value={{ open, openBiography, close }}>
       <div
         className="cp-page"
         style={phase === "open" || phase === "opening" ? { filter: "blur(14px)", pointerEvents: "none" } : undefined}
@@ -48,12 +51,12 @@ export function ContactPopupProvider({ children }: { children: ReactNode }) {
         {children}
       </div>
       {phase !== "closed" && typeof document !== "undefined" &&
-        createPortal(<ContactPopup closing={phase === "closing"} onClose={close} />, document.body)}
+        createPortal(<ContactPopup biography={biography} closing={phase === "closing"} onClose={close} />, document.body)}
     </PopupContext.Provider>
   );
 }
 
-function ContactPopup({ closing, onClose }: { closing: boolean; onClose: () => void }) {
+function ContactPopup({ biography, closing, onClose }: { biography: boolean; closing: boolean; onClose: () => void }) {
   const { t } = useLang();
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
@@ -87,12 +90,17 @@ function ContactPopup({ closing, onClose }: { closing: boolean; onClose: () => v
     <div className={`cp-overlay ${closing ? "cp-overlay-out" : ""}`} onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
       <div role="dialog" aria-modal="true" aria-labelledby="cp-title" className={`cp-window ${closing ? "cp-genie-out" : "cp-genie-in"}`}>
         <div className="flex items-center gap-[18px]">
-          <button type="button" onClick={onClose} aria-label={t("popClose")} className="cp-dot bg-[#ff5f57] hover:brightness-90 focus-visible:outline-2 focus-visible:outline-black" />
-          <span className="cp-dot bg-[#febc2e]" aria-hidden />
-          <span className="cp-dot bg-[#28c840]" aria-hidden />
+          <Button type="button" variant="ghost" size="icon" onClick={onClose} aria-label={t("popClose")} className="cp-dot cp-dot-close hover:brightness-90" />
+          <span className="cp-dot cp-dot-minimize" aria-hidden />
+          <span className="cp-dot cp-dot-expand" aria-hidden />
         </div>
 
-        <div className="mt-6 md:mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-start">
+        {biography ? (
+          <div className="mt-7 md:mt-9">
+            <h2 id="cp-title" className="text-xl md:text-2xl font-semibold leading-snug text-foreground">{t("founderVisionTitle")}</h2>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground">{t("founderVision")}</p>
+          </div>
+        ) : <div className="mt-6 md:mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-start">
           <div className="min-w-0">
             <h2 id="cp-title" className="text-3xl md:text-4xl font-bold leading-[1.05] tracking-tight text-black">
               {t("popTitle")}
@@ -133,7 +141,7 @@ function ContactPopup({ closing, onClose }: { closing: boolean; onClose: () => v
               </form>
             )}
           </div>
-        </div>
+        </div>}
       </div>
     </div>
   );

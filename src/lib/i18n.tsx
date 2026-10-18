@@ -39,6 +39,26 @@ export const T: Dict = {
     en: "The power of Sonic Branding",
     it: "Il potere del Sonic Branding",
   },
+  founderTitle: { en: "It all started with a vision", it: "Tutto è iniziato con una visione" },
+  founderIntro: {
+    en: "Our reality was created to give production companies and creative teams one reliable partner for their entire audio workflow.",
+    it: "Siamo nati per offrire alle case di produzione e ai team creativi un unico partner affidabile per l’intero flusso di lavoro audio.",
+  },
+  founderRole: { en: "Founder", it: "Fondatore" },
+  founderMore: { en: "More about Matej", it: "Scopri di più su Matej" },
+  founderContact: { en: "Get in touch", it: "Parliamone" },
+  founderProjects: { en: "Projects completed", it: "Progetti realizzati" },
+  founderYears: { en: "Years of experience", it: "Anni di esperienza" },
+  founderClients: { en: "Happy clients", it: "Clienti soddisfatti" },
+  founderVisionTitle: { en: "The Vision Behind Sancin Audio", it: "La visione dietro Sancin Audio" },
+  founderVision: {
+    en: "With over 15 years of experience in music production, composition and sound design, Matej founded Sancin Audio to bring a new perspective to the world of sound. Active in Milan, he worked with internationally recognised brands such as Giorgio Armani, combining artistic vision, technical expertise and a deep understanding of sound. His vision is to make exceptional audio seamless and integral to every creative project, giving production companies and brands one trusted partner for all their audio needs. Sancin Audio brings together creativity and precision to shape how brands sound, communicate and connect with the world.",
+    it: "Con oltre 15 anni di esperienza nella produzione musicale, nella composizione e nel sound design, Matej ha fondato Sancin Audio per portare una nuova prospettiva nel mondo del suono. Attivo a Milano, ha lavorato con brand di fama internazionale come Giorgio Armani, unendo visione artistica, competenza tecnica e una profonda conoscenza del suono. La sua visione è rendere un audio d’eccellenza una parte naturale e integrante di ogni progetto creativo, offrendo a case di produzione e brand un unico partner di fiducia per tutte le loro esigenze audio. Sancin Audio unisce creatività e precisione per dare forma al modo in cui i brand suonano, comunicano e si connettono con il mondo.",
+  },
+  aboutTeamNarrative: {
+    en: "A team of professionals at your service: our team brings together experienced sound designers, music producers, composers and audio engineers, united by a shared commitment to excellence. Having worked with global icons such as Giorgio Armani and leading international brands, we combine creative vision, technical expertise and state-of-the-art audio equipment to deliver outstanding results. With years of experience across the multimedia industry, we work seamlessly alongside your team to ensure every project meets the highest creative and technical standards.",
+    it: "Un team di professionisti al tuo servizio: riuniamo sound designer, produttori musicali, compositori e ingegneri del suono esperti, accomunati dalla ricerca dell’eccellenza. Dopo aver lavorato con icone globali come Giorgio Armani e importanti brand internazionali, uniamo visione creativa, competenza tecnica e attrezzature audio all’avanguardia per ottenere risultati straordinari. Grazie ad anni di esperienza nel settore multimediale, collaboriamo in perfetta sintonia con il tuo team per garantire che ogni progetto rispetti i più elevati standard creativi e tecnici.",
+  },
   aboutP1: {
     en: "Every great brand is instantly recognizable through its visual identity. From its logo and website to advertising campaigns and digital content, every visual element is carefully designed to communicate a clear and memorable message.",
     it: "Ogni grande brand è immediatamente riconoscibile grazie alla sua identità visiva. Dal logo al sito, dalle campagne pubblicitarie ai contenuti digitali, ogni elemento visivo è progettato per comunicare un messaggio chiaro e memorabile.",

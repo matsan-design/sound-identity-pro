@@ -1,4 +1,7 @@
 # Expertise page refinements
+- [x] Complete About founder layout with supplied portrait and bilingual copy.
+- [x] Add biography popup, existing contact popup trigger, and LinkedIn link.
+- [x] Verify About interactions and layout on desktop and mobile.
 - [x] Move the existing cards to Our Expertise and update navigation, preserving About content.
 - [x] Reduce the expertise heading by 30% and extend the existing lavender background across the page.
 - [x] Check assets and preserve current visuals without replacements.
