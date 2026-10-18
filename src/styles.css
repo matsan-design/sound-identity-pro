@@ -577,6 +577,72 @@ button.cp-dot { cursor: pointer; }
 
 .cp-page { transition: filter 0.45s ease; will-change: filter; transform: translateZ(0); }
 
+/* About: founder portrait and editorial story, using the site's typography. */
+:root {
+  --founder-surface: oklch(0.956 0.014 245);
+  --window-close: oklch(0.7 0.2 29);
+  --window-minimize: oklch(0.83 0.16 80);
+  --window-expand: oklch(0.73 0.19 146);
+}
+.dark { --founder-surface: var(--secondary); }
+.cp-dot-close { background: var(--window-close); padding: 0; flex-shrink: 0; }
+.cp-dot-close:hover { background: var(--window-close); }
+.cp-dot-minimize { background: var(--window-minimize); }
+.cp-dot-expand { background: var(--window-expand); }
+.about-founder {
+  position: relative;
+  isolation: isolate;
+  margin-top: 4rem;
+  min-height: 600px;
+  background: var(--founder-surface);
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+}
+.about-founder-copy { position: relative; z-index: 2; padding: 3.5rem 0 3.5rem 3rem; }
+.about-founder-title { max-width: 560px; font-size: 3rem; line-height: 1.08; font-weight: 700; text-transform: uppercase; letter-spacing: 0; }
+.about-founder-intro { margin-top: 1.5rem; max-width: 470px; font-size: 1.125rem; line-height: 1.5; color: var(--muted-foreground); }
+.about-founder-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.7rem; margin-top: 1.75rem; }
+.about-founder-actions > * { height: 46px; padding-inline: 1.1rem; font-size: 0.9rem; letter-spacing: 0; }
+.about-founder-actions > .about-linkedin { width: 46px; padding: 0; border-radius: 50%; }
+.about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 3rem; max-width: 490px; }
+.about-stats dt { font-size: 2.35rem; font-weight: 700; line-height: 1.1; }
+.about-stats dd { font-size: 0.8rem; line-height: 1.4; margin-top: 0.35rem; }
+.about-founder-portrait { position: relative; align-self: stretch; min-width: 0; }
+.about-founder-portrait img { position: absolute; bottom: 0; right: 0; width: 100%; height: auto; max-height: 660px; object-fit: contain; object-position: bottom; }
+.about-founder-label { position: absolute; right: 0.8rem; top: 54%; z-index: 3; font-size: 1rem; line-height: 1.4; padding: 0.75rem; background: color-mix(in oklab, var(--background) 85%, transparent); backdrop-filter: blur(12px); animation: founder-label-float 7s ease-in-out infinite; transform-origin: right center; }
+.about-founder-label strong, .about-founder-label span { display: block; }
+.about-founder-label span { font-style: italic; }
+@keyframes founder-label-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-14px) scale(1.3); }
+}
+.about-story { padding: 6rem 0 2rem; max-width: 980px; margin-inline: auto; }
+.about-story h2 { font-size: 2.25rem; line-height: 1.3; font-weight: 400; letter-spacing: 0; }
+.about-story p { margin-top: 2rem; max-width: 840px; font-size: 1.125rem; line-height: 1.8; color: var(--muted-foreground); }
+@media (max-width: 1100px) and (min-width: 768px) {
+  .about-founder-copy { padding-left: 1.75rem; }
+  .about-founder-title { font-size: 2.5rem; }
+  .about-founder-label { top: 30%; }
+}
+@media (max-width: 767px) {
+  .about-founder { margin-top: 2.5rem; grid-template-columns: 1fr; }
+  .about-founder-copy { padding: 2rem 1.25rem 0; }
+  .about-founder-title { font-size: 2rem; }
+  .about-founder-intro { font-size: 1rem; }
+  .about-founder-actions > * { font-size: 0.85rem; padding-inline: 0.8rem; }
+  .about-stats { gap: 0.6rem; margin-top: 2rem; }
+  .about-stats dt { font-size: 1.75rem; }
+  .about-stats dd { font-size: 0.72rem; }
+  .about-founder-portrait { margin-top: 1.5rem; }
+  .about-founder-portrait img { position: relative; display: block; width: min(100%, 420px); margin: 0 auto; max-height: none; }
+  .about-founder-label { right: 0.65rem; top: 48%; font-size: 0.8rem; }
+  .about-story { padding-top: 3.5rem; }
+  .about-story h2 { font-size: 1.6rem; }
+  .about-story p { font-size: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) { .about-founder-label { animation: none; } }
+
 /* ---------- Expertise page: existing service cards ---------- */
 .expertise-page {
   background: var(--background-expertise);

@@ -12,3 +12,4 @@
 - Expertise service cards live in one shared ServiceCards component using Button, prepared styles, local selection and native scroll-snap pagination; this preserves existing interactions without duplication or dependencies.
 - Keep /free-identity-analysis as a redirect to /our-expertise; this preserves the previously published service URL.
 - PageShell accepts an expertise appearance while leaving other pages unchanged; this extends the existing service background across only the expertise page.
+- The shared popup provider supports contact and founder-biography content within the same glass window lifecycle; this keeps overlays mutually exclusive and reuses existing animation and dismissal behavior.
