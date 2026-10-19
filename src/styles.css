@@ -639,7 +639,7 @@ button.cp-dot { cursor: pointer; }
   .about-stats dt { font-size: 1.75rem; }
   .about-stats dd { font-size: 0.72rem; }
   .about-founder-portrait { margin-top: 1.5rem; }
-  .about-founder-portrait img { position: relative; display: block; width: min(100%, 420px); margin: 0 auto; max-height: none; }
+  .about-founder-portrait img { position: relative; display: block; width: min(100%, 420px); margin: 0 auto; max-height: none; left: auto; transform: none; }
   .about-founder-label { right: 0.65rem; top: 48%; font-size: 0.8rem; }
   .about-story { padding-top: 3.5rem; }
   .about-story h2 { font-size: 1.6rem; }
