@@ -4,7 +4,7 @@ import { useLang } from "@/lib/i18n";
 import { Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useContactPopup } from "@/components/contact-popup";
-import founderAsset from "@/assets/matej-sancin-founder.png.asset.json";
+import founderAsset from "@/assets/matej-sancin-new-blue.png.asset.json";
 
 export const Route = createFileRoute("/about-us")({
   head: () => ({
@@ -52,7 +52,7 @@ function AboutUs() {
           </dl>
         </div>
         <div className="about-founder-portrait">
-          <img src={founderAsset.url} alt="Matej Sancin, founder of Sancin Audio" width={768} height={1152} fetchPriority="high" />
+          <img src={founderAsset.url} alt="Matej Sancin, founder of Sancin Audio" width={1024} height={1536} fetchPriority="high" />
           <div className="about-founder-label text-foreground">
             <strong>Matej Sancin</strong>
             <span>{t("founderRole")}</span>

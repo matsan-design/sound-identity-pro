@@ -754,3 +754,20 @@ button.cp-dot { cursor: pointer; }
   .svc-row { padding-inline: max(11%, calc((100% - 300px) / 2)); scroll-padding-inline: 11%; }
   .svc-card[aria-pressed="true"] { animation: none; transform: scale(1.025); }
 }
+
+/* About founder — desktop composition matching reference */
+@media (min-width: 768px) {
+  .about-founder { max-width: none; width: 100%; aspect-ratio: 1690 / 810; min-height: 0; margin-top: 7rem; overflow: visible; border-radius: 2.5rem; grid-template-columns: 1fr; }
+  .about-founder-copy { padding: 0 0 0 8%; max-width: 62%; }
+  .about-founder-title { max-width: none; font-size: clamp(2.6rem, 4.6vw, 5.4rem); line-height: 1.02; }
+  .about-founder-intro { max-width: none; margin-top: 1.4rem; font-size: clamp(1rem, 1.45vw, 1.75rem); line-height: 1.25; }
+  .about-founder-actions { margin-top: 2.2rem; gap: 0.8rem; }
+  .about-founder-actions > * { height: clamp(46px, 3.1vw, 60px); padding-inline: 1.6rem; font-size: clamp(0.9rem, 1.15vw, 1.3rem); }
+  .about-founder-actions > .about-linkedin { width: clamp(46px, 3.1vw, 60px); }
+  .about-stats { max-width: none; width: 70%; margin-top: 3.5rem; margin-left: -2%; }
+  .about-stats dt { font-size: clamp(2.2rem, 3.1vw, 3.7rem); }
+  .about-stats dd { font-size: clamp(0.85rem, 1.2vw, 1.4rem); }
+  .about-founder-portrait { position: static; }
+  .about-founder-portrait img { left: 53%; right: auto; transform: none; bottom: 0; width: 37%; height: auto; max-height: none; }
+  .about-founder-label { left: 89%; right: auto; top: 57%; font-size: clamp(1rem, 1.25vw, 1.45rem); }
+}
