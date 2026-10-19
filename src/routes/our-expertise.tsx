@@ -21,7 +21,7 @@ function OurExpertise() {
   const { t } = useLang();
   return (
     <PageShell expertise>
-      <section className="mt-10 md:mt-16 max-w-4xl">
+      <section className="mt-10 md:mt-16 max-w-4xl mx-auto text-center">
         <h1 className="expertise-heading font-bold uppercase leading-[1.02] text-foreground break-words">
           {t("expertiseTitle")}
         </h1>

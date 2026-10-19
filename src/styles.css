@@ -594,9 +594,13 @@ button.cp-dot { cursor: pointer; }
   isolation: isolate;
   margin-top: 4rem;
   min-height: 600px;
+  max-width: 1180px;
+  margin-inline: auto;
+  border-radius: 2rem;
+  overflow: hidden;
   background: var(--founder-surface);
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
 }
 .about-founder-copy { position: relative; z-index: 2; padding: 3.5rem 0 3.5rem 3rem; }
@@ -609,8 +613,8 @@ button.cp-dot { cursor: pointer; }
 .about-stats dt { font-size: 2.35rem; font-weight: 700; line-height: 1.1; }
 .about-stats dd { font-size: 0.8rem; line-height: 1.4; margin-top: 0.35rem; }
 .about-founder-portrait { position: relative; align-self: stretch; min-width: 0; }
-.about-founder-portrait img { position: absolute; bottom: 0; right: 0; width: 100%; height: auto; max-height: 660px; object-fit: contain; object-position: bottom; }
-.about-founder-label { position: absolute; right: 0.8rem; top: 54%; z-index: 3; font-size: 1rem; line-height: 1.4; padding: 0.75rem; background: color-mix(in oklab, var(--background) 85%, transparent); backdrop-filter: blur(12px); animation: founder-label-float 7s ease-in-out infinite; transform-origin: right center; }
+.about-founder-portrait img { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 110%; max-width: none; height: auto; max-height: 720px; object-fit: contain; object-position: bottom; }
+.about-founder-label { position: absolute; right: 0.8rem; top: 54%; z-index: 3; font-size: 1rem; line-height: 1.4; }
 .about-founder-label strong, .about-founder-label span { display: block; }
 .about-founder-label span { font-style: italic; }
 @keyframes founder-label-float {
@@ -693,7 +697,7 @@ button.cp-dot { cursor: pointer; }
   outline: none;
 }
 .svc-card:focus-visible { box-shadow: 0 0 0 3px rgba(0,0,0,0.35), 0 26px 50px -28px rgba(40,40,70,0.35); }
-@media (min-width: 768px) { .svc-card { flex: 0 1 300px; } }
+@media (min-width: 768px) { .svc-card { flex: 0 1 390px; max-height: 728px; } }
 
 /* abstract blurred visuals */
 .svc-visual { position: absolute; inset: 0; pointer-events: none; filter: blur(28px) saturate(120%); }
