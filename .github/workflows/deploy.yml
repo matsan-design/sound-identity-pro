@@ -28,11 +28,16 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Build website
-        run: bun run build --base=/sound-identity-pro/
+      - name: Build static website
+        run: bunx vite build --config vite.github.config.ts
 
-      - name: SPA page fallback
-        run: cp dist/index.html dist/404.html
+      - name: Check generated HTML
+        run: test -f .output/public/index.html
+
+      - name: Create fallback
+        run: |
+          cp .output/public/index.html .output/public/404.html
+          touch .output/public/.nojekyll
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -40,7 +45,7 @@ jobs:
       - name: Upload website
         uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: .output/public
 
       - name: Deploy website
         id: deployment
