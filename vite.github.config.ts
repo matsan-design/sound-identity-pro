@@ -14,7 +14,7 @@ export default defineConfig({
     },
   },
   vite: {
-    base: "/sound-identity-pro/",
+    base: "/",
     plugins: [nitro({ preset: "node-server" })],
   },
 });
