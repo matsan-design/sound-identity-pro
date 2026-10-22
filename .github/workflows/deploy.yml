@@ -39,6 +39,55 @@ jobs:
           cp .output/public/index.html .output/public/404.html
           touch .output/public/.nojekyll
 
+
+      - name: Restore Lovable images
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          from urllib.parse import quote, unquote
+          from urllib.request import Request, urlopen
+
+          source = "https://sound-identity-pro.lovable.app"
+          output = Path(".output/public")
+          count = 0
+
+          for metadata in Path("src").rglob("*.asset.json"):
+              data = json.loads(metadata.read_text())
+              path = data.get("url", "")
+
+              if not path.startswith("/__l5e/assets-v1/"):
+                  continue
+
+              url = source + quote(path, safe="/%")
+              destination = output / unquote(path.lstrip("/"))
+              destination.parent.mkdir(
+                  parents=True, exist_ok=True
+              )
+
+              request = Request(
+                  url,
+                  headers={"User-Agent": "Mozilla/5.0"}
+              )
+
+              with urlopen(request, timeout=60) as response:
+                  content_type = response.headers.get(
+                      "Content-Type", ""
+                  )
+                  content = response.read()
+
+              if not content or "text/html" in content_type:
+                  raise RuntimeError(
+                      f"Invalid asset response: {url}"
+                  )
+
+              destination.write_bytes(content)
+              count += 1
+              print(f"Restored: {path}")
+
+          print(f"Total restored assets: {count}")
+          PY
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
