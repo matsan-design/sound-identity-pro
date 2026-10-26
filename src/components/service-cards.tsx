@@ -45,7 +45,8 @@ export function ServiceCards() {
   };
 
   return (
-    <section className="svc-stage mt-12 md:mt-16" aria-label={t("svcLabel")}>
+    <section className="
+svc-stage mt-[2.4rem] md:mt-[3.2rem]" aria-label={t("svcLabel")}>
 
       <div ref={rowRef} className="svc-row" data-selected={selected === null ? undefined : selected}
         onScroll={updateActiveCard} onKeyDown={(event) => { if (event.key === "Escape") setSelected(null); }}>
