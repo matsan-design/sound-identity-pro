@@ -63,9 +63,8 @@ function Index() {
     <div className="min-h-screen bg-[#e9e9e9] p-4 md:p-8">
       <div className="mx-auto max-w-none rounded-3xl bg-white px-6 py-8 md:px-14 md:py-10 shadow-sm">
         <div
-          className={`transition-all duration-500 ease-out ${
-            entering ? "opacity-0 scale-95" : "opacity-100 scale-100"
-          }`}
+          className={`transition-all duration-500 ease-out ${entering ? "opacity-0 scale-95" : "opacity-100 scale-100"
+            }`}
         >
           <SiteHeader onNavigate={navigateWithAnimation} logoIntro={activated} />
         </div>
@@ -73,11 +72,10 @@ function Index() {
         {/* Hero */}
         <section className="relative mt-10 md:mt-16 md:mb-56 lg:mb-72 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div
-            className={`relative z-10 transition-all ease-[cubic-bezier(0.65,0,0.35,1)] duration-700 ${
-              hidden
+            className={`relative z-10 transition-all ease-[cubic-bezier(0.65,0,0.35,1)] duration-700 ${hidden
                 ? `opacity-0 blur-md ${leaving ? "-translate-x-[60%]" : "translate-x-0"}`
                 : "opacity-100 blur-0 translate-x-0"
-            }`}
+              }`}
           >
             <h1 className="expertise-heading font-bold uppercase leading-[1.02] tracking-tight text-black break-words">
               {t("heroTitle")}
@@ -121,13 +119,11 @@ function Index() {
           {/* Headphones — subtle floating animation */}
           <div className="pointer-events-none relative md:absolute md:right-0 md:left-[46%] md:top-[70%] md:-translate-y-1/2 z-0">
             <div
-              className={`transition-all ease-[cubic-bezier(0.65,0,0.35,1)] duration-700 ${
-                hidden
-                  ? `opacity-0 blur-md scale-90 ${
-                      leaving ? "translate-x-[120%] rotate-[6deg]" : "translate-x-[40%] rotate-[6deg]"
-                    }`
+              className={`transition-all ease-[cubic-bezier(0.65,0,0.35,1)] duration-700 ${hidden
+                  ? `opacity-0 blur-md scale-90 ${leaving ? "translate-x-[120%] rotate-[6deg]" : "translate-x-[40%] rotate-[6deg]"
+                  }`
                   : "translate-x-0 opacity-100 blur-0 scale-100 rotate-0"
-              }`}
+                }`}
             >
               <img
                 src={heroImage}
