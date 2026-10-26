@@ -9,6 +9,10 @@ export const T: Dict = {
     en: "Our Expertise",
     it: "Le nostre competenze",
   },
+  navWork: {
+    en: "Our work",
+    it: "I nostri lavori",
+  },
   navAbout: { en: "About", it: "Chi siamo" },
   navContact: { en: "Contact", it: "Contatti" },
 
