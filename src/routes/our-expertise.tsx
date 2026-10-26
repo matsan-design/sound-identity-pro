@@ -21,16 +21,25 @@ function OurExpertise() {
   const { t } = useLang();
   return (
     <PageShell expertise>
+
       <section className="mt-10 md:mt-16 max-w-4xl mx-auto text-center">
-        <h1 className="expertise-heading font-bold uppercase leading-[1.02] text-foreground break-words">
-          {t("expertiseTitle")}
+        <h1 className="expertise-heading font-bold leading-[1.02] text-foreground break-words">
+          Our services
         </h1>
+      </section>
+
+      <ServiceCards />
+
+      <section className="max-w-4xl mx-auto text-center">
         <p className="mt-10 text-xl md:text-2xl text-muted-foreground leading-relaxed">
           {t("aboutIntroA")}<br />
-          {t("aboutIntroB")} {" "}<strong className="font-semibold text-foreground">{t("aboutIntroBold")}</strong>
+          {t("aboutIntroB")}{" "}
+          <strong className="font-semibold text-foreground">
+            {t("aboutIntroBold")}
+          </strong>
         </p>
       </section>
-      <ServiceCards />
+
     </PageShell>
   );
 }

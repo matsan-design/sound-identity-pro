@@ -6,12 +6,12 @@ type Dict = Record<string, { en: string; it: string }>;
 
 export const T: Dict = {
   navFree: {
-    en: "Our Expertise",
-    it: "Le nostre competenze",
+    en: "Our work",
+    it: "Il nostro lavoro",
   },
   navWork: {
     en: "Our work",
-    it: "I nostri lavori",
+    it: "Il nostro lavoro",
   },
   navAbout: { en: "About", it: "Chi siamo" },
   navContact: { en: "Contact", it: "Contatti" },
@@ -21,8 +21,8 @@ export const T: Dict = {
     it: "I brand più iconici si fanno sentire prima ancora di mostrarsi.",
   },
   heroSubtitle: {
-    en: "We craft immersive audio identities that make brands instantly recognizable and create lasting emotional connections with audiences.",
-    it: "Creiamo identità sonore immersive che rendono i brand immediatamente riconoscibili e generano connessioni emotive durature con il pubblico.",
+    en: "We craft audio identities that make brands instantly recognizable and create lasting emotional connections with audiences.",
+    it: "Creiamo identità sonore che rendono i brand immediatamente riconoscibili e generano connessioni emotive durature con il pubblico.",
   },
   ctaFreeAnalysis: {
     en: "Book a FREE videocall!",
@@ -43,10 +43,10 @@ export const T: Dict = {
     en: "The power of Sonic Branding",
     it: "Il potere del Sonic Branding",
   },
-  founderTitle: { en: "It all started with a vision", it: "Tutto è iniziato con una visione" },
+  founderTitle: { en: "Your personal external audio department", it: "Il tuo reparto audio esterno personale" },
   founderIntro: {
-    en: "Our reality was created to give production companies and creative teams one reliable partner for their entire audio workflow.",
-    it: "Siamo nati per offrire alle case di produzione e ai team creativi un unico partner affidabile per l’intero flusso di lavoro audio.",
+    en: "We provide brands, agencies and production companies with a complete external audio department, covering original music, sound design, mixing and post-production. And we do sonic branding for brands.",
+    it: "Offriamo a brand, agenzie e case di produzione un reparto audio esterno completo, occupandoci di musica originale, sound design, mix e post-produzione. E facciamo sonic branding per i brand.",
   },
   founderRole: { en: "Founder", it: "Fondatore" },
   founderMore: { en: "More about Matej", it: "Scopri di più su Matej" },
@@ -56,8 +56,8 @@ export const T: Dict = {
   founderClients: { en: "Happy clients", it: "Clienti soddisfatti" },
   founderVisionTitle: { en: "The Vision Behind Sancin Audio", it: "La visione dietro Sancin Audio" },
   founderVision: {
-    en: "With over 15 years of experience in music production, composition and sound design, Matej founded Sancin Audio to bring a new perspective to the world of sound. Active in Milan, he worked with internationally recognised brands such as Giorgio Armani, combining artistic vision, technical expertise and a deep understanding of sound. His vision is to make exceptional audio seamless and integral to every creative project, giving production companies and brands one trusted partner for all their audio needs. Sancin Audio brings together creativity and precision to shape how brands sound, communicate and connect with the world.",
-    it: "Con oltre 15 anni di esperienza nella produzione musicale, nella composizione e nel sound design, Matej ha fondato Sancin Audio per portare una nuova prospettiva nel mondo del suono. Attivo a Milano, ha lavorato con brand di fama internazionale come Giorgio Armani, unendo visione artistica, competenza tecnica e una profonda conoscenza del suono. La sua visione è rendere un audio d’eccellenza una parte naturale e integrante di ogni progetto creativo, offrendo a case di produzione e brand un unico partner di fiducia per tutte le loro esigenze audio. Sancin Audio unisce creatività e precisione per dare forma al modo in cui i brand suonano, comunicano e si connettono con il mondo.",
+    en: "With over 10 years of experience in music production, composition and sound design, Matej founded Sancin Audio to bring a new perspective to the world of sound. Active in Milan, he worked with internationally recognised brands such as Giorgio Armani, combining artistic vision, technical expertise and a deep understanding of sound. His vision is to make exceptional audio seamless and integral to every creative project, giving production companies and brands one trusted partner for all their audio needs. Sancin Audio brings together creativity and precision to shape how brands sound, communicate and connect with the world.",
+    it: "Con oltre 10 anni di esperienza nella produzione musicale, nella composizione e nel sound design, Matej ha fondato Sancin Audio per portare una nuova prospettiva nel mondo del suono. Attivo a Milano, ha lavorato con brand di fama internazionale come Giorgio Armani, unendo visione artistica, competenza tecnica e una profonda conoscenza del suono. La sua visione è rendere un audio d’eccellenza una parte naturale e integrante di ogni progetto creativo, offrendo a case di produzione e brand un unico partner di fiducia per tutte le loro esigenze audio. Sancin Audio unisce creatività e precisione per dare forma al modo in cui i brand suonano, comunicano e si connettono con il mondo.",
   },
   aboutTeamNarrative: {
     en: "A team of professionals at your service: our team brings together experienced sound designers, music producers, composers and audio engineers, united by a shared commitment to excellence. Having worked with global icons such as Giorgio Armani and leading international brands, we combine creative vision, technical expertise and state-of-the-art audio equipment to deliver outstanding results. With years of experience across the multimedia industry, we work seamlessly alongside your team to ensure every project meets the highest creative and technical standards.",
@@ -182,7 +182,7 @@ export const T: Dict = {
 
   marqueeHeard: {
     en: "EXPAND YOUR BRAND THROUGH SOUND",
-    it: "ESPANDI IL TUO BRAND ATTRAVERSO IL SUONO",
+    it: "MIGLIORA IL TUO BRAND ATTRAVERSO IL SUONO",
   },
   marqueeTitle: {
     en: "EVERY POWERFUL BRAND HAS ITS OWN SOUND. YOUR BRAND HAS A SOUND. WE HELP YOU FIND IT.",

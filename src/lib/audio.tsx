@@ -30,10 +30,10 @@ type AudioCtx = {
 const Ctx = createContext<AudioCtx>({
   activated: false,
   enabled: false,
-  toggle: () => {},
-  unlock: () => {},
-  activate: () => {},
-  play: () => {},
+  toggle: () => { },
+  unlock: () => { },
+  activate: () => { },
+  play: () => { },
 });
 
 
@@ -110,11 +110,11 @@ export function AudioProvider({ children }: { children: ReactNode }) {
         try {
           const a = new Audio(url);
           a.volume = volume;
-          void a.play().catch(() => {});
-        } catch {}
+          void a.play().catch(() => { });
+        } catch { }
         return;
       }
-      if (ctx.state === "suspended") void ctx.resume().catch(() => {});
+      if (ctx.state === "suspended") void ctx.resume().catch(() => { });
       const start = (buf: AudioBuffer | null) => {
         if (!buf) return;
         const src = ctx.createBufferSource();
@@ -137,13 +137,13 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     // Create/resume the AudioContext inside the user gesture and preload sounds.
     const ctx = getCtx();
     if (ctx) {
-      void ctx.resume().catch(() => {});
+      void ctx.resume().catch(() => { });
       try {
         const s = ctx.createBufferSource();
         s.buffer = ctx.createBuffer(1, 1, 22050);
         s.connect(ctx.destination);
         s.start(0);
-      } catch {}
+      } catch { }
       void load(clickSfx.url);
       void load(swooshSfx.url);
     }
@@ -231,13 +231,17 @@ export function AudioGate({ children }: { children: ReactNode }) {
       {children}
       {!activated && (
         <div
-          className={`fixed inset-0 z-[100] flex flex-col items-center justify-center gap-10 bg-white px-6 transition-all duration-[600ms] ease-[cubic-bezier(0.65,0,0.35,1)] ${
-            closing ? "opacity-0 scale-105 blur-md" : "opacity-100 scale-100 blur-0"
-          }`}
+          className={`fixed inset-0 z-[100] flex flex-col items-center justify-center gap-10 bg-white px-6 transition-all duration-[600ms] ease-[cubic-bezier(0.65,0,0.35,1)] ${closing ? "opacity-0 scale-105 blur-md" : "opacity-100 scale-100 blur-0"
+            }`}
         >
-          <p className="text-center max-w-md text-base md:text-lg text-neutral-500 leading-relaxed">
-            Activate audio for a better experience
-          </p>
+
+          <div className="flex flex-col items-center gap-2">
+            <p className="text-center max-w-md text-base md:text-lg text-neutral-500 leading-relaxed">
+              Activate audio for a better experience
+            </p>
+            <span className="text-xl text-neutral-500">↓</span>
+          </div>
+
           <button
             type="button"
             onClick={onActivateClick}
@@ -245,9 +249,8 @@ export function AudioGate({ children }: { children: ReactNode }) {
             className="rounded-full p-4 transition-colors duration-500"
           >
             <SpeakerIcon
-              className={`h-16 w-16 md:h-20 md:w-20 transition-colors duration-500 ${
-                pressed ? "text-black" : "text-black/10"
-              }`}
+              className={`h-16 w-16 md:h-20 md:w-20 transition-colors duration-500 ${pressed ? "text-black" : "text-black/10"
+                }`}
             />
           </button>
         </div>
@@ -268,9 +271,8 @@ export function AudioToggle({ className = "" }: { className?: string }) {
       className={`inline-flex items-center justify-center rounded-full border border-black/20 p-1.5 transition hover:bg-black/5 ${className}`}
     >
       <SpeakerIcon
-        className={`h-3.5 w-3.5 transition-colors duration-300 ${
-          enabled ? "text-black" : "text-black/25"
-        }`}
+        className={`h-3.5 w-3.5 transition-colors duration-300 ${enabled ? "text-black" : "text-black/25"
+          }`}
       />
     </button>
   );

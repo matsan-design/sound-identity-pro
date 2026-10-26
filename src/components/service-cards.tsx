@@ -45,35 +45,35 @@ export function ServiceCards() {
   };
 
   return (
-      <section className="svc-stage mt-12 md:mt-16" aria-label={t("svcLabel")}>
-        <h2 className="text-center text-sm font-medium text-muted-foreground">{t("svcLabel")}</h2>
-        <div ref={rowRef} className="svc-row" data-selected={selected === null ? undefined : selected}
-          onScroll={updateActiveCard} onKeyDown={(event) => { if (event.key === "Escape") setSelected(null); }}>
-          {services.map((service, index) => (
-            <Button key={index} ref={(node) => { cardRefs.current[index] = node; }}
-              variant="ghost" className={`svc-card svc-float-${index} block h-auto whitespace-normal`}
-              aria-label={service.title} aria-pressed={selected === index}
-              onClick={() => { setSelected(selected === index ? null : index); goToCard(index); }}>
-              <span className={`svc-visual svc-v${index + 1}`} aria-hidden="true" />
-              {selected === index && <span className="svc-close" title={t("svcClose")}><X aria-label={t("svcClose")} /></span>}
-              <span className="svc-content">
-                <span className="svc-label">{t("svcLabel")}</span>
-                <span className="svc-title" role="heading" aria-level={3}>{service.title}</span>
-                <span className="svc-desc">{service.description}</span>
-              </span>
-            </Button>
-          ))}
-        </div>
-        <div className="svc-dots">
-          {services.map((service, index) => (
-            <Button key={index} variant="ghost" className="h-8 w-8 p-0 rounded-full"
-              aria-label={service.title} aria-current={active === index ? "true" : undefined}
-              onClick={() => goToCard(index)}>
-              <span className="svc-dot" data-active={active === index} aria-hidden="true" />
-            </Button>
-          ))}
-        </div>
-      </section>
+    <section className="svc-stage mt-12 md:mt-16" aria-label={t("svcLabel")}>
+
+      <div ref={rowRef} className="svc-row" data-selected={selected === null ? undefined : selected}
+        onScroll={updateActiveCard} onKeyDown={(event) => { if (event.key === "Escape") setSelected(null); }}>
+        {services.map((service, index) => (
+          <Button key={index} ref={(node) => { cardRefs.current[index] = node; }}
+            variant="ghost" className={`svc-card svc-float-${index} block h-auto whitespace-normal`}
+            aria-label={service.title} aria-pressed={selected === index}
+            onClick={() => { setSelected(selected === index ? null : index); goToCard(index); }}>
+            <span className={`svc-visual svc-v${index + 1}`} aria-hidden="true" />
+            {selected === index && <span className="svc-close" title={t("svcClose")}><X aria-label={t("svcClose")} /></span>}
+            <span className="svc-content">
+              <span className="svc-label">{t("svcLabel")}</span>
+              <span className="svc-title" role="heading" aria-level={3}>{service.title}</span>
+              <span className="svc-desc">{service.description}</span>
+            </span>
+          </Button>
+        ))}
+      </div>
+      <div className="svc-dots">
+        {services.map((service, index) => (
+          <Button key={index} variant="ghost" className="h-8 w-8 p-0 rounded-full"
+            aria-label={service.title} aria-current={active === index ? "true" : undefined}
+            onClick={() => goToCard(index)}>
+            <span className="svc-dot" data-active={active === index} aria-hidden="true" />
+          </Button>
+        ))}
+      </div>
+    </section>
 
   );
 }
