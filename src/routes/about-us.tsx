@@ -62,7 +62,9 @@ function AboutUs() {
       </section>
 
       <section className="about-story">
-        <h2 className="expertise-heading text-foreground break-words">
+
+        <h2 className="expertise-heading font-bold leading-[1.02] text-foreground break-words">
+
           {t("aboutIntroA")}<br />
           {t("aboutIntroB")} {" "}<strong className="font-semibold">{t("aboutIntroBold")}</strong>
         </h2>
