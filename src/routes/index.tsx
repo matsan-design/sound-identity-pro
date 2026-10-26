@@ -79,7 +79,7 @@ function Index() {
                 : "opacity-100 blur-0 translate-x-0"
             }`}
           >
-            <h1 className="text-5xl md:text-7xl font-bold uppercase leading-[1.02] tracking-tight text-black">
+            <h1 className="expertise-heading font-bold uppercase leading-[1.02] tracking-tight text-black break-words">
               {t("heroTitle")}
             </h1>
             <p className="mt-8 max-w-md text-base md:text-lg text-neutral-500 leading-relaxed">

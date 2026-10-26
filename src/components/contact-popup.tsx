@@ -5,7 +5,7 @@ import { useLang } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 
 type Ctx = { open: () => void; openBiography: () => void; close: () => void };
-const PopupContext = createContext<Ctx>({ open: () => {}, openBiography: () => {}, close: () => {} });
+const PopupContext = createContext<Ctx>({ open: () => { }, openBiography: () => { }, close: () => { } });
 export const useContactPopup = () => useContext(PopupContext);
 
 type Phase = "closed" | "opening" | "open" | "closing";

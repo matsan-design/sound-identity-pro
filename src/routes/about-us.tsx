@@ -34,7 +34,7 @@ function AboutUs() {
     <PageShell>
       <section className="about-founder" aria-labelledby="founder-title">
         <div className="about-founder-copy">
-          <h1 id="founder-title" className="about-founder-title text-foreground">{t("founderTitle")}</h1>
+          <h1 id="founder-title" className="about-founder-title expertise-heading text-foreground break-words">{t("founderTitle")}</h1>
           <p className="about-founder-intro">{t("founderIntro")}</p>
           <div className="about-founder-actions">
             <Button onClick={popup.openBiography}>{t("founderMore")}</Button>
@@ -61,7 +61,7 @@ function AboutUs() {
       </section>
 
       <section className="about-story">
-        <h2 className="text-foreground">
+        <h2 className="expertise-heading text-foreground break-words">
           {t("aboutIntroA")}<br />
           {t("aboutIntroB")} {" "}<strong className="font-semibold">{t("aboutIntroBold")}</strong>
         </h2>

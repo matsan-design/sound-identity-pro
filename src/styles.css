@@ -604,7 +604,7 @@ button.cp-dot { cursor: pointer; }
   align-items: center;
 }
 .about-founder-copy { position: relative; z-index: 2; padding: 3.5rem 0 3.5rem 3rem; }
-.about-founder-title { max-width: 560px; font-size: 3rem; line-height: 1.08; font-weight: 700; text-transform: uppercase; letter-spacing: 0; }
+.about-founder-title { max-width: 560px; line-height: 1.08; font-weight: 700; text-transform: uppercase; letter-spacing: 0; }
 .about-founder-intro { margin-top: 1.5rem; max-width: 470px; font-size: 1.125rem; line-height: 1.5; color: var(--muted-foreground); }
 .about-founder-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.7rem; margin-top: 1.75rem; }
 .about-founder-actions > * { height: 46px; padding-inline: 1.1rem; font-size: 0.9rem; letter-spacing: 0; }
@@ -622,17 +622,15 @@ button.cp-dot { cursor: pointer; }
   50% { transform: translateY(-14px) scale(1.3); }
 }
 .about-story { padding: 6rem 0 2rem; max-width: 980px; margin-inline: auto; }
-.about-story h2 { font-size: 2.25rem; line-height: 1.3; font-weight: 400; letter-spacing: 0; }
+.about-story h2 { line-height: 1.3; font-weight: 400; letter-spacing: 0; }
 .about-story p { margin-top: 2rem; max-width: 840px; font-size: 1.125rem; line-height: 1.8; color: var(--muted-foreground); }
 @media (max-width: 1100px) and (min-width: 768px) {
   .about-founder-copy { padding-left: 1.75rem; }
-  .about-founder-title { font-size: 2.5rem; }
   .about-founder-label { top: 30%; }
 }
 @media (max-width: 767px) {
   .about-founder { margin-top: 2.5rem; grid-template-columns: 1fr; }
   .about-founder-copy { padding: 2rem 1.25rem 0; }
-  .about-founder-title { font-size: 2rem; }
   .about-founder-intro { font-size: 1rem; }
   .about-founder-actions > * { font-size: 0.85rem; padding-inline: 0.8rem; }
   .about-stats { gap: 0.6rem; margin-top: 2rem; }
@@ -642,7 +640,6 @@ button.cp-dot { cursor: pointer; }
   .about-founder-portrait img { position: relative; display: block; width: min(100%, 420px); margin: 0 auto; max-height: none; left: auto; transform: none; }
   .about-founder-label { right: 0.65rem; top: 48%; font-size: 0.8rem; }
   .about-story { padding-top: 3.5rem; }
-  .about-story h2 { font-size: 1.6rem; }
   .about-story p { font-size: 1rem; }
 }
 @media (prefers-reduced-motion: reduce) { .about-founder-label { animation: none; } }
@@ -759,7 +756,7 @@ button.cp-dot { cursor: pointer; }
 @media (min-width: 768px) {
   .about-founder { max-width: none; width: 100%; aspect-ratio: 1690 / 810; min-height: 0; margin-top: 7rem; overflow: visible; border-radius: 2.5rem; grid-template-columns: 1fr; }
   .about-founder-copy { padding: 0 0 0 8%; max-width: 62%; }
-  .about-founder-title { max-width: none; font-size: clamp(2.6rem, 4.6vw, 5.4rem); line-height: 1.02; }
+  .about-founder-title { max-width: none; line-height: 1.02; }
   .about-founder-intro { max-width: none; margin-top: 1.4rem; font-size: clamp(1rem, 1.45vw, 1.75rem); line-height: 1.25; }
   .about-founder-actions { margin-top: 2.2rem; gap: 0.8rem; }
   .about-founder-actions > * { height: clamp(46px, 3.1vw, 60px); padding-inline: 1.6rem; font-size: clamp(0.9rem, 1.15vw, 1.3rem); }
