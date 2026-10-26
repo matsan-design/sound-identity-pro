@@ -171,7 +171,7 @@ export const T: Dict = {
     it: "Ti risponderemo il prima possibile — a presto!",
   },
 
-  popTitle: { en: "Let’s expand your sound experience!", it: "Espandiamo la tua esperienza sonora!" },
+  popTitle: { en: "Let’s enhance your sound experience!", it: "Espandiamo la tua esperienza sonora!" },
   popName: { en: "Full name or company name", it: "Nome completo o nome azienda" },
   popEmail: { en: "Email", it: "Email" },
   popPhone: { en: "Phone number (optional)", it: "Numero di telefono (facoltativo)" },
