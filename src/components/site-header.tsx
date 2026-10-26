@@ -8,17 +8,16 @@ import { useContactPopup } from "@/components/contact-popup";
 
 type NavHandler = (to: string) => (e: React.MouseEvent) => void;
 
-/** Mobile label: only the FREE analysis item scrolls slowly right-to-left. */
-function MobileLabel({ to, label }: { to: string; label: string }) {
-  if (to !== "/our-expertise") return <span>{label}</span>;
-  return (
-    <span className="marquee-label">
-      <span className="marquee-label-track">
-        <span>{label}</span>
-        <span aria-hidden="true">{label}</span>
-      </span>
-    </span>
-  );
+function MobileLabel({
+  to: _to,
+  label,
+  mobileLabel,
+}: {
+  to: string;
+  label: string;
+  mobileLabel?: string;
+}) {
+  return <span>{mobileLabel ?? label}</span>;
 }
 
 /** Session-scoped guard: the logo reveal only plays on the first landing-page entry. */
@@ -85,7 +84,7 @@ export function SiteHeader({
 
 
   const items = [
-    { to: "/our-expertise", label: t("navFree") },
+    { to: "/our-expertise", label: t("navFree"), mobileLabel: t("navWork") },
     { to: "/about-us", label: t("navAbout") },
     { to: "/contact", label: t("navContact") },
   ];
@@ -159,7 +158,7 @@ export function SiteHeader({
                 className="glass-nav justify-center text-center px-2 py-[0.65rem] text-[14px] font-medium tracking-wide whitespace-nowrap"
                 {...interactions(it.to, onNavigate(it.to))}
               >
-                <MobileLabel to={it.to} label={it.label} />
+                <MobileLabel to={it.to} label={it.label} mobileLabel={it.mobileLabel} />
               </a>
             ) : (
               <Link
@@ -168,7 +167,7 @@ export function SiteHeader({
                 className="glass-nav justify-center text-center px-2 py-[0.65rem] text-[14px] font-medium tracking-wide whitespace-nowrap"
                 {...interactions(it.to)}
               >
-                <MobileLabel to={it.to} label={it.label} />
+                <MobileLabel to={it.to} label={it.label} mobileLabel={it.mobileLabel} />
               </Link>
             ),
           )}

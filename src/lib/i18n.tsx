@@ -191,7 +191,7 @@ export const T: Dict = {
 };
 
 type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (k: keyof typeof T) => string };
-const LangContext = createContext<Ctx>({ lang: "en", setLang: () => {}, t: (k) => T[k].en });
+const LangContext = createContext<Ctx>({ lang: "en", setLang: () => { }, t: (k) => T[k].en });
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>("en");
@@ -200,14 +200,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     try {
       const saved = localStorage.getItem("sancin-lang");
       if (saved === "it" || saved === "en") setLangState(saved);
-    } catch {}
+    } catch { }
   }, []);
 
   const setLang = (l: Lang) => {
     setLangState(l);
     try {
       localStorage.setItem("sancin-lang", l);
-    } catch {}
+    } catch { }
   };
 
   const t = (k: keyof typeof T) => T[k][lang];
