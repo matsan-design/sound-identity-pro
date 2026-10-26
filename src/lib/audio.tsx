@@ -249,7 +249,7 @@ export function AudioGate({ children }: { children: ReactNode }) {
             className="rounded-full p-4 transition-colors duration-500"
           >
             <SpeakerIcon
-              className={`h-16 w-16 md:h-20 md:w-20 transition-colors duration-500 ${pressed ? "text-black" : "text-black/10"
+              className={`h-[54.4px] w-[54.4px] md:h-[68px] md:w-[68px] transition-colors duration-500 ${pressed ? "text-black" : "text-black/10"
                 }`}
             />
           </button>
