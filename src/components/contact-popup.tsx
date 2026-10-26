@@ -62,27 +62,69 @@ function ContactPopup({ biography, closing, onClose }: { biography: boolean; clo
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
 
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (state === "sending") return;
+
     setState("sending");
     setError(null);
+
     try {
-      const res = await fetch("/api/public/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, phone: form.phone || undefined }),
-      });
-      if (!res.ok) {
-        const data = (await res.json().catch(() => ({}))) as { error?: string };
-        throw new Error(data.error || "Something went wrong");
+      const data = new FormData();
+      data.append("name", form.name);
+      data.append("email", form.email);
+      data.append("message", form.message);
+
+      if (form.phone.trim()) {
+        data.append("phone", form.phone);
       }
+
+      const res = await fetch(
+        "https://formspree.io/f/xoeeewlb",
+        {
+          method: "POST",
+          body: data,
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      );
+
+      if (!res.ok) {
+        const result = (await res.json().catch(() => ({}))) as {
+          errors?: { message?: string }[];
+          error?: string;
+        };
+
+        const message =
+          result.errors
+            ?.map((item) => item.message)
+            .filter(Boolean)
+            .join(", ") ||
+          result.error ||
+          "Unable to send the message. Please try again.";
+
+        throw new Error(message);
+      }
+
       setState("sent");
-      setForm({ name: "", email: "", phone: "", message: "" });
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
     } catch (err) {
       setState("error");
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong"
+      );
     }
   }
+
 
   const field = "cp-input";
 
