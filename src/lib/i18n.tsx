@@ -17,16 +17,16 @@ export const T: Dict = {
   navContact: { en: "Contact", it: "Contatti" },
 
   heroTitle: {
-    en: "The world's most recognizable brands are heard before they are seen.",
-    it: "I brand più iconici si fanno sentire prima ancora di mostrarsi.",
+    en: "The world's most recognizable brands are heard before they are seen",
+    it: "I brand più iconici si fanno sentire prima ancora di farsi vedere",
   },
   heroSubtitle: {
     en: "We craft audio identities that make brands instantly recognizable and create lasting emotional connections with audiences.",
     it: "Creiamo identità sonore che rendono i brand immediatamente riconoscibili e generano connessioni emotive durature con il pubblico.",
   },
   ctaFreeAnalysis: {
-    en: "Book a FREE videocall!",
-    it: "Prenota una videochiamata GRATUITA!",
+    en: "Book a FREE videocall",
+    it: "Prenota una videochiamata GRATUITA",
   },
 
   letsTalk: { en: "Let's talk", it: "Parliamone" },
@@ -163,12 +163,12 @@ export const T: Dict = {
   formSend: { en: "SEND", it: "INVIA" },
   formSending: { en: "Sending...", it: "Invio..." },
   formThanks: {
-    en: "Thank you for reaching out.",
-    it: "Grazie per averci scritto.",
+    en: "Thank you for reaching out!",
+    it: "Grazie per averci scritto!",
   },
   formThanksSub: {
-    en: "We'll get back to you as soon as possible — expect to hear from us shortly.",
-    it: "Ti risponderemo il prima possibile — a presto.",
+    en: "We'll get back to you as soon as possible — expect to hear from us shortly!",
+    it: "Ti risponderemo il prima possibile — a presto!",
   },
 
   popTitle: { en: "Let’s expand your sound experience!", it: "Espandiamo la tua esperienza sonora!" },
@@ -181,12 +181,12 @@ export const T: Dict = {
   contactTitle: { en: "Contact", it: "Contatti" },
 
   marqueeHeard: {
-    en: "EXPAND YOUR BRAND THROUGH SOUND",
-    it: "MIGLIORA IL TUO BRAND ATTRAVERSO IL SUONO",
+    en: "Enchance your brand experience through sound",
+    it: "Migliora l'esperienza del tuo brando attraverso il suono",
   },
   marqueeTitle: {
-    en: "EVERY POWERFUL BRAND HAS ITS OWN SOUND. YOUR BRAND HAS A SOUND. WE HELP YOU FIND IT.",
-    it: "OGNI BRAND POTENTE HA IL SUO SUONO. IL TUO BRAND HA UN SUONO. TI AIUTIAMO A TROVARLO.",
+    en: "Every powerful brand has its own sound. Your brand has a sound. We help you find it.",
+    it: "Ogni brand potente ha il suo suono. Il tuo brand ha un suono. Ti aiutiamo a trovarlo.",
   },
 };
 

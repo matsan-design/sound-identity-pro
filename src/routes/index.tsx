@@ -77,12 +77,15 @@ function Index() {
               : "opacity-100 blur-0 translate-x-0"
               }`}
           >
-            <h1 className="expertise-heading font-bold uppercase leading-[1.02] tracking-tight text-black break-words">
+
+            <h1 className="expertise-heading font-bold leading-[1.02] tracking-tight text-black break-words">
               {t("heroTitle")}
             </h1>
+
             <p className="mt-8 max-w-md text-base md:text-lg text-neutral-500 leading-relaxed">
               {t("heroSubtitle")}
             </p>
+
 
             <svg
               className="mt-6 h-16 w-52 text-black/70"

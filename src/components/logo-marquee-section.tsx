@@ -63,9 +63,8 @@ function Row({ reverse }: { reverse: boolean }) {
   return (
     <div className="relative overflow-x-clip py-14 -my-8">
       <div
-        className={`flex w-max items-center gap-6 md:gap-10 ${
-          reverse ? "animate-logo-track-reverse" : "animate-logo-track"
-        }`}
+        className={`flex w-max items-center gap-6 md:gap-10 ${reverse ? "animate-logo-track-reverse" : "animate-logo-track"
+          }`}
       >
         {items.map((logo, i) => (
           <Card
@@ -122,7 +121,9 @@ export function LogoMarqueeSection() {
       <Row reverse={false} />
 
       <div className="px-6 md:px-14 py-6 md:py-10 text-center">
-        <h2 className="mx-auto max-w-4xl text-4xl md:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-black">
+
+        <h2 className="mx-auto max-w-4xl text-4xl md:text-6xl font-bold normal-case leading-[1.05] tracking-tight text-black">
+
           {TITLE_WORDS.map((word, i) => {
             const local = Math.min(1, Math.max(0, revealed - i));
             return (

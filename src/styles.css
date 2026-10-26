@@ -1330,15 +1330,16 @@ button.cp-dot {
   gap: 0.6rem;
 }
 
+
 .svc-label {
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.08em;
   color: rgba(0, 0, 0, 0.55);
 }
 
 .svc-title {
-  font-size: 1.55rem;
+  font-size: 1.85rem;
   line-height: 1.12;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -1346,11 +1347,12 @@ button.cp-dot {
 }
 
 .svc-desc {
-  font-size: 0.86rem;
+  font-size: 1.05rem;
   line-height: 1.55;
   color: rgba(0, 0, 0, 0.6);
   font-weight: 400;
 }
+
 
 /* floating: phase-shifted, vertical only */
 @keyframes svc-float-a {

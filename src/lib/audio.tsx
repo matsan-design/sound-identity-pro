@@ -237,7 +237,7 @@ export function AudioGate({ children }: { children: ReactNode }) {
 
           <div className="flex flex-col items-center gap-2">
             <p className="text-center max-w-md text-base md:text-lg text-neutral-500 leading-relaxed">
-              Activate audio for a better experience
+              Click on the sound icon for the full experience
             </p>
             <span className="text-xl text-neutral-500">↓</span>
           </div>
