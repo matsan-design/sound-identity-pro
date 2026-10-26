@@ -1568,3 +1568,51 @@ button.cp-dot {
     font-size: clamp(1rem, 1.25vw, 1.45rem);
   }
 }
+
+/* Fix portrait layout on iPhone */
+@media (hover: none) and (pointer: coarse) and (max-width: 1024px) {
+  .about-founder {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    aspect-ratio: auto;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .about-founder-copy {
+    width: 100%;
+    max-width: none;
+    padding: 2rem 1.25rem 1.5rem;
+  }
+
+  .about-founder-portrait {
+    position: relative;
+    width: 100%;
+    align-self: auto;
+    margin-top: 0;
+  }
+
+  .about-founder-portrait img {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    max-height: none;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    transform: none;
+    margin: 0 auto;
+    object-fit: contain;
+    object-position: bottom;
+  }
+
+  .about-founder-label {
+    left: auto;
+    right: 0.75rem;
+    top: 52%;
+    font-size: 0.8rem;
+  }
+}
