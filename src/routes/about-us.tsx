@@ -49,7 +49,7 @@ function AboutUs() {
           <dl className="about-stats">
             <div><dt>200+</dt><dd>{t("founderProjects")}</dd></div>
             <div><dt>10+</dt><dd>{t("founderYears")}</dd></div>
-            <div><dt>150+</dt><dd>{t("founderClients")}</dd></div>
+            <div><dt></dt><dd>{t("founderClients")}</dd></div>
           </dl>
         </div>
         <div className="about-founder-portrait">
