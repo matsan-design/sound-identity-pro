@@ -7,8 +7,14 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import clickSfx from "@/assets/sfx-click-v2.wav.asset.json";
-import swooshSfx from "@/assets/sfx-swoosh.wav.asset.json";
+
+const CLICK_SFX_URL = "/sounds/SFX_Click.wav";
+const SWOOSH_SFX_URL = "/sounds/SFX_Swoosh.wav";
+
+const HEADPHONES_IN_URL = "/sounds/SFX_Headphones_In.wav";
+const HEADPHONES_OUT_URL = "/sounds/SFX_Headphones_Out.wav";
+
+
 
 /** Shared once-per-session flag for the logo intro swoosh. */
 export const introSwoosh = { played: false };
@@ -144,8 +150,13 @@ export function AudioProvider({ children }: { children: ReactNode }) {
         s.connect(ctx.destination);
         s.start(0);
       } catch { }
-      void load(clickSfx.url);
-      void load(swooshSfx.url);
+      void load(CLICK_SFX_URL);
+      void load(SWOOSH_SFX_URL);
+      void load("/sounds/SFX_Contact_Form_Red_Button.wav");
+
+      void load(HEADPHONES_IN_URL);
+      void load(HEADPHONES_OUT_URL);
+
     }
   }, [load]);
 
@@ -172,7 +183,34 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       );
       if (!hit) return;
       if (hit.hasAttribute("data-no-click-sound")) return;
-      playNow(clickSfx.url);
+
+
+      const link = target.closest("a[href]");
+
+      if (link instanceof HTMLAnchorElement && link.origin === window.location.origin) {
+        const from = window.location.pathname.replace(/\/+$/, "") || "/";
+        const to = link.pathname.replace(/\/+$/, "") || "/";
+
+        const isInnerPage = (path: string) =>
+          path === "/about-us" || path === "/our-expertise";
+
+        if (from === "/" && isInnerPage(to)) {
+          playNow(HEADPHONES_OUT_URL, 0.14);
+          return;
+        }
+
+        if (isInnerPage(from) && to === "/") {
+          playNow(HEADPHONES_IN_URL, 0.08);
+          return;
+        }
+      }
+
+      if (hit.classList.contains("cp-dot-close")) {
+        playNow("/sounds/SFX_Contact_Form_Red_Button.wav", 0.1);
+      } else {
+        playNow(CLICK_SFX_URL);
+      }
+
     };
     document.addEventListener("click", onPointerUp, true);
     return () => document.removeEventListener("click", onPointerUp, true);
@@ -199,7 +237,7 @@ export function AudioGate({ children }: { children: ReactNode }) {
     if (pressed) return;
     // 1. unlock audio inside the gesture, 2. play the click sound, 3. turn the icon black
     unlock();
-    play(clickSfx.url);
+    play(CLICK_SFX_URL);
     setPressed(true);
   };
 
@@ -215,7 +253,7 @@ export function AudioGate({ children }: { children: ReactNode }) {
     const t0 = window.setTimeout(() => {
       if (window.location.pathname === "/" && !introSwoosh.played) {
         introSwoosh.played = true;
-        play(swooshSfx.url, Math.pow(10, -5 / 20));
+        play(SWOOSH_SFX_URL, Math.pow(10, -5 / 20));
       }
     }, 420);
     const t2 = window.setTimeout(() => activate(), 620);
