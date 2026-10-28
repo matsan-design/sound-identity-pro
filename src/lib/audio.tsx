@@ -200,7 +200,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
         }
 
         if (isInnerPage(from) && to === "/") {
-          playNow(HEADPHONES_IN_URL, 0.12);
+          playNow(HEADPHONES_IN_URL, 0.9);
           return;
         }
       }
