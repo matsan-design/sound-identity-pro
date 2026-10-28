@@ -233,6 +233,14 @@ export function AudioGate({ children }: { children: ReactNode }) {
   const [pressed, setPressed] = useState(false);
   const [closing, setClosing] = useState(false);
 
+  const [introVisible, setIntroVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setIntroVisible(true), 30);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+
   const onActivateClick = () => {
     if (pressed) return;
     // 1. unlock audio inside the gesture, 2. play the click sound, 3. turn the icon black
@@ -273,26 +281,34 @@ export function AudioGate({ children }: { children: ReactNode }) {
             }`}
         >
 
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-center max-w-md text-base md:text-lg text-neutral-500 leading-relaxed">
-              Click on the sound icon for the full experience
-            </p>
-            <span className="text-xl text-neutral-500">↓</span>
-          </div>
-
-          <button
-            type="button"
-            onClick={onActivateClick}
-            aria-label="Activate audio"
-            className="rounded-full p-4 transition-colors duration-500"
+          <div
+            className={`flex flex-col items-center gap-10 transition-opacity duration-[3000ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${introVisible ? "opacity-100" : "opacity-0"
+              }`}
           >
-            <SpeakerIcon
-              className={`h-[54.4px] w-[54.4px] md:h-[68px] md:w-[68px] transition-colors duration-500 ${pressed ? "text-black" : "text-black/10"
-                }`}
-            />
-          </button>
+
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-center max-w-md text-base md:text-lg text-neutral-500 leading-relaxed">
+                Click on the sound icon for the full experience
+              </p>
+              <span className="text-xl text-neutral-500">↓</span>
+            </div>
+
+            <button
+              type="button"
+              onClick={onActivateClick}
+              aria-label="Activate audio"
+              className="rounded-full p-4 transition-colors duration-500"
+            >
+              <SpeakerIcon
+                className={`h-[54.4px] w-[54.4px] md:h-[68px] md:w-[68px] transition-colors duration-500 ${pressed ? "text-black" : "text-black/10"
+                  }`}
+              />
+
+            </button>
+          </div>
         </div>
       )}
+
     </>
   );
 }
