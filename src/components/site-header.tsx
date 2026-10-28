@@ -112,9 +112,8 @@ export function SiteHeader({
           <img
             src={logo}
             alt="Sancin Audio"
-            className={`h-[3.5rem] md:h-[4.4rem] w-auto object-contain select-none ${
-              ""
-            }`}
+            className={`h-[3.5rem] md:h-[4.4rem] w-auto object-contain select-none ${""
+              }`}
             draggable={false}
           />
         </Link>

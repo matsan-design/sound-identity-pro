@@ -82,6 +82,26 @@ function Index() {
               {t("heroTitle")}
             </h1>
 
+            {/* Headphones — mobile only */}
+            <div className="pointer-events-none relative z-0 mt-5 md:hidden">
+              <div
+                className={`transition-all ease-[cubic-bezier(0.65,0,0.35,1)] duration-700 ${hidden
+                  ? `opacity-0 blur-md scale-90 ${leaving ? "translate-x-[120%] rotate-[6deg]" : "translate-x-[40%] rotate-[6deg]"}`
+                  : "translate-x-0 opacity-100 blur-0 scale-100 rotate-0"
+                  }`}
+              >
+                <img
+                  src={heroImage}
+                  alt="Premium over-ear headphones"
+                  width={1400}
+                  height={1400}
+                  className={`mx-auto w-full max-w-[400px] h-auto object-contain drop-shadow-2xl ${!hidden ? "animate-float-y" : ""}`}
+                />
+              </div>
+            </div>
+
+
+
             <p className="mt-8 max-w-md text-base md:text-lg text-neutral-500 leading-relaxed">
               {t("heroSubtitle")}
             </p>
@@ -120,7 +140,9 @@ function Index() {
           </div>
 
           {/* Headphones — subtle floating animation */}
-          <div className="pointer-events-none relative md:absolute md:right-0 md:left-[46%] md:top-[70%] md:-translate-y-1/2 z-0">
+
+          <div className="hidden md:block pointer-events-none relative md:absolute md:right-0 md:left-[46%] md:top-[70%] md:-translate-y-1/2 z-0">
+
             <div
               className={`transition-all ease-[cubic-bezier(0.65,0,0.35,1)] duration-700 ${hidden
                 ? `opacity-0 blur-md scale-90 ${leaving ? "translate-x-[120%] rotate-[6deg]" : "translate-x-[40%] rotate-[6deg]"
