@@ -164,11 +164,11 @@ export const T: Dict = {
   formSending: { en: "Sending...", it: "Invio..." },
   formThanks: {
     en: "Thank you for reaching out!",
-    it: "Grazie per averci scritto!",
+    it: "Grazie!",
   },
   formThanksSub: {
-    en: "We'll get back to you as soon as possible — expect to hear from us shortly!",
-    it: "Ti risponderemo il prima possibile — a presto!",
+    en: "Expect to hear from us shortly!",
+    it: "Ti risponderemo il prima possibile!",
   },
 
   popTitle: { en: "Let’s enhance your sound experience!", it: "Espandiamo la tua esperienza sonora!" },
