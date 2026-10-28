@@ -141,7 +141,8 @@ function Index() {
 
           {/* Headphones — subtle floating animation */}
 
-          <div className="hidden md:block pointer-events-none relative md:absolute md:right-0 md:left-[46%] md:top-[70%] md:-translate-y-1/2 z-0">
+
+          <div className="hidden md:block pointer-events-none relative md:absolute md:right-0 md:left-[46%] md:top-[70%] min-[1800px]:top-[90%] md:-translate-y-1/2 z-0">
 
             <div
               className={`transition-all ease-[cubic-bezier(0.65,0,0.35,1)] duration-700 ${hidden
@@ -155,7 +156,8 @@ function Index() {
                 alt="Premium over-ear headphones"
                 width={1400}
                 height={1400}
-                className={`w-full h-auto object-contain drop-shadow-2xl ${!hidden ? "animate-float-y" : ""}`}
+
+                className={`w-full h-auto object-contain drop-shadow-2xl min-[1800px]:max-w-[800px] min-[1800px]:ml-auto ${!hidden ? "animate-float-y" : ""}`}
               />
             </div>
           </div>
