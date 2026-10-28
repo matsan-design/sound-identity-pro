@@ -1668,3 +1668,78 @@ button.cp-dot {
     animation: none !important;
   }
 }
+
+/* ABOUT PAGE — Cinematic scroll reveal */
+
+/* ABOUT PAGE — Cinematic scroll reveal */
+
+[data-about-reveal] {
+  opacity: 0;
+  translate: 0 30px;
+  transition:
+    opacity 950ms ease-out,
+    translate 950ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Entrance from left */
+[data-about-reveal="left"] {
+  translate: -48px 0;
+}
+
+/* Entrance from right */
+[data-about-reveal="right"] {
+  translate: 60px 0;
+}
+
+/* Entrance from bottom */
+[data-about-reveal="up"] {
+  translate: 0 30px;
+}
+
+/* Final visible state */
+[data-about-reveal].about-revealed {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* Staggered appearance */
+.about-founder-intro {
+  transition-delay: 130ms;
+}
+
+.about-founder-actions {
+  transition-delay: 250ms;
+}
+
+.about-stats>div:nth-child(1) {
+  transition-delay: 320ms;
+}
+
+.about-stats>div:nth-child(2) {
+  transition-delay: 430ms;
+}
+
+.about-stats>div:nth-child(3) {
+  transition-delay: 540ms;
+}
+
+.about-founder-portrait img {
+  transition-delay: 120ms;
+}
+
+.about-founder-label {
+  transition-delay: 380ms;
+}
+
+.about-story p {
+  transition-delay: 170ms;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  [data-about-reveal] {
+    opacity: 1 !important;
+    translate: none !important;
+    transition: none !important;
+  }
+}
