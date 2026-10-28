@@ -23,6 +23,9 @@ function MobileLabel({
 /** Session-scoped guard: the logo reveal only plays on the first landing-page entry. */
 let logoIntroPlayed = false;
 
+let mobileNavRevealed = false;
+
+
 
 /** Tracks the cursor for the glass illumination and spins the pill on click. */
 function useGlassInteractions() {
@@ -69,6 +72,26 @@ export function SiteHeader({
   const glass = useGlassInteractions();
   const { play } = useAudio();
   const [intro, setIntro] = useState(false);
+
+  const [mobileNavVisible, setMobileNavVisible] = useState(mobileNavRevealed);
+
+  useEffect(() => {
+    if (mobileNavRevealed) return;
+
+    const handleMobileScroll = () => {
+      if (window.innerWidth >= 640 || window.scrollY < 30) return;
+
+      mobileNavRevealed = true;
+      setMobileNavVisible(true);
+      window.removeEventListener("scroll", handleMobileScroll);
+    };
+
+    window.addEventListener("scroll", handleMobileScroll, { passive: true });
+    handleMobileScroll();
+
+    return () => window.removeEventListener("scroll", handleMobileScroll);
+  }, []);
+
   const playRef = useRef(play);
   playRef.current = play;
 
@@ -147,7 +170,16 @@ export function SiteHeader({
       </header>
 
       {/* Mobile nav — two rows, controls enlarged 30% */}
-      <div className="md:hidden relative z-20 mt-6 flex flex-col gap-4">
+
+      <div
+        className={`md:hidden relative z-20 flex flex-col gap-4 
+transition-all duration-[850ms] ease-[cubic-bezier(0.22,1,0.36,1)]
+ sm:mt-6 sm:max-h-none sm:opacity-100 sm:translate-y-0 sm:visible sm:pointer-events-auto sm:overflow-visible ${mobileNavVisible
+            ? "mt-6 max-h-48 opacity-100 translate-y-0 visible"
+            : "mt-0 max-h-0 opacity-0 -translate-y-2 invisible pointer-events-none overflow-hidden"
+          }`}
+      >
+
         <nav aria-label="Mobile navigation" className="grid grid-cols-3 gap-2">
           {items.map((it) =>
             onNavigate ? (

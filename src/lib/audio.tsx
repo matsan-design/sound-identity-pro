@@ -195,12 +195,12 @@ export function AudioProvider({ children }: { children: ReactNode }) {
           path === "/about-us" || path === "/our-expertise";
 
         if (from === "/" && isInnerPage(to)) {
-          playNow(HEADPHONES_OUT_URL, 0.1);
+          playNow(HEADPHONES_OUT_URL, 0.2);
           return;
         }
 
         if (isInnerPage(from) && to === "/") {
-          playNow(HEADPHONES_IN_URL, 0.9);
+          playNow(HEADPHONES_IN_URL, 0.08);
           return;
         }
       }
