@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import logo from "@/assets/sancin-logo.png";
-import swooshSfx from "@/assets/sfx-swoosh.wav.asset.json";
 import { LangToggle, useLang } from "@/lib/i18n";
 import { AudioToggle, useAudio, introSwoosh } from "@/lib/audio";
 import { useContactPopup } from "@/components/contact-popup";
@@ -101,7 +100,7 @@ export function SiteHeader({
     setIntro(true);
     if (!introSwoosh.played) {
       introSwoosh.played = true;
-      playRef.current(swooshSfx.url, Math.pow(10, -5 / 20));
+      playRef.current("/sounds/SFX_Landing_Page_Initial_Magic.wav", Math.pow(10, -8 / 20));
     }
   }, [logoIntro]);
 

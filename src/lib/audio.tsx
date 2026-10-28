@@ -9,7 +9,7 @@ import {
 } from "react";
 
 const CLICK_SFX_URL = "/sounds/SFX_Click.wav";
-const SWOOSH_SFX_URL = "/sounds/SFX_Swoosh.wav";
+const SWOOSH_SFX_URL = "/sounds/SFX_Landing_Page_Initial_Magic.wav";
 
 const HEADPHONES_IN_URL = "/sounds/SFX_Headphones_In.wav";
 const HEADPHONES_OUT_URL = "/sounds/SFX_Headphones_Out.wav";
@@ -253,7 +253,7 @@ export function AudioGate({ children }: { children: ReactNode }) {
     const t0 = window.setTimeout(() => {
       if (window.location.pathname === "/" && !introSwoosh.played) {
         introSwoosh.played = true;
-        play(SWOOSH_SFX_URL, Math.pow(10, -5 / 20));
+        play(SWOOSH_SFX_URL, Math.pow(10, -8 / 20));
       }
     }, 420);
     const t2 = window.setTimeout(() => activate(), 620);
