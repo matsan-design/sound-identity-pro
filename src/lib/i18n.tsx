@@ -25,8 +25,8 @@ export const T: Dict = {
     it: "Creiamo identità sonore che rendono i brand immediatamente riconoscibili e generano connessioni emotive durature con il pubblico.",
   },
   ctaFreeAnalysis: {
-    en: "Book a FREE videocall",
-    it: "Prenota una videochiamata GRATUITA",
+    en: "Get your FREE consultation",
+    it: "Ricevi la tua consulenza GRATUITA",
   },
 
   letsTalk: { en: "Let's talk", it: "Parliamone" },
