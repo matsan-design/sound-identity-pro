@@ -144,16 +144,22 @@ function ContactPopup({ biography, closing, onClose }: { biography: boolean; clo
           </div>
         ) : <div className="mt-6 md:mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-start">
           <div className="min-w-0">
-            <h2 id="cp-title" className="text-3xl md:text-4xl font-bold leading-[1.05] tracking-tight text-black">
-              {t("popTitle")}
-            </h2>
+
+            {state !== "sent" && (
+              <h2 id="cp-title" className="text-3xl md:text-4xl font-bold leading-[1.05] tracking-tight text-black">
+                {t("popTitle")}
+              </h2>
+            )}
+
             <img src={heroImage} alt="Sancin Audio headphones" className="mt-4 mx-auto w-full max-w-[220px] lg:max-w-[340px] h-auto object-contain drop-shadow-xl select-none" draggable={false} />
           </div>
 
           <div className="min-w-0">
             {state === "sent" ? (
               <div className="py-10 text-center">
-                <h3 className="text-2xl font-bold uppercase tracking-tight text-black">{t("formThanks")}</h3>
+
+                <h3 id="cp-title" className="text-2xl font-bold normal-case tracking-tight text-black">{t("formThanks")}</h3>
+
                 <p className="mt-3 text-neutral-600">{t("formThanksSub")}</p>
               </div>
             ) : (

@@ -167,8 +167,8 @@ export const T: Dict = {
     it: "Grazie!",
   },
   formThanksSub: {
-    en: "Expect to hear from us shortly!",
-    it: "Ti risponderemo il prima possibile!",
+    en: "Expect to hear from us shortly",
+    it: "Ti risponderemo il prima possibile",
   },
 
   popTitle: { en: "Let’s enhance your sound experience!", it: "Espandiamo la tua esperienza sonora!" },
