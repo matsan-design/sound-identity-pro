@@ -5,7 +5,8 @@ import { Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useContactPopup } from "@/components/contact-popup";
 import founderAsset from "@/assets/matej-sancin-new-blue.png.asset.json";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { PortfolioPopup } from "@/components/portfolio-popup";
 
 export const Route = createFileRoute("/about-us")({
   head: () => ({
@@ -31,6 +32,7 @@ export const Route = createFileRoute("/about-us")({
 function AboutUs() {
   const { t } = useLang();
   const popup = useContactPopup();
+  const [portfolioOpen, setPortfolioOpen] = useState(false);
 
   useEffect(() => {
     const elements = document.querySelectorAll<HTMLElement>(
@@ -83,6 +85,9 @@ function AboutUs() {
           <div className="about-founder-actions" data-about-reveal="left">
             <Button onClick={popup.openBiography}>
               {t("founderMore")}
+            </Button>
+            <Button variant="outline" onClick={() => setPortfolioOpen(true)}>
+              Portfolio
             </Button>
 
             <Button variant="outline" onClick={popup.open}>
@@ -151,6 +156,9 @@ function AboutUs() {
           {t("aboutTeamNarrative")}
         </p>
       </section>
+      {portfolioOpen && (
+        <PortfolioPopup onClose={() => setPortfolioOpen(false)} />
+      )}
     </PageShell>
   );
 }
