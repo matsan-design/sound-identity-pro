@@ -175,6 +175,7 @@ export const T: Dict = {
   popName: { en: "Full name or company name", it: "Nome completo o nome azienda" },
   popEmail: { en: "Email", it: "Email" },
   popPhone: { en: "Phone number (optional)", it: "Numero di telefono (facoltativo)" },
+
   popMessage: { en: "Your message", it: "Il tuo messaggio" },
   popSend: { en: "Send Message", it: "Invia messaggio" },
   popClose: { en: "Close", it: "Chiudi" },

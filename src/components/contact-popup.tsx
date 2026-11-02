@@ -4,18 +4,44 @@ import heroImage from "@/assets/headphones-hero.png";
 import { useLang } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 
-type Ctx = { open: () => void; openBiography: () => void; close: () => void };
-const PopupContext = createContext<Ctx>({ open: () => { }, openBiography: () => { }, close: () => { } });
+
+
+
+
+type Ctx = {
+  open: () => void;
+  openBiography: () => void;
+  close: () => void;
+};
+
+const PopupContext = createContext<Ctx>({
+  open: () => { },
+  openBiography: () => { },
+  close: () => { },
+});
+
 export const useContactPopup = () => useContext(PopupContext);
 
 type Phase = "closed" | "opening" | "open" | "closing";
 
 export function ContactPopupProvider({ children }: { children: ReactNode }) {
   const [phase, setPhase] = useState<Phase>("closed");
+
   const [biography, setBiography] = useState(false);
 
-  const open = useCallback(() => { setBiography(false); setPhase("opening"); }, []);
-  const openBiography = useCallback(() => { setBiography(true); setPhase("opening"); }, []);
+
+
+  const open = useCallback(() => {
+    setBiography(false);
+    setPhase("opening");
+  }, []);
+
+  const openBiography = useCallback(() => {
+    setBiography(true);
+    setPhase("opening");
+  }, []);
+
+
   const close = useCallback(() => setPhase((p) => (p === "closed" ? p : "closing")), []);
 
   useEffect(() => {
@@ -50,16 +76,41 @@ export function ContactPopupProvider({ children }: { children: ReactNode }) {
       >
         {children}
       </div>
-      {phase !== "closed" && typeof document !== "undefined" &&
-        createPortal(<ContactPopup biography={biography} closing={phase === "closing"} onClose={close} />, document.body)}
+
+
+      {phase !== "closed" &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <ContactPopup
+            biography={biography}
+            closing={phase === "closing"}
+            onClose={close}
+          />,
+          document.body
+        )}
+
     </PopupContext.Provider>
+
   );
 }
 
-function ContactPopup({ biography, closing, onClose }: { biography: boolean; closing: boolean; onClose: () => void }) {
+
+
+function ContactPopup({
+  biography,
+  closing,
+  onClose,
+}: {
+  biography: boolean;
+  closing: boolean;
+  onClose: () => void;
+}) {
+
+
   const { t } = useLang();
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
+
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
 
 
@@ -79,6 +130,9 @@ function ContactPopup({ biography, closing, onClose }: { biography: boolean; clo
       if (form.phone.trim()) {
         data.append("phone", form.phone);
       }
+
+
+
 
       const res = await fetch(
         "https://formspree.io/f/xoeeewlb",
@@ -109,6 +163,7 @@ function ContactPopup({ biography, closing, onClose }: { biography: boolean; clo
       }
 
       setState("sent");
+
       setForm({
         name: "",
         email: "",
@@ -172,10 +227,23 @@ function ContactPopup({ biography, closing, onClose }: { biography: boolean; clo
                   <span className="cp-label">{t("popEmail")} <span className="text-red-500">*</span></span>
                   <input required type="email" maxLength={320} value={form.email} placeholder="name@email.com" onChange={(e) => setForm({ ...form, email: e.target.value })} className={field} />
                 </label>
+
+
                 <label className="block">
                   <span className="cp-label">{t("popPhone")}</span>
-                  <input type="tel" maxLength={50} value={form.phone} placeholder="+39 ..." onChange={(e) => setForm({ ...form, phone: e.target.value })} className={field} />
+                  <input
+                    type="tel"
+                    maxLength={50}
+                    value={form.phone}
+                    placeholder="+39 ..."
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    className={field}
+                  />
                 </label>
+
+
+
+
                 <label className="block">
                   <span className="cp-label">{t("popMessage")} <span className="text-red-500">*</span></span>
                   <textarea required rows={5} maxLength={5000} value={form.message} placeholder={t("popMessage")} onChange={(e) => setForm({ ...form, message: e.target.value })} className={`${field} resize-none rounded-2xl`} />

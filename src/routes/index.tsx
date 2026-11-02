@@ -132,7 +132,9 @@ function Index() {
             <button
               ref={ctaRef}
               type="button"
+
               onClick={() => popup.open()}
+
               className="mt-4 inline-flex items-center justify-center rounded-full bg-black px-8 py-4 md:px-[2.8rem] md:py-[1.4rem] text-sm font-medium text-white hover:bg-neutral-800 transition animate-cta-shake"
             >
               {t("ctaFreeAnalysis")}
