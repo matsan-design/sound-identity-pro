@@ -1,9 +1,10 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import logo from "@/assets/sancin-logo.png";
 import { LangToggle, useLang } from "@/lib/i18n";
 import { AudioToggle, useAudio, introSwoosh } from "@/lib/audio";
 import { useContactPopup } from "@/components/contact-popup";
+import { LiquidGlassLogo } from "@/components/liquid-glass-logo";
 
 type NavHandler = (to: string) => (e: React.MouseEvent) => void;
 
@@ -60,6 +61,152 @@ function useGlassInteractions() {
   return { onMouseMove, onMouseLeave, spin };
 }
 
+
+function LandingLogo({
+  enabled,
+  isLanding,
+}: {
+  enabled: boolean;
+  isLanding: boolean;
+}) {
+  const logoRef = useRef<HTMLImageElement>(null);
+
+  const [showGlass, setShowGlass] = useState(enabled);
+  const [settled, setSettled] = useState(false);
+  const [finalScale, setFinalScale] = useState(1);
+
+  // Calcola la dimensione finale in base al vero logo
+  useEffect(() => {
+    const img = logoRef.current;
+    if (!img) return;
+
+    const updateScale = () => {
+      const desktop = window.innerWidth >= 768;
+      const canvasWidth = desktop ? 300 : 230;
+      const canvasHeight = desktop ? 230 : 190;
+
+      const logoSize = 256;
+      const logoScale = 0.9;
+
+      const fit = Math.min(
+        1,
+        canvasWidth / (logoSize * 1.9),
+        canvasHeight / (logoSize * 1.5)
+      );
+
+      const originalSize = Math.max(
+        img.offsetWidth,
+        img.offsetHeight
+      );
+
+      if (!originalSize) return;
+
+      const scale = originalSize / (logoSize * fit * logoScale);
+
+      setFinalScale(Math.max(0.1, Math.min(3, scale)));
+    };
+
+    updateScale();
+
+    const observer = new ResizeObserver(updateScale);
+    observer.observe(img);
+    window.addEventListener("resize", updateScale);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateScale);
+    };
+  }, []);
+
+  // Avvia l'effetto quando entriamo nella Landing
+  useEffect(() => {
+    if (
+      !enabled ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      setShowGlass(false);
+      setSettled(false);
+      return;
+    }
+
+    setShowGlass(true);
+    setSettled(false);
+
+    // Riporta dolcemente il logo nella sua posizione definitiva
+    const timer = window.setTimeout(() => {
+      setSettled(true);
+    }, 1600);
+
+    return () => window.clearTimeout(timer);
+  }, [enabled]);
+
+  return (
+    <div className="relative inline-flex shrink-0 items-center">
+
+      {/* Logo originale: usato per dimensioni e fallback */}
+      <img
+        ref={logoRef}
+        src={logo}
+        alt="Sancin Audio"
+        className={`h-[3.5rem] md:h-[4.4rem] w-auto object-contain select-none ${isLanding ? "opacity-0 motion-reduce:opacity-100" : "opacity-100"
+          }`}
+        draggable={false}
+        onLoad={() => {
+          window.dispatchEvent(new Event("resize"));
+        }}
+      />
+
+      {/* L'effetto rimane montato anche dopo la fine */}
+      {showGlass && (
+        <div
+          aria-hidden="true"
+          className={`pointer-events-none absolute left-1/2 top-1/2 z-10
+            h-[190px] w-[230px] md:h-[230px] md:w-[300px]
+            -translate-x-1/2
+            transition-transform duration-[1100ms]
+            ease-[cubic-bezier(0.22,1,0.36,1)]
+            ${settled
+              ? "-translate-y-1/2"
+              : "translate-y-[calc(-50%+12px)]"
+            }
+          `}
+        >
+          <LiquidGlassLogo
+            logo={logo}
+            ending="logo"
+            theme="light"
+            logoSize={256}
+            logoScale={0.9}
+            finalLogoScale={finalScale}
+            logoColor="original"
+            tile={false}
+            background="#ffffff"
+            depth={2.3}
+            dispersion={0.25}
+            relief={0.55}
+            caustics={2.3}
+            highlights={2.6}
+            bloom={1.9}
+            dropStrength={1.6}
+            decay={2.4}
+            echoTint={0.2}
+            speed={0.65}
+            loop={false}
+            style={{
+              width: "100%",
+              height: "100%",
+              minHeight: 0,
+              background: "transparent",
+            }}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+
 export function SiteHeader({
   onNavigate,
   logoIntro = false,
@@ -68,6 +215,9 @@ export function SiteHeader({
   logoIntro?: boolean;
 }) {
   const { t } = useLang();
+  const isLanding = useLocation({
+    select: (location) => location.pathname === "/",
+  });
   const glass = useGlassInteractions();
   const { play } = useAudio();
   const [intro, setIntro] = useState(false);
@@ -130,15 +280,11 @@ export function SiteHeader({
   return (
     <>
       <header className="relative z-20 flex items-center justify-between">
+
         <Link to="/" className="flex items-center" aria-label="Sancin Audio">
-          <img
-            src={logo}
-            alt="Sancin Audio"
-            className={`h-[3.5rem] md:h-[4.4rem] w-auto object-contain select-none ${""
-              }`}
-            draggable={false}
-          />
+          <LandingLogo enabled={logoIntro} isLanding={isLanding} />
         </Link>
+
         <nav className="hidden md:flex items-center gap-2 px-2 py-2 text-sm">
           {items.map((it) =>
             onNavigate ? (
