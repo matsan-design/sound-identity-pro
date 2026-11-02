@@ -182,12 +182,12 @@ export const T: Dict = {
   contactTitle: { en: "Contact", it: "Contatti" },
 
   marqueeHeard: {
-    en: "Enchance your brand experience through sound",
-    it: "Migliora l'esperienza del tuo brando attraverso il suono",
+    en: "Your vision. With our sound.",
+    it: "La tua visione. Con il nostro suono.",
   },
   marqueeTitle: {
     en: "Every powerful brand has its own sound. Your brand has a sound. We help you find it.",
-    it: "Ogni brand potente ha il suo suono. Il tuo brand ha un suono. Ti aiutiamo a trovarlo.",
+    it: "Ogni brand influente ha il suo suono. Il tuo brand ha un suono. Ti aiutiamo a trovarlo.",
   },
 };
 
