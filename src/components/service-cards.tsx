@@ -1,5 +1,4 @@
-import { useRef, useState } from "react";
-import { X } from "lucide-react";
+import { useLayoutEffect, useRef, useState } from "react"; import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLang } from "@/lib/i18n";
 import externalAudioPortrait from "@/assets/Round-image-8.png";
@@ -22,6 +21,30 @@ export function ServiceCards({
   const [hoveredHomeCard, setHoveredHomeCard] = useState<number | null>(null);
   const rowRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<Array<HTMLButtonElement | null>>([]);
+
+  useLayoutEffect(() => {
+    if (!homePreview) return;
+
+    // Applica il centramento solo sugli smartphone
+    if (!window.matchMedia("(max-width: 767px)").matches) return;
+
+    const row = rowRef.current;
+    const middleCard = cardRefs.current[1];
+
+    if (!row || !middleCard) return;
+
+    const rowBounds = row.getBoundingClientRect();
+    const cardBounds = middleCard.getBoundingClientRect();
+
+    // Centra la seconda card immediatamente, senza animazione
+    row.scrollLeft +=
+      cardBounds.left -
+      rowBounds.left -
+      (row.clientWidth - cardBounds.width) / 2;
+
+    setActive(1);
+  }, [homePreview]);
+
   const services = [
     { title: t("svc1Title"), description: t("svc1Desc") },
     { title: t("svc2Title"), description: t("svc2Desc") },
