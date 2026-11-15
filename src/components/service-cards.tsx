@@ -62,7 +62,32 @@ svc-stage mt-[2.4rem] md:mt-[3.2rem]" aria-label={t("svcLabel")}>
 ${index < 3 ? "svc-card--branding" : ""}
 `}
             aria-label={service.title} aria-pressed={selected === index}
-            onClick={() => { setSelected(selected === index ? null : index); goToCard(index); }}>
+
+            onClick={() => {
+              setSelected(selected === index ? null : index);
+              goToCard(index);
+            }}
+            onPointerMove={(event) => {
+              if (event.pointerType !== "mouse" && event.pointerType !== "pen") return;
+
+              const rect = event.currentTarget.getBoundingClientRect();
+
+              event.currentTarget.style.setProperty(
+                "--svc-halo-x",
+                `${event.clientX - rect.left}px`
+              );
+
+              event.currentTarget.style.setProperty(
+                "--svc-halo-y",
+                `${event.clientY - rect.top}px`
+              );
+
+              event.currentTarget.style.setProperty("--svc-halo-opacity", "1");
+            }}
+            onPointerLeave={(event) => {
+              event.currentTarget.style.setProperty("--svc-halo-opacity", "0");
+            }}
+          >
 
 
             {index < 2 ? (

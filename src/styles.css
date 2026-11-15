@@ -1871,3 +1871,25 @@ button.cp-dot {
 .svc-row>.svc-card:nth-child(2) .svc-title {
   text-shadow: 0 2px 12px rgba(25, 55, 48, 0.35);
 }
+
+
+/* INTERACTIVE GLASS — MOUSE FOLLOWING HALO */
+
+.svc-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 1;
+  pointer-events: none;
+
+  background: radial-gradient(circle 150px at var(--svc-halo-x, 50%) var(--svc-halo-y, 50%),
+
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0.12) 28%,
+      rgba(255, 255, 255, 0.04) 65%,
+      transparent 100%);
+
+  opacity: var(--svc-halo-opacity, 0);
+  transition: opacity 0.35s ease;
+}
