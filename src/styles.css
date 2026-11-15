@@ -1335,7 +1335,7 @@ button.cp-dot {
   line-height: 1.12;
   font-weight: 600;
   letter-spacing: -0.01em;
-  color: #111;
+  color: #ffffff;
 }
 
 .svc-desc {
@@ -1742,4 +1742,132 @@ button.cp-dot {
     translate: none !important;
     transition: none !important;
   }
+}
+
+
+/* SOUND BRANDING — WARM GLASS DESIGN */
+
+
+.svc-card--branding {
+  background: linear-gradient(180deg,
+      #F0DED5 0%,
+      #D5B8B4 49%,
+      #978C9C 100%);
+  isolation: isolate;
+}
+
+
+/* Blurred photographic atmosphere */
+.svc-branding-blur {
+  position: absolute;
+  inset: -15%;
+  z-index: 0;
+  pointer-events: none;
+
+  background-size: cover;
+  background-position: center;
+
+  filter: blur(48px) saturate(125%);
+  opacity: 0.65;
+}
+
+/* Frosted glass lighting and dark gradient */
+
+.svc-card--branding::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background:
+    radial-gradient(ellipse at 25% 4%,
+      rgba(255, 255, 255, 0.55),
+      transparent 55%),
+    linear-gradient(180deg,
+      rgba(255, 245, 240, 0.12) 0%,
+      rgba(190, 160, 165, 0.08) 45%,
+      rgba(70, 60, 85, 0.30) 100%);
+}
+
+
+/* Original circular photograph */
+.svc-branding-portrait {
+  position: absolute;
+  z-index: 1;
+
+  top: 23%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 78%;
+  max-width: 320px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+
+  object-fit: cover;
+  border-radius: 50%;
+  pointer-events: none;
+
+  box-shadow:
+    0 18px 40px -24px rgba(0, 0, 0, 0.35);
+}
+
+/* Readable copy on dark glass */
+.svc-card--branding .svc-label,
+.svc-card--branding .svc-desc {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Keep title and description above glass effects */
+.svc-card--branding .svc-title,
+.svc-card--branding .svc-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* The title must remain at the top */
+.svc-card--branding>.svc-title {
+  position: absolute;
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .svc-branding-portrait {
+    top: 22%;
+    width: 60%;
+  }
+}
+
+
+/* SOUND BRANDING — AQUA GLASS */
+
+
+.svc-row>.svc-card:nth-child(2) {
+  background: linear-gradient(180deg,
+      #E4F3ED 0%,
+      #CBE6DC 45%,
+      #A9D0C4 100%);
+}
+
+
+.svc-row>.svc-card:nth-child(2)::after {
+  background:
+    radial-gradient(ellipse at 25% 8%,
+      rgba(255, 255, 255, 0.42),
+      transparent 55%),
+    linear-gradient(180deg,
+      rgba(224, 245, 235, 0.10) 0%,
+      rgba(115, 174, 158, 0.08) 45%,
+      rgba(40, 76, 72, 0.27) 100%);
+}
+
+.svc-row>.svc-card:nth-child(2) .svc-branding-blur {
+  opacity: 0.88;
+  filter: blur(42px) saturate(150%);
+}
+
+/* Mantiene leggibile il titolo bianco */
+.svc-row>.svc-card:nth-child(2) .svc-title {
+  text-shadow: 0 2px 12px rgba(25, 55, 48, 0.35);
 }

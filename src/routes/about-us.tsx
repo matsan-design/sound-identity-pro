@@ -1,13 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { PageShell } from "@/components/site-header";
+import { createFileRoute } from "@tanstack/react-router"; import { PageShell } from "@/components/site-header";
 import { useLang } from "@/lib/i18n";
 import { Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useContactPopup } from "@/components/contact-popup";
 import founderAsset from "@/assets/matej-sancin-new-blue.png.asset.json";
 import { useEffect, useState } from "react";
-import { PortfolioPopup } from "@/components/portfolio-popup";
-
 export const Route = createFileRoute("/about-us")({
   head: () => ({
     meta: [
@@ -32,7 +29,6 @@ export const Route = createFileRoute("/about-us")({
 function AboutUs() {
   const { t } = useLang();
   const popup = useContactPopup();
-  const [portfolioOpen, setPortfolioOpen] = useState(false);
 
   useEffect(() => {
     const elements = document.querySelectorAll<HTMLElement>(
@@ -86,9 +82,8 @@ function AboutUs() {
             <Button onClick={popup.openBiography}>
               {t("founderMore")}
             </Button>
-            <Button variant="outline" onClick={() => setPortfolioOpen(true)}>
-              Portfolio
-            </Button>
+
+
 
             <Button variant="outline" onClick={popup.open}>
               {t("founderContact")}
@@ -156,9 +151,6 @@ function AboutUs() {
           {t("aboutTeamNarrative")}
         </p>
       </section>
-      {portfolioOpen && (
-        <PortfolioPopup onClose={() => setPortfolioOpen(false)} />
-      )}
     </PageShell>
   );
 }

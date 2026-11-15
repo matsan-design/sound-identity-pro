@@ -112,10 +112,10 @@ export const T: Dict = {
   },
   svc2Title: { en: "Sound Branding", it: "Sound Branding" },
   svc2Desc: {
-    en: "We create distinctive sonic logos and signature corporate themes that make brands instantly recognizable across campaigns, content, and experiences.",
-    it: "Creiamo loghi sonori distintivi e temi corporate che rendono i brand immediatamente riconoscibili in campagne, contenuti ed esperienze.",
+    en: "We create distinctive sonic logos and signature musical themes that make brands instantly recognizable across video content, campaigns and social media.",
+    it: "Creiamo loghi sonori distintivi e temi musicali che rendono il brand immediatamente riconoscibile in video, campagne e social media.",
   },
-  svc3Title: { en: "Music Experience", it: "Music Experience" },
+  svc3Title: { en: "Music for multimedia", it: "Musica per multimedia" },
   svc3Desc: {
     en: "Original music and bespoke sound design for films, branded content, events, retail spaces, podcasts, and every environment where sound shapes the experience.",
     it: "Musica originale e sound design su misura per film, contenuti brandizzati, eventi, spazi retail, podcast e ogni ambiente in cui il suono plasma l'esperienza.",

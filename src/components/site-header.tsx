@@ -214,7 +214,9 @@ export function SiteHeader({
   onNavigate?: NavHandler;
   logoIntro?: boolean;
 }) {
-  const { t } = useLang();
+
+  const { t, lang } = useLang();
+
   const isLanding = useLocation({
     select: (location) => location.pathname === "/",
   });
@@ -255,11 +257,16 @@ export function SiteHeader({
   }, [logoIntro]);
 
 
+
   const items = [
     { to: "/our-expertise", label: t("navFree"), mobileLabel: t("navWork") },
+
+    { to: "/selected-work", label: lang === "it" ? "In evidenza" : "Selected work" },
+
     { to: "/about-us", label: t("navAbout") },
     { to: "/contact", label: t("navContact") },
   ];
+
 
   const popup = useContactPopup();
   const interactions = (to: string, extra?: (e: React.MouseEvent) => void) => ({

@@ -18,14 +18,18 @@ export const Route = createFileRoute("/our-expertise")({
 });
 
 function OurExpertise() {
-  const { t } = useLang();
+
+  const { t, lang } = useLang();
+
   return (
     <PageShell expertise>
 
       <section className="mt-10 md:mt-16 max-w-4xl mx-auto text-center">
+
         <h1 className="expertise-heading font-bold leading-[1.02] text-foreground break-words">
-          Our services
+          {lang === "it" ? "I nostri servizi" : "Our services"}
         </h1>
+
       </section>
 
       <ServiceCards />

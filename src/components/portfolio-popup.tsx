@@ -157,13 +157,13 @@ export function PortfolioPopup({
                         id="portfolio-title"
                         className="text-3xl md:text-5xl font-bold tracking-tight text-black"
                     >
-                        Selected Work.
+                        Selected work.
                     </h2>
 
                     <p className="mt-3 text-neutral-600">
                         {lang === "it"
-                            ? "Una selezione dei nostri progetti."
-                            : "Explore some of our projects."}
+                            ? "Una selezione dei nostri lavori recenti."
+                            : "Explore some of our recent projects."}
                     </p>
                 </div>
 

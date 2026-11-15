@@ -14,6 +14,7 @@ import { Route as AboutUsRouteImport } from './routes/about-us'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FreeIdentityAnalysisRouteImport } from './routes/free-identity-analysis'
 import { Route as OurExpertiseRouteImport } from './routes/our-expertise'
+import { Route as SelectedWorkRouteImport } from './routes/selected-work'
 import { Route as ApiPublicContactRouteImport } from './routes/api/public/contact'
 
 const IndexRoute = IndexRouteImport.update({
@@ -41,6 +42,11 @@ const OurExpertiseRoute = OurExpertiseRouteImport.update({
   path: '/our-expertise',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SelectedWorkRoute = SelectedWorkRouteImport.update({
+  id: '/selected-work',
+  path: '/selected-work',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicContactRoute = ApiPublicContactRouteImport.update({
   id: '/api/public/contact',
   path: '/api/public/contact',
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/free-identity-analysis': typeof FreeIdentityAnalysisRoute
   '/our-expertise': typeof OurExpertiseRoute
+  '/selected-work': typeof SelectedWorkRoute
   '/api/public/contact': typeof ApiPublicContactRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/free-identity-analysis': typeof FreeIdentityAnalysisRoute
   '/our-expertise': typeof OurExpertiseRoute
+  '/selected-work': typeof SelectedWorkRoute
   '/api/public/contact': typeof ApiPublicContactRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/free-identity-analysis': typeof FreeIdentityAnalysisRoute
   '/our-expertise': typeof OurExpertiseRoute
+  '/selected-work': typeof SelectedWorkRoute
   '/api/public/contact': typeof ApiPublicContactRoute
 }
 export interface FileRouteTypes {
@@ -80,6 +89,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/free-identity-analysis'
     | '/our-expertise'
+    | '/selected-work'
     | '/api/public/contact'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -88,6 +98,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/free-identity-analysis'
     | '/our-expertise'
+    | '/selected-work'
     | '/api/public/contact'
   id:
     | '__root__'
@@ -96,6 +107,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/free-identity-analysis'
     | '/our-expertise'
+    | '/selected-work'
     | '/api/public/contact'
   fileRoutesById: FileRoutesById
 }
@@ -105,6 +117,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FreeIdentityAnalysisRoute: typeof FreeIdentityAnalysisRoute
   OurExpertiseRoute: typeof OurExpertiseRoute
+  SelectedWorkRoute: typeof SelectedWorkRoute
   ApiPublicContactRoute: typeof ApiPublicContactRoute
 }
 
@@ -145,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OurExpertiseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/selected-work': {
+      id: '/selected-work'
+      path: '/selected-work'
+      fullPath: '/selected-work'
+      preLoaderRoute: typeof SelectedWorkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/contact': {
       id: '/api/public/contact'
       path: '/api/public/contact'
@@ -161,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FreeIdentityAnalysisRoute: FreeIdentityAnalysisRoute,
   OurExpertiseRoute: OurExpertiseRoute,
+  SelectedWorkRoute: SelectedWorkRoute,
   ApiPublicContactRoute: ApiPublicContactRoute,
 }
 export const routeTree = rootRouteImport

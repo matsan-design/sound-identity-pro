@@ -2,6 +2,10 @@ import { useRef, useState } from "react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLang } from "@/lib/i18n";
+import externalAudioPortrait from "@/assets/Round-image-8.png";
+import soundBrandingPortrait from "@/assets/Round-image-11.png";
+import multimediaPortrait from "@/assets/Round-image-13.png";
+
 
 export function ServiceCards() {
   const { t } = useLang();
@@ -52,10 +56,59 @@ svc-stage mt-[2.4rem] md:mt-[3.2rem]" aria-label={t("svcLabel")}>
         onScroll={updateActiveCard} onKeyDown={(event) => { if (event.key === "Escape") setSelected(null); }}>
         {services.map((service, index) => (
           <Button key={index} ref={(node) => { cardRefs.current[index] = node; }}
-            variant="ghost" className={`svc-card svc-float-${index} block h-auto whitespace-normal`}
+
+            variant="ghost" className={`svc-card svc-float-${index} block h-auto whitespace-normal 
+
+${index < 3 ? "svc-card--branding" : ""}
+`}
             aria-label={service.title} aria-pressed={selected === index}
             onClick={() => { setSelected(selected === index ? null : index); goToCard(index); }}>
-            <span className={`svc-visual svc-v${index + 1}`} aria-hidden="true" />
+
+
+            {index < 2 ? (
+              <>
+
+                <span
+                  className="svc-branding-blur"
+                  style={{
+
+                    backgroundImage: `url(${index === 0 ? externalAudioPortrait : soundBrandingPortrait})`,
+                  }}
+                  aria-hidden="true"
+                />
+
+                <img
+
+                  src={index === 0 ? externalAudioPortrait : soundBrandingPortrait}
+                  alt=""
+                  aria-hidden="true"
+                  draggable={false}
+                  className="svc-branding-portrait"
+                />
+              </>
+
+
+            ) : (
+              <>
+                <span
+                  className="svc-branding-blur"
+                  style={{
+                    backgroundImage: `url(${multimediaPortrait})`,
+                  }}
+                  aria-hidden="true"
+                />
+
+                <img
+                  src={multimediaPortrait}
+                  alt=""
+                  aria-hidden="true"
+                  draggable={false}
+                  className="svc-branding-portrait"
+                />
+              </>
+            )}
+
+
             {selected === index && <span className="svc-close" title={t("svcClose")}><X aria-label={t("svcClose")} /></span>}
             <span className="svc-content">
               <span className="svc-label">{t("svcLabel")}</span>
