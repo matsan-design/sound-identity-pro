@@ -104,14 +104,14 @@ export const T: Dict = {
     en: "",
     it: "",
   },
-  svcLabel: { en: "Our Services", it: "I nostri servizi" },
+  svcLabel: { en: "Our services", it: "I nostri servizi" },
   svc1Title: { en: "Your personal audio department", it: "Il tuo reparto audio personale" },
   svc1Desc: {
 
     en: "We become your trusted external audio department, taking care of original music, sound design, and mixing. One dedicated audio partner for all your projects.",
     it: "Diventiamo il tuo reparto audio di fiducia, occupandoci di musiche originali, sound design su misura e mix. Un unico partner audio dedicato, per tutti i tuoi progetti.",
   },
-  svc2Title: { en: "Sound Branding & Logos", it: "Sound Branding e Loghi" },
+  svc2Title: { en: "Sound Branding & Logos", it: "Sound branding e loghi" },
   svc2Desc: {
     en: "We create distinctive sonic logos and signature musical themes that make brands instantly recognizable across video content, campaigns and social media.",
     it: "Creiamo loghi sonori distintivi e temi musicali che rendono il brand immediatamente riconoscibile in video, campagne e social media.",

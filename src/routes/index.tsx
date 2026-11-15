@@ -3,9 +3,11 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import heroImage from "@/assets/headphones-hero.png";
 import { SiteHeader, SiteFooter } from "@/components/site-header";
 import { LogoMarqueeSection } from "@/components/logo-marquee-section";
+import { ServiceCards } from "@/components/service-cards";
 import { useLang } from "@/lib/i18n";
 import { useAudio } from "@/lib/audio";
 import { useContactPopup } from "@/components/contact-popup";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -165,9 +167,26 @@ function Index() {
           </div>
         </section>
 
+
         <LogoMarqueeSection />
 
+        {/* Our Services — Floating Glass Cards */}
+
+        <section className="relative z-10 mt-28 md:mt-44 pb-10 md:pb-16">
+
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="expertise-heading font-bold leading-[1.02] text-foreground">
+              {t("svcLabel")}
+            </h2>
+          </div>
+
+
+          <ServiceCards homePreview />
+
+        </section>
+
         <SiteFooter />
+
       </div>
     </div>
   );

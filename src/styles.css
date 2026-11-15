@@ -1893,3 +1893,55 @@ button.cp-dot {
   opacity: var(--svc-halo-opacity, 0);
   transition: opacity 0.35s ease;
 }
+
+
+/* HOME — INTERACTIVE GENIE HOVER */
+
+
+/* HOME — INTERACTIVE GENIE HOVER */
+
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) {
+
+  .svc-stage--home {
+    position: relative;
+    overflow: visible;
+  }
+
+  .svc-stage--home .svc-row {
+    position: relative;
+    overflow: visible;
+    isolation: isolate;
+  }
+
+  .svc-stage--home .svc-card {
+    position: relative;
+    z-index: 1;
+
+    translate: 0 0;
+    scale: 1;
+
+    transition:
+      translate 650ms cubic-bezier(0.22, 1, 0.36, 1),
+      scale 1000ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 1000ms ease;
+  }
+
+
+  .svc-stage--home .svc-card--home-hovered {
+    z-index: 10;
+
+    scale: 1.06;
+
+    box-shadow:
+      0 35px 80px rgba(0, 0, 0, 0.18);
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svc-stage--home .svc-card {
+    translate: 0 0;
+    scale: 1;
+    transition: none;
+  }
+}

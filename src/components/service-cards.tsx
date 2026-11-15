@@ -5,12 +5,21 @@ import { useLang } from "@/lib/i18n";
 import externalAudioPortrait from "@/assets/Round-image-8.png";
 import soundBrandingPortrait from "@/assets/Round-image-11.png";
 import multimediaPortrait from "@/assets/Round-image-13.png";
+import { useNavigate } from "@tanstack/react-router";
 
 
-export function ServiceCards() {
+
+export function ServiceCards({
+  homePreview = false,
+}: {
+  homePreview?: boolean;
+}) {
   const { t } = useLang();
+  const navigate = useNavigate();
+
   const [selected, setSelected] = useState<number | null>(null);
   const [active, setActive] = useState(0);
+  const [hoveredHomeCard, setHoveredHomeCard] = useState<number | null>(null);
   const rowRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const services = [
@@ -48,25 +57,91 @@ export function ServiceCards() {
     setActive(closest);
   };
 
-  return (
-    <section className="
-svc-stage mt-[2.4rem] md:mt-[3.2rem]" aria-label={t("svcLabel")}>
 
-      <div ref={rowRef} className="svc-row" data-selected={selected === null ? undefined : selected}
-        onScroll={updateActiveCard} onKeyDown={(event) => { if (event.key === "Escape") setSelected(null); }}>
+  return (
+    <section
+      className={`svc-stage mt-[2.4rem] md:mt-[3.2rem] ${homePreview ? "svc-stage--home" : ""
+        }`}
+      aria-label={t("svcLabel")}
+    >
+
+
+
+      <div
+        ref={rowRef}
+        className="svc-row"
+        data-selected={selected === null ? undefined : selected}
+        onScroll={updateActiveCard}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") setSelected(null);
+        }}
+        onPointerMove={(event) => {
+          if (!homePreview || event.pointerType !== "mouse") return;
+
+          if (
+            !window.matchMedia(
+              "(min-width: 768px) and (hover: hover) and (pointer: fine)"
+            ).matches ||
+            window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ) return;
+
+          const row = event.currentTarget;
+          const bounds = row.getBoundingClientRect();
+
+          const mouseX = event.clientX - bounds.left + row.scrollLeft;
+          const mouseY = event.clientY - bounds.top + row.scrollTop;
+
+          // Individua la card usando le posizioni originali,
+          // senza considerare ingrandimento e spostamento.
+          const hoveredIndex = cardRefs.current.findIndex((card) => {
+            if (!card) return false;
+
+            return (
+              mouseX >= card.offsetLeft &&
+              mouseX <= card.offsetLeft + card.offsetWidth &&
+              mouseY >= card.offsetTop &&
+              mouseY <= card.offsetTop + card.offsetHeight
+            );
+          });
+
+          if (hoveredIndex === -1) {
+            setHoveredHomeCard(null);
+            return;
+          }
+
+          const card = cardRefs.current[hoveredIndex];
+          if (!card) return;
+
+          setHoveredHomeCard(hoveredIndex);
+        }}
+        onPointerLeave={() => {
+          if (homePreview) setHoveredHomeCard(null);
+        }}
+      >
+
         {services.map((service, index) => (
           <Button key={index} ref={(node) => { cardRefs.current[index] = node; }}
 
-            variant="ghost" className={`svc-card svc-float-${index} block h-auto whitespace-normal 
 
-${index < 3 ? "svc-card--branding" : ""}
+            className={`svc-card svc-float-${index} block h-auto whitespace-normal
+  ${index < 3 ? "svc-card--branding" : ""}
+  ${homePreview && hoveredHomeCard === index ? "svc-card--home-hovered" : ""}
+
+
 `}
             aria-label={service.title} aria-pressed={selected === index}
 
+
             onClick={() => {
+              if (homePreview) {
+                void navigate({ to: "/our-expertise" });
+                return;
+              }
+
               setSelected(selected === index ? null : index);
               goToCard(index);
             }}
+
             onPointerMove={(event) => {
               if (event.pointerType !== "mouse" && event.pointerType !== "pen") return;
 
@@ -135,14 +210,46 @@ ${index < 3 ? "svc-card--branding" : ""}
 
 
             {selected === index && <span className="svc-close" title={t("svcClose")}><X aria-label={t("svcClose")} /></span>}
-            <span className="svc-content">
-              <span className="svc-label">{t("svcLabel")}</span>
+
+            <span
+              className="svc-content"
+              style={
+                homePreview
+                  ? {
+                    transform: index === 1
+                      ? "translateY(0)"
+                      : "translateY(-15px)",
+                    justifyContent: index === 1
+                      ? "flex-start"
+                      : "flex-end",
+                  }
+                  : undefined
+              }
+            >
+
+
+              <span
+                className="svc-label"
+                style={homePreview ? { visibility: "hidden" } : undefined}
+              >
+                {t("svcLabel")}
+              </span>
+
               <span className="svc-title" role="heading" aria-level={3}>{service.title}</span>
-              <span className="svc-desc">{service.description}</span>
+
+
+              {!homePreview && (
+                <span className="svc-desc">
+                  {service.description}
+                </span>
+              )}
+
+
             </span>
           </Button>
-        ))}
-      </div>
+        ))
+        }
+      </div >
       <div className="svc-dots">
         {services.map((service, index) => (
           <Button key={index} variant="ghost" className="h-8 w-8 p-0 rounded-full"
@@ -152,7 +259,7 @@ ${index < 3 ? "svc-card--branding" : ""}
           </Button>
         ))}
       </div>
-    </section>
+    </section >
 
   );
 }
