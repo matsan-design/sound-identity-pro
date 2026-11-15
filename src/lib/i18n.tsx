@@ -6,12 +6,12 @@ type Dict = Record<string, { en: string; it: string }>;
 
 export const T: Dict = {
   navFree: {
-    en: "Our work",
-    it: "Il nostro lavoro",
+    en: "Our services",
+    it: "Servizi",
   },
   navWork: {
-    en: "Our work",
-    it: "Il nostro lavoro",
+    en: "Our services",
+    it: "Servizi",
   },
   navAbout: { en: "About", it: "Chi siamo" },
   navContact: { en: "Contact", it: "Contatti" },
