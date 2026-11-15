@@ -89,7 +89,7 @@ export const T: Dict = {
   },
   aboutP7: {
     en: "Because in today's world, the strongest brands are not only seen. They are remembered by the way they sound.",
-    it: "Perché nel mondo di oggi, i brand più forti non si vedono soltanto. Si ricordano per come suonano.",
+    it: "Perché nel mondo di oggi, i brand più forti non si vedono soltanto. Vengono ricordati per come suonano.",
   },
 
   aboutIntroA: {
@@ -97,28 +97,29 @@ export const T: Dict = {
     it: "Nel mondo di oggi, i brand più forti non si vedono soltanto.",
   },
   aboutIntroB: {
-    en: "They are remembered by",
-    it: "Si ricordano",
+    en: "They are remembered by the way they sound.",
+    it: "Vengono ricordati per come suonano.",
   },
   aboutIntroBold: {
-    en: "the way they sound.",
-    it: "per come suonano.",
+    en: "",
+    it: "",
   },
   svcLabel: { en: "Our Services", it: "I nostri servizi" },
-  svc1Title: { en: "Your External Audio Department", it: "Il tuo reparto audio esterno" },
+  svc1Title: { en: "Your personal audio department", it: "Il tuo reparto audio personale" },
   svc1Desc: {
-    en: "We manage your entire audio department, from strategy to delivery. One dedicated audio partner, one seamless workflow, every project covered.",
-    it: "Gestiamo l'intero reparto audio, dalla strategia alla consegna. Un unico partner audio dedicato, un flusso di lavoro senza interruzioni, ogni progetto coperto.",
+
+    en: "We become your trusted external audio department, taking care of original music, sound design, and mixing. One dedicated audio partner for all your projects.",
+    it: "Diventiamo il tuo reparto audio di fiducia, occupandoci di musiche originali, sound design su misura e mix. Un unico partner audio dedicato, per tutti i tuoi progetti.",
   },
-  svc2Title: { en: "Sound Branding", it: "Sound Branding" },
+  svc2Title: { en: "Sound Branding & Logos", it: "Sound Branding e Loghi" },
   svc2Desc: {
     en: "We create distinctive sonic logos and signature musical themes that make brands instantly recognizable across video content, campaigns and social media.",
     it: "Creiamo loghi sonori distintivi e temi musicali che rendono il brand immediatamente riconoscibile in video, campagne e social media.",
   },
   svc3Title: { en: "Music for multimedia", it: "Musica per multimedia" },
   svc3Desc: {
-    en: "Original music and bespoke sound design for films, branded content, events, retail spaces, podcasts, and every environment where sound shapes the experience.",
-    it: "Musica originale e sound design su misura per film, contenuti brandizzati, eventi, spazi retail, podcast e ogni ambiente in cui il suono plasma l'esperienza.",
+    en: "Original music and custom sound design for films, events, social network and every environment where sound shapes the experience.",
+    it: "Musica originale e sound design su misura per film, eventi, social media e ogni ambiente in cui il suono plasma l'esperienza.",
   },
   teamLabel: { en: "OUR TEAM IS MADE OF INDUSTRY EXPERTS", it: "IL NOSTRO TEAM È COMPOSTO DA ESPERTI DEL SETTORE" },
   teamLine: {

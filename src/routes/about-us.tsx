@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useContactPopup } from "@/components/contact-popup";
 import founderAsset from "@/assets/matej-sancin-new-blue.png.asset.json";
 import { useEffect, useState } from "react";
+
 export const Route = createFileRoute("/about-us")({
   head: () => ({
     meta: [

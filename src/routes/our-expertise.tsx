@@ -17,6 +17,34 @@ export const Route = createFileRoute("/our-expertise")({
   component: OurExpertise,
 });
 
+function WaveLetters({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(/(\s+)/).map((part, index) =>
+        /^\s+$/.test(part) ? (
+          <span key={index}>{part}</span>
+        ) : (
+          <span
+            key={index}
+            className="inline-block whitespace-nowrap"
+          >
+            {Array.from(part).map((letter, letterIndex) => (
+              <span
+                key={letterIndex}
+                data-wave-letter
+                className="inline-block transition-transform duration-150 ease-out"
+              >
+                {letter}
+              </span>
+            ))}
+          </span>
+        )
+      )}
+    </>
+  );
+}
+
+
 function OurExpertise() {
 
   const { t, lang } = useLang();
@@ -35,14 +63,76 @@ function OurExpertise() {
       <ServiceCards />
 
       <section className="max-w-4xl mx-auto text-center">
-        <p className="mt-10 text-xl md:text-2xl text-muted-foreground leading-relaxed">
-          {t("aboutIntroA")}<br />
-          {t("aboutIntroB")}{" "}
+        <p
+          className="relative mt-10 text-xl md:text-2xl text-muted-foreground leading-relaxed"
+          onPointerMove={(event) => {
+            if (
+              event.pointerType !== "mouse" &&
+              event.pointerType !== "pen"
+            ) return;
+
+            if (
+              window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+              ).matches
+            ) return;
+
+            const paragraph = event.currentTarget;
+            const rect = paragraph.getBoundingClientRect();
+
+            const mouseX = event.clientX - rect.left;
+            const mouseY = event.clientY - rect.top;
+
+            const letters =
+              paragraph.querySelectorAll<HTMLSpanElement>(
+                "[data-wave-letter]"
+              );
+
+            letters.forEach((letter) => {
+              const letterX =
+                letter.offsetLeft + letter.offsetWidth / 2;
+
+              const letterY =
+                letter.offsetTop + letter.offsetHeight / 2;
+
+              const dx = letterX - mouseX;
+              const dy = letterY - mouseY;
+
+              const influence = Math.exp(
+                -(
+                  (dx * dx) / (80 * 80) +
+                  (dy * dy) / (48 * 48)
+                )
+              );
+
+              const lift = 18 * influence;
+
+              letter.style.transform =
+                `translateY(${-lift}px)`;
+            });
+          }}
+          onPointerLeave={(event) => {
+            const letters =
+              event.currentTarget.querySelectorAll<HTMLSpanElement>(
+                "[data-wave-letter]"
+              );
+
+            letters.forEach((letter) => {
+              letter.style.transform = "";
+            });
+          }}
+        >
+          <WaveLetters text={t("aboutIntroA")} />
+          <br />
+
+          <WaveLetters text={t("aboutIntroB")} />{" "}
+
           <strong className="font-semibold text-foreground">
-            {t("aboutIntroBold")}
+            <WaveLetters text={t("aboutIntroBold")} />
           </strong>
         </p>
       </section>
+
 
     </PageShell>
   );
