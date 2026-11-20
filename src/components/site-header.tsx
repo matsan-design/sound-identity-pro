@@ -5,6 +5,7 @@ import { LangToggle, useLang } from "@/lib/i18n";
 import { AudioToggle, useAudio, introSwoosh } from "@/lib/audio";
 import { useContactPopup } from "@/components/contact-popup";
 import { LiquidGlassLogo } from "@/components/liquid-glass-logo";
+import { Menu, X } from "lucide-react";
 
 type NavHandler = (to: string) => (e: React.MouseEvent) => void;
 
@@ -23,7 +24,6 @@ function MobileLabel({
 /** Session-scoped guard: the logo reveal only plays on the first landing-page entry. */
 let logoIntroPlayed = false;
 
-let mobileNavRevealed = false;
 
 
 
@@ -224,24 +224,39 @@ export function SiteHeader({
   const { play } = useAudio();
   const [intro, setIntro] = useState(false);
 
-  const [mobileNavVisible, setMobileNavVisible] = useState(mobileNavRevealed);
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+
+  // Chiude il menu premendo ESC o cliccando fuori.
   useEffect(() => {
-    if (mobileNavRevealed) return;
+    if (!mobileMenuOpen) return;
 
-    const handleMobileScroll = () => {
-      if (window.innerWidth >= 640 || window.scrollY < 30) return;
-
-      mobileNavRevealed = true;
-      setMobileNavVisible(true);
-      window.removeEventListener("scroll", handleMobileScroll);
+    const handleOutsideClick = (event: PointerEvent) => {
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node)
+      ) {
+        setMobileMenuOpen(false);
+      }
     };
 
-    window.addEventListener("scroll", handleMobileScroll, { passive: true });
-    handleMobileScroll();
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
+      }
+    };
 
-    return () => window.removeEventListener("scroll", handleMobileScroll);
-  }, []);
+    document.addEventListener("pointerdown", handleOutsideClick);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("pointerdown", handleOutsideClick);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [mobileMenuOpen]);
+
+
 
   const playRef = useRef(play);
   playRef.current = play;
@@ -274,6 +289,7 @@ export function SiteHeader({
     onMouseMove: glass.onMouseMove,
     onMouseLeave: glass.onMouseLeave,
     onClick: (e: React.MouseEvent) => {
+      if (window.innerWidth < 768) setMobileMenuOpen(false);
       glass.spin(e as React.MouseEvent<HTMLElement>);
       if (to === "/contact") {
         e.preventDefault();
@@ -315,51 +331,92 @@ export function SiteHeader({
             ),
           )}
         </nav>
+
+        {/* Desktop — invariato */}
         <div className="hidden md:flex flex-col items-end gap-2 text-black">
           <LangToggle />
           <AudioToggle />
         </div>
-      </header>
 
-      {/* Mobile nav — two rows, controls enlarged 30% */}
+        {/* Mobile — Audio, Language, Hamburger */}
+        <div
+          ref={mobileMenuRef}
+          className="relative z-30 flex items-center gap-4 text-black md:hidden"
+        >
+          <div className="shrink-0 origin-center scale-[1.15]">
+            <AudioToggle />
+          </div>
 
-      <div
-        className={`md:hidden relative z-20 flex flex-col gap-4 
-transition-all duration-[850ms] ease-[cubic-bezier(0.22,1,0.36,1)]
- sm:mt-6 sm:max-h-none sm:opacity-100 sm:translate-y-0 sm:visible sm:pointer-events-auto sm:overflow-visible ${mobileNavVisible
-            ? "mt-6 max-h-48 opacity-100 translate-y-0 visible"
-            : "mt-0 max-h-0 opacity-0 -translate-y-2 invisible pointer-events-none overflow-hidden"
-          }`}
-      >
+          <div className="shrink-0 origin-center scale-[1.15]">
+            <LangToggle />
+          </div>
 
-        <nav aria-label="Mobile navigation" className="grid grid-cols-3 gap-2">
-          {items.map((it) =>
-            onNavigate ? (
-              <a
-                key={it.to}
-                href={it.to}
-                className="glass-nav justify-center text-center px-2 py-[0.65rem] text-[14px] font-medium tracking-wide whitespace-nowrap"
-                {...interactions(it.to, onNavigate(it.to))}
-              >
-                <MobileLabel to={it.to} label={it.label} mobileLabel={it.mobileLabel} />
-              </a>
+          <button
+            type="button"
+            aria-label={
+              mobileMenuOpen
+                ? lang === "it" ? "Chiudi menu" : "Close menu"
+                : lang === "it" ? "Apri menu" : "Open menu"
+            }
+            aria-expanded={mobileMenuOpen}
+            aria-controls="sancin-mobile-menu"
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white/75 shadow-sm backdrop-blur-xl transition-all duration-300 hover:bg-white active:scale-95"
+          >
+            {mobileMenuOpen ? (
+              <X size={22} strokeWidth={1.6} />
             ) : (
-              <Link
-                key={it.to}
-                to={it.to}
-                className="glass-nav justify-center text-center px-2 py-[0.65rem] text-[14px] font-medium tracking-wide whitespace-nowrap"
-                {...interactions(it.to)}
-              >
-                <MobileLabel to={it.to} label={it.label} mobileLabel={it.mobileLabel} />
-              </Link>
-            ),
-          )}
-        </nav>
-        <div className="flex items-center gap-6 text-black">
-          <div className="origin-left scale-[1.3]"><LangToggle /></div>
-          <div className="origin-left scale-[1.3] ml-2"><AudioToggle /></div>
+              <Menu size={22} strokeWidth={1.6} />
+            )}
+          </button>
+
+          {/* Liquid Glass dropdown */}
+          <nav
+            id="sancin-mobile-menu"
+            aria-label="Mobile navigation"
+            className={`absolute right-0 top-full mt-4 w-64 max-w-[calc(100vw-3rem)]
+              origin-top-right rounded-[24px] border border-white/70
+              bg-white/85 p-2 shadow-[0_20px_60px_rgba(0,0,0,0.13)]
+              backdrop-blur-2xl backdrop-saturate-150
+              transition-all duration-[450ms]
+              ease-[cubic-bezier(0.22,1,0.36,1)]
+              ${mobileMenuOpen
+                ? "visible translate-y-0 scale-100 opacity-100 pointer-events-auto"
+                : "invisible -translate-y-3 scale-95 opacity-0 pointer-events-none"
+              }`}
+          >
+            {items.map((it) =>
+              onNavigate ? (
+                <a
+                  key={it.to}
+                  href={it.to}
+                  className="glass-nav flex w-full justify-start rounded-2xl px-5 py-3.5 text-[14px] font-medium"
+                  {...interactions(it.to, onNavigate(it.to))}
+                >
+                  <MobileLabel
+                    to={it.to}
+                    label={it.label}
+                    mobileLabel={it.mobileLabel}
+                  />
+                </a>
+              ) : (
+                <Link
+                  key={it.to}
+                  to={it.to}
+                  className="glass-nav flex w-full justify-start rounded-2xl px-5 py-3.5 text-[14px] font-medium"
+                  {...interactions(it.to)}
+                >
+                  <MobileLabel
+                    to={it.to}
+                    label={it.label}
+                    mobileLabel={it.mobileLabel}
+                  />
+                </Link>
+              )
+            )}
+          </nav>
         </div>
-      </div>
+      </header>
     </>
   );
 }

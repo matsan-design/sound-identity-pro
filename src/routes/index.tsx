@@ -64,12 +64,14 @@ function Index() {
   return (
     <div className="min-h-screen bg-[#e9e9e9] p-4 md:p-8">
       <div className="mx-auto max-w-none rounded-3xl bg-white px-6 py-8 md:px-14 md:py-10 shadow-sm">
+
         <div
-          className={`transition-all duration-500 ease-out ${entering ? "opacity-0 scale-95" : "opacity-100 scale-100"
+          className={`relative z-50 md:z-auto transition-all duration-500 ease-out ${entering ? "opacity-0 scale-95" : "opacity-100 scale-100"
             }`}
         >
           <SiteHeader onNavigate={navigateWithAnimation} logoIntro={activated} />
         </div>
+
 
         {/* Hero */}
         <section className="relative mt-10 md:mt-16 md:mb-56 lg:mb-72 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">

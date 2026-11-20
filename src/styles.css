@@ -1875,24 +1875,40 @@ button.cp-dot {
 
 /* INTERACTIVE GLASS — MOUSE FOLLOWING HALO */
 
+
+
 .svc-card::before {
   content: "";
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
   z-index: 1;
   pointer-events: none;
+  border-radius: 50%;
 
-  background: radial-gradient(circle 150px at var(--svc-halo-x, 50%) var(--svc-halo-y, 50%),
-
+  /* Gradiente originale, con raggio preciso */
+  background: radial-gradient(circle 150px at center,
       rgba(255, 255, 255, 0.25) 0%,
       rgba(255, 255, 255, 0.12) 28%,
       rgba(255, 255, 255, 0.04) 65%,
       transparent 100%);
 
+  transform: translate3d(calc(var(--svc-halo-x, 150px) - 150px),
+      calc(var(--svc-halo-y, 150px) - 150px),
+      0);
+
   opacity: var(--svc-halo-opacity, 0);
-  transition: opacity 0.35s ease;
+
+  transition:
+    transform var(--svc-halo-travel, 110ms) ease-out,
+    opacity 350ms ease;
+
+  will-change: transform, opacity;
 }
+
+
 
 
 /* HOME — INTERACTIVE GENIE HOVER */
@@ -1944,4 +1960,29 @@ button.cp-dot {
     scale: 1;
     transition: none;
   }
+}
+
+/* SERVICES — Mobile: evita sovrapposizione testo/foto */
+
+@media (max-width: 767px) {
+
+  .svc-stage:not(.svc-stage--home) .svc-branding-portrait {
+    top: 15%;
+    width: 85%;
+  }
+
+  .svc-stage:not(.svc-stage--home) .svc-content {
+    gap: 0.35rem;
+  }
+
+  .svc-stage:not(.svc-stage--home) .svc-title {
+    font-size: 1.4rem;
+    line-height: 1.1;
+  }
+
+  .svc-stage:not(.svc-stage--home) .svc-desc {
+    font-size: 0.9rem;
+    line-height: 1.35;
+  }
+
 }

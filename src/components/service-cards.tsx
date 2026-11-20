@@ -98,48 +98,58 @@ export function ServiceCards({
         onKeyDown={(event) => {
           if (event.key === "Escape") setSelected(null);
         }}
-        onPointerMove={(event) => {
-          if (!homePreview || event.pointerType !== "mouse") return;
 
+        onPointerMove={(event) => {
           if (
-            !window.matchMedia(
-              "(min-width: 768px) and (hover: hover) and (pointer: fine)"
-            ).matches ||
-            window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            event.pointerType !== "mouse" &&
+            event.pointerType !== "pen"
           ) return;
 
-          const row = event.currentTarget;
-          const bounds = row.getBoundingClientRect();
+          const card = event.currentTarget;
+          const rect = card.getBoundingClientRect();
 
-          const mouseX = event.clientX - bounds.left + row.scrollLeft;
-          const mouseY = event.clientY - bounds.top + row.scrollTop;
+          // Coordinate corrette anche quando la card
+          // viene ingrandita con l'effetto hover.
+          const x =
+            ((event.clientX - rect.left) / rect.width) *
+            card.offsetWidth;
 
-          // Individua la card usando le posizioni originali,
-          // senza considerare ingrandimento e spostamento.
-          const hoveredIndex = cardRefs.current.findIndex((card) => {
-            if (!card) return false;
+          const y =
+            ((event.clientY - rect.top) / rect.height) *
+            card.offsetHeight;
 
-            return (
-              mouseX >= card.offsetLeft &&
-              mouseX <= card.offsetLeft + card.offsetWidth &&
-              mouseY >= card.offsetTop &&
-              mouseY <= card.offsetTop + card.offsetHeight
-            );
-          });
+          // Al primo ingresso posiziona immediatamente
+          // l'alone sotto il mouse, prima di farlo apparire.
+          if (card.dataset.haloActive !== "true") {
+            card.dataset.haloActive = "true";
 
-          if (hoveredIndex === -1) {
-            setHoveredHomeCard(null);
+            card.style.setProperty("--svc-halo-travel", "0ms");
+            card.style.setProperty("--svc-halo-x", `${x}px`);
+            card.style.setProperty("--svc-halo-y", `${y}px`);
+            card.style.setProperty("--svc-halo-opacity", "1");
+
+            requestAnimationFrame(() => {
+              if (card.dataset.haloActive === "true") {
+                card.style.setProperty(
+                  "--svc-halo-travel",
+                  "110ms"
+                );
+              }
+            });
+
             return;
           }
 
-          const card = cardRefs.current[hoveredIndex];
-          if (!card) return;
+          card.style.setProperty("--svc-halo-x", `${x}px`);
+          card.style.setProperty("--svc-halo-y", `${y}px`);
+        }}
+        onPointerLeave={(event) => {
+          const card = event.currentTarget;
 
-          setHoveredHomeCard(hoveredIndex);
+          card.dataset.haloActive = "false";
+          card.style.setProperty("--svc-halo-opacity", "0");
         }}
-        onPointerLeave={() => {
-          if (homePreview) setHoveredHomeCard(null);
-        }}
+
       >
 
         {services.map((service, index) => (
